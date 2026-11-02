@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Lima",
+  "repository": "juancapower/juancapower-web-v2",
+  "deployedSha": "ebf3ff73c4051d72e867ce1b9d28177216bd9cc4",
+  "deploymentId": 7483664129,
+  "workflowRun": 41384053217,
+  "workflowConclusion": "success",
+  "stagingUrl": "https://juancapower.github.io/juancapower-web-v2/",
+  "cname": null,
+  "httpsEnforced": true,
+  "browserTests": {
+    "local": {
+      "passed": 17,
+      "failed": 0
+    },
+    "ci": {
+      "passed": 17,
+      "failed": 0
+    },
+    "publishedStaging": {
+      "passed": 17,
+      "failed": 0
+    },
+    "widths": [
+      360,
+      375,
+      768,
+      1024,
+      1440
+    ],
+    "browser": "Chromium",
+    "axeViolations": 0
+  },
+  "publicHtml": [
+    {
+      "path": "/",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "70d5d97f64e97e67a6266d40b82c4de3e728d3aea538848d59a1e37cdf4b5df4"
+    },
+    {
+      "path": "/speaker/",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "a2f7375ecd0044b541026fe66d018a562f80c7e8896c60c75dbfa5951c9bad94"
+    },
+    {
+      "path": "/contacto/",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "0df631431e6903b4b6178bf677665a641c98ed4048ce8dcbd867a56c772bc64f"
+    }
+  ],
+  "productionReadOnly": {
+    "repository": "juancapower/soy.juancapower",
+    "initialAndFinalMainSha": "927f34416ac4d552c30d250f7784a7675f446749",
+    "finalCname": "www.juancapower.com"
+  },
+  "pending": [
+    "Real booking and commercial receipt",
+    "JUA-29 architecture and wireframe approval",
+    "Legal applicability and final legal text",
+    "Real-device Safari/iOS/Android",
+    "Field performance"
+  ]
+}
