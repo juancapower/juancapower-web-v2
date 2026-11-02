@@ -26,7 +26,7 @@ Home, entrada comercial speaker y contacto mínimo. Las rutas futuras están doc
 
 Este sprint no autoriza migrar producción. Un sprint futuro debe inventariar rutas legadas, validar reservas, privacidad y textos legales; aprobar dominio, HTTPS y plan de retorno antes de cambiar Pages/DNS. Para recuperar staging, revertir el commit defectuoso en main mediante PR y comprobar un nuevo deployment. La web anterior conserva su repositorio y configuración.
 
-## Sprint 1 · revisión de dirección visual
+## Sprint 1 · Stage Presence aprobada
 
 Trabajo aislado en `design/sprint-1-power-presence`, sin fusionar ni desplegar el rediseño. La Home pública de Sprint 0 no cambia.
 
@@ -37,4 +37,6 @@ Después de `npm ci` y `npm run build`, ejecutar `npm run preview:concepts`. Gal
 - Wireframes: `/conceptos/wireframes/home/`, `/conceptos/wireframes/coaching/`, `/conceptos/wireframes/speaker/`.
 - Revisión: `docs/SPRINT-1-REVIEW.md`, benchmark, curaduría y capturas.
 
-El PR valida pero no publica Pages. El workflow también exige `refs/heads/main` para desplegar: un dispatch desde una rama de exploración no reemplaza staging. Los artifacts del PR incluyen el build estático de revisión y las capturas de pruebas. Elegir una dirección con el usuario antes de integrar el rediseño principal.
+El PR valida pero no publica Pages. El workflow también exige `refs/heads/main` para desplegar: un dispatch desde una rama de exploración no reemplaza staging. Los artifacts del PR incluyen el build estático de revisión y las capturas de pruebas. La dirección A está aprobada. La rama ya integra Stage Presence en la Home y una galería editorial de ocho fotos; falta revisar la galería antes de fusionar.
+
+Revisión actual: `docs/GALLERY-REVIEW.md`. Inventarios: `docs/GALLERY-PHOTO-INVENTORY.md` y `docs/TESTIMONIAL-INVENTORY.md`. Preview de la Home aprobada: http://127.0.0.1:4322/juancapower-web-v2/. Los testimonios no se publican; `.private/` queda excluido del repositorio.

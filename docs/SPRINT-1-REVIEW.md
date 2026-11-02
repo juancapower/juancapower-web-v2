@@ -1,3 +1,5 @@
+> Actualización 02/11/2026: el usuario aprobó oficialmente A · Stage Presence. Este documento conserva la exploración original. El trabajo vigente de galería y Home se registra en GALLERY-REVIEW.md.
+
 # Sprint 1 · POWER PRESENCE · Revisión de dirección
 
 02/11/2026 · America/Lima. **Listo para comparar; diseño aún no aprobado.**

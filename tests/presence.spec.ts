@@ -66,7 +66,7 @@ test('Sprint 1 gallery, internal links and encoded content',async({page,request}
  await page.goto(base);await expect(page.getByRole('heading',{level:1})).toContainText('PRESENCE.');
  const hrefs=await page.locator('a[href]').evaluateAll(xs=>xs.map(x=>(x as HTMLAnchorElement).href));
  for(const href of [...new Set(hrefs)]){if(href.startsWith(new URL(page.url()).origin)&&!href.endsWith('#contenido'))expect((await request.get(href)).status()).toBe(200);}
- await page.getByRole('link',{name:/CONCEPTO A/}).click();await expect(page).toHaveURL(/stage-presence\/$/);
+ await page.getByRole('link',{name:/APROBADA/}).click();await expect(page).toHaveURL(/stage-presence\/$/);
  await page.setViewportSize({width:780,height:390});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await page.evaluate(()=>document.documentElement.style.fontSize='200%');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });

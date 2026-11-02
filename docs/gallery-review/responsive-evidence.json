@@ -1,0 +1,507 @@
+[
+  {
+    "width": 360,
+    "photos": [
+      {
+        "alt": "Vista del auditorio desde las filas de asistentes, con JuanCa Power en el escenario.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/auditorio-360.webp",
+        "natural": [
+          312,
+          554
+        ],
+        "rendered": [
+          312,
+          554.65625
+        ]
+      },
+      {
+        "alt": "JuanCa Power con micrófono frente a una pantalla, visto desde el público de una sala.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/en-escena-480.webp",
+        "natural": [
+          312,
+          175
+        ],
+        "rendered": [
+          312,
+          175.5
+        ]
+      },
+      {
+        "alt": "Participantes sentados en una sala de trabajo durante una actividad corporativa.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/en-equipo-480.webp",
+        "natural": [
+          312,
+          233
+        ],
+        "rendered": [
+          312,
+          234
+        ]
+      },
+      {
+        "alt": "JuanCa Power y participantes posan juntos al terminar un encuentro corporativo.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/grupo-corporativo-480.webp",
+        "natural": [
+          312,
+          233
+        ],
+        "rendered": [
+          312,
+          234
+        ]
+      },
+      {
+        "alt": "JuanCa Power intercambia un material con un participante mientras el grupo observa.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/dinamica-360.webp",
+        "natural": [
+          273,
+          364
+        ],
+        "rendered": [
+          255.828125,
+          341.09375
+        ]
+      },
+      {
+        "alt": "JuanCa Power habla junto a una pizarra durante un taller presencial.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/pizarra-280.webp",
+        "natural": [
+          259,
+          461
+        ],
+        "rendered": [
+          237.109375,
+          421.703125
+        ]
+      },
+      {
+        "alt": "JuanCa Power junto a otro hombre en una fotografía de evento, ambos de pie.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/encuentro-360.webp",
+        "natural": [
+          273,
+          364
+        ],
+        "rendered": [
+          255.828125,
+          341.09375
+        ]
+      },
+      {
+        "alt": "Fotografía de un encuentro grupal al aire libre, con participantes reunidos frente a los materiales del evento.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/grupo-abierto-480.webp",
+        "natural": [
+          312,
+          233
+        ],
+        "rendered": [
+          312,
+          234
+        ]
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "photos": [
+      {
+        "alt": "Vista del auditorio desde las filas de asistentes, con JuanCa Power en el escenario.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/auditorio-360.webp",
+        "natural": [
+          342,
+          608
+        ],
+        "rendered": [
+          342,
+          608
+        ]
+      },
+      {
+        "alt": "JuanCa Power con micrófono frente a una pantalla, visto desde el público de una sala.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/en-escena-480.webp",
+        "natural": [
+          342,
+          192
+        ],
+        "rendered": [
+          342,
+          192.375
+        ]
+      },
+      {
+        "alt": "Participantes sentados en una sala de trabajo durante una actividad corporativa.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/en-equipo-480.webp",
+        "natural": [
+          342,
+          256
+        ],
+        "rendered": [
+          342,
+          256.5
+        ]
+      },
+      {
+        "alt": "JuanCa Power y participantes posan juntos al terminar un encuentro corporativo.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/grupo-corporativo-480.webp",
+        "natural": [
+          342,
+          256
+        ],
+        "rendered": [
+          342,
+          256.5
+        ]
+      },
+      {
+        "alt": "JuanCa Power intercambia un material con un participante mientras el grupo observa.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/dinamica-360.webp",
+        "natural": [
+          296,
+          395
+        ],
+        "rendered": [
+          280.4375,
+          373.90625
+        ]
+      },
+      {
+        "alt": "JuanCa Power habla junto a una pizarra durante un taller presencial.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/pizarra-480.webp",
+        "natural": [
+          280,
+          499
+        ],
+        "rendered": [
+          259.90625,
+          461.875
+        ]
+      },
+      {
+        "alt": "JuanCa Power junto a otro hombre en una fotografía de evento, ambos de pie.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/encuentro-360.webp",
+        "natural": [
+          296,
+          395
+        ],
+        "rendered": [
+          280.4375,
+          373.90625
+        ]
+      },
+      {
+        "alt": "Fotografía de un encuentro grupal al aire libre, con participantes reunidos frente a los materiales del evento.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/grupo-abierto-480.webp",
+        "natural": [
+          342,
+          256
+        ],
+        "rendered": [
+          342,
+          256.5
+        ]
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "photos": [
+      {
+        "alt": "Vista del auditorio desde las filas de asistentes, con JuanCa Power en el escenario.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/auditorio-360.webp",
+        "natural": [
+          322,
+          573
+        ],
+        "rendered": [
+          272.65625,
+          484.71875
+        ]
+      },
+      {
+        "alt": "JuanCa Power con micrófono frente a una pantalla, visto desde el público de una sala.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/en-escena-480.webp",
+        "natural": [
+          384,
+          216
+        ],
+        "rendered": [
+          332,
+          186.75
+        ]
+      },
+      {
+        "alt": "Participantes sentados en una sala de trabajo durante una actividad corporativa.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/en-equipo-480.webp",
+        "natural": [
+          384,
+          288
+        ],
+        "rendered": [
+          332,
+          249
+        ]
+      },
+      {
+        "alt": "JuanCa Power y participantes posan juntos al terminar un encuentro corporativo.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/grupo-corporativo-480.webp",
+        "natural": [
+          445,
+          334
+        ],
+        "rendered": [
+          391.328125,
+          293.484375
+        ]
+      },
+      {
+        "alt": "JuanCa Power intercambia un material con un participante mientras el grupo observa.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/dinamica-360.webp",
+        "natural": [
+          253,
+          337
+        ],
+        "rendered": [
+          213.328125,
+          284.4375
+        ]
+      },
+      {
+        "alt": "JuanCa Power habla junto a una pizarra durante un taller presencial.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/pizarra-280.webp",
+        "natural": [
+          191,
+          341
+        ],
+        "rendered": [
+          154,
+          273.890625
+        ]
+      },
+      {
+        "alt": "JuanCa Power junto a otro hombre en una fotografía de evento, ambos de pie.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/encuentro-360.webp",
+        "natural": [
+          253,
+          337
+        ],
+        "rendered": [
+          213.34375,
+          284.453125
+        ]
+      },
+      {
+        "alt": "Fotografía de un encuentro grupal al aire libre, con participantes reunidos frente a los materiales del evento.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/grupo-abierto-800.webp",
+        "natural": [
+          576,
+          432
+        ],
+        "rendered": [
+          510,
+          382.5
+        ]
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "photos": [
+      {
+        "alt": "Vista del auditorio desde las filas de asistentes, con JuanCa Power en el escenario.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/auditorio-540.webp",
+        "natural": [
+          430,
+          764
+        ],
+        "rendered": [
+          379.328125,
+          674.359375
+        ]
+      },
+      {
+        "alt": "JuanCa Power con micrófono frente a una pantalla, visto desde el público de una sala.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/en-escena-800.webp",
+        "natural": [
+          512,
+          288
+        ],
+        "rendered": [
+          460,
+          258.75
+        ]
+      },
+      {
+        "alt": "Participantes sentados en una sala de trabajo durante una actividad corporativa.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/en-equipo-800.webp",
+        "natural": [
+          512,
+          384
+        ],
+        "rendered": [
+          460,
+          345
+        ]
+      },
+      {
+        "alt": "JuanCa Power y participantes posan juntos al terminar un encuentro corporativo.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/grupo-corporativo-800.webp",
+        "natural": [
+          593,
+          445
+        ],
+        "rendered": [
+          540.65625,
+          405.484375
+        ]
+      },
+      {
+        "alt": "JuanCa Power intercambia un material con un participante mientras el grupo observa.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/dinamica-360.webp",
+        "natural": [
+          337,
+          450
+        ],
+        "rendered": [
+          298.671875,
+          398.21875
+        ]
+      },
+      {
+        "alt": "JuanCa Power habla junto a una pizarra durante un taller presencial.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/pizarra-280.webp",
+        "natural": [
+          256,
+          455
+        ],
+        "rendered": [
+          218,
+          387.71875
+        ]
+      },
+      {
+        "alt": "JuanCa Power junto a otro hombre en una fotografía de evento, ambos de pie.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/encuentro-360.webp",
+        "natural": [
+          337,
+          450
+        ],
+        "rendered": [
+          298.65625,
+          398.203125
+        ]
+      },
+      {
+        "alt": "Fotografía de un encuentro grupal al aire libre, con participantes reunidos frente a los materiales del evento.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/grupo-abierto-800.webp",
+        "natural": [
+          768,
+          576
+        ],
+        "rendered": [
+          702,
+          526.5
+        ]
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "photos": [
+      {
+        "alt": "Vista del auditorio desde las filas de asistentes, con JuanCa Power en el escenario.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/auditorio-720.webp",
+        "natural": [
+          604,
+          1075
+        ],
+        "rendered": [
+          529,
+          940.4375
+        ]
+      },
+      {
+        "alt": "JuanCa Power con micrófono frente a una pantalla, visto desde el público de una sala.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/en-escena-800.webp",
+        "natural": [
+          720,
+          405
+        ],
+        "rendered": [
+          642,
+          361.125
+        ]
+      },
+      {
+        "alt": "Participantes sentados en una sala de trabajo durante una actividad corporativa.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/en-equipo-800.webp",
+        "natural": [
+          720,
+          540
+        ],
+        "rendered": [
+          642,
+          481.5
+        ]
+      },
+      {
+        "alt": "JuanCa Power y participantes posan juntos al terminar un encuentro corporativo.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/grupo-corporativo-1280.webp",
+        "natural": [
+          835,
+          626
+        ],
+        "rendered": [
+          755,
+          566.25
+        ]
+      },
+      {
+        "alt": "JuanCa Power intercambia un material con un participante mientras el grupo observa.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/dinamica-640.webp",
+        "natural": [
+          475,
+          633
+        ],
+        "rendered": [
+          416,
+          554.4375
+        ]
+      },
+      {
+        "alt": "JuanCa Power habla junto a una pizarra durante un taller presencial.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/pizarra-480.webp",
+        "natural": [
+          360,
+          639
+        ],
+        "rendered": [
+          303,
+          538.453125
+        ]
+      },
+      {
+        "alt": "JuanCa Power junto a otro hombre en una fotografía de evento, ambos de pie.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/encuentro-640.webp",
+        "natural": [
+          475,
+          633
+        ],
+        "rendered": [
+          416,
+          554.4375
+        ]
+      },
+      {
+        "alt": "Fotografía de un encuentro grupal al aire libre, con participantes reunidos frente a los materiales del evento.",
+        "url": "http://127.0.0.1:4322/juancapower-web-v2/images/gallery/grupo-abierto-1280.webp",
+        "natural": [
+          1080,
+          810
+        ],
+        "rendered": [
+          981,
+          735.75
+        ]
+      }
+    ]
+  }
+]

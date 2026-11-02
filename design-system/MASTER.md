@@ -1,6 +1,6 @@
 # JuanCa Power 2.0 · Sistema maestro
 
-> Sprint 1: POWER PRESENCE se explora únicamente en `/conceptos/`, con excepción en [pages/conceptos.md](pages/conceptos.md). A y B no están aprobadas. Las rutas de Sprint 0 conservan su sistema hasta selección expresa del usuario.
+> Dirección oficial aprobada: **A · Stage Presence** (02/11/2026). La implementación de Home se prepara en el PR, sin fusionar ni publicar. Hero, paleta, tipografía y alternancia se conservan; la nueva galería sigue pendiente de revisión. Excepciones activas en [pages/home.md](pages/home.md). B queda como archivo de exploración.
 
 ## Función y evidencia
 Audiencia: personas que buscan coaching personal y responsables de conferencias/talleres. Trabajo principal: llevar a orientación; secundario: contratación speaker. CTA dominante: «Agenda una sesión de orientación». Brief del Sprint 0 prevalece sobre identidades previas: Plus Jakarta Sans única familia y dorado #F1E5AC. No precios definitivos, garantías, estadísticas ni testimonios sin verificar.

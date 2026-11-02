@@ -1,11 +1,11 @@
 ---
 import { path, booking } from '../../data/site';
 import Arrow from './Arrow.astro';
-const { editorial = false } = Astro.props;
-const links = [{name:'Coaching POWER 4',url:path('conceptos/wireframes/coaching')},{name:'Speaker y talleres',url:path('conceptos/wireframes/speaker')},{name:'Sobre mí',url:'#experiencia'}];
+const { editorial = false, live = false } = Astro.props;
+const links = [{name:'Coaching POWER 4',url:live ? '#power4' : path('conceptos/wireframes/coaching')},{name:'Speaker y talleres',url:path(live ? 'speaker' : 'conceptos/wireframes/speaker')},{name:live ? 'Experiencia' : 'Sobre mí',url:'#experiencia'}];
 ---
 <header class:list={['presence-header', { editorial }]}>
-  <a class="presence-brand" href={path('conceptos')} aria-label="JuanCa Power, propuestas de diseño"><img src={`${path()}images/isotipo.png`} alt="" width="34" height="34" /><span>JUANCA <strong>POWER</strong></span></a>
+  <a class="presence-brand" href={path(live ? '' : 'conceptos')} aria-label={live ? 'JuanCa Power, inicio' : 'JuanCa Power, propuestas de diseño'}><img src={`${path()}images/isotipo.png`} alt="" width="34" height="34" /><span>JUANCA <strong>POWER</strong></span></a>
   <nav class="presence-nav" aria-label="Navegación principal">{links.map(link => <a href={link.url}>{link.name}</a>)}</nav>
   <a class="presence-header-cta" href={booking}>Agenda tu sesión <Arrow /></a>
   <details class="presence-menu"><summary>Menú <span aria-hidden="true">＋</span></summary><nav aria-label="Navegación móvil">{links.map(link => <a href={link.url}>{link.name}</a>)}</nav></details>

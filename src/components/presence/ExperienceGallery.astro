@@ -1,0 +1,17 @@
+---
+import photos from '../../data/gallery.json';
+import { path } from '../../data/site';
+---
+<section class="presence-experience presence-experience-editorial" id="experiencia" aria-labelledby="experience-title">
+  <div class="presence-wrap">
+    <div class="experience-top"><p class="presence-kicker">PERSONAS. CONVERSACIONES. ACCIÓN.</p><h2 id="experience-title">La presencia<br />también se comparte.</h2><p>En el escenario y en el trabajo con equipos, el punto de partida sigue siendo humano.</p></div>
+    <div class="presence-gallery" aria-label="Fotografías de encuentros, talleres y presentaciones">
+      {photos.map(photo => <figure class={`gallery-photo gallery-${photo.layout}`} data-photo={photo.slug}>
+        <img src={`${path()}images/gallery/${photo.slug}-${photo.variants[photo.variants.length-1]}.webp`}
+          srcset={photo.variants.map(width => `${path()}images/gallery/${photo.slug}-${width}.webp ${width}w`).join(', ')}
+          sizes={photo.sizes} width={photo.width} height={photo.height} alt={photo.alt} loading="lazy" decoding="async" />
+        <figcaption>{photo.caption}</figcaption>
+      </figure>)}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,7 @@
+import { readFile,mkdir,writeFile } from 'node:fs/promises';
+import { chromium } from '@playwright/test';
+const assets=JSON.parse(await readFile('docs/gallery-selection.json','utf8'));await mkdir('docs/gallery-review',{recursive:true});
+for(let i=0;i<assets.length;i++){const a=assets[i];const url=a.secure_url.replace('/upload/','/upload/f_webp,q_85,c_limit,w_640/');const r=await fetch(url);if(!r.ok)throw Error(r.status+' '+a.public_id);await writeFile(`docs/gallery-review/candidate-${i+1}.webp`,Buffer.from(await r.arrayBuffer()));}
+const browser=await chromium.launch();const page=await browser.newPage({viewport:{width:1440,height:1100},deviceScaleFactor:1});
+for(let start=0;start<assets.length;start+=4){let html='<html><head><meta charset="utf-8"><style>body{background:#151720;color:white;font:14px Arial;margin:24px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}figure{margin:0}img{width:100%;height:440px;object-fit:contain;background:#252a37}figcaption{padding:10px}</style></head><body><div class="grid">';for(let i=start;i<Math.min(start+4,assets.length);i++){const b=await readFile(`docs/gallery-review/candidate-${i+1}.webp`);html+=`<figure><img src="data:image/webp;base64,${b.toString('base64')}"><figcaption>${i+1}. ${assets[i].public_id} · ${assets[i].width}×${assets[i].height}</figcaption></figure>`;}html+='</div></body></html>';await page.setContent(html);await page.screenshot({path:`docs/gallery-review/selection-${start/4+1}.png`,fullPage:true});}
+await browser.close();console.log('8 fotografías descargadas para revisión visual.');

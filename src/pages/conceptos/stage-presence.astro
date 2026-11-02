@@ -2,24 +2,9 @@
 import Concept from '../../layouts/Concept.astro';
 import Header from '../../components/presence/Header.astro';
 import Journey from '../../components/presence/Journey.astro';
-import Arrow from '../../components/presence/Arrow.astro';
-import { path, booking } from '../../data/site';
+import StageHero from '../../components/presence/StageHero.astro';
 ---
-<Concept title="A · Stage Presence">
+<Concept title="A · Stage Presence · Dirección aprobada">
   <Header />
-  <main id="contenido" tabindex="-1">
-    <section class="stage-hero" aria-labelledby="stage-title">
-      <figure class="stage-image"><img src={`${path()}images/presence/stage-1066.webp`} srcset={`${path()}images/presence/stage-480.webp 480w, ${path()}images/presence/stage-768.webp 768w, ${path()}images/presence/stage-1066.webp 1066w`} sizes="(max-width:700px) 100vw, 65vw" width="1066" height="1600" alt="JuanCa Power en un escenario, de perfil, hablando con un micrófono de diadema." fetchpriority="high" loading="eager" /><figcaption>JUANCA POWER · EN ESCENA</figcaption></figure>
-      <div class="stage-shade" aria-hidden="true"></div>
-      <div class="stage-content presence-wrap">
-        <p class="presence-kicker">COACHING PERSONAL · SPEAKER Y TALLERES</p>
-        <h1 id="stage-title"><span class="stage-lead">No esperes<br />motivación.</span><span class="stage-result">Crea el<br />resultado.</span></h1>
-        <p class="stage-intro">Soy JuanCa Power. Coaching personalizado con <strong>POWER 4</strong> para conectar propósito, mente, cuerpo y emociones con decisiones y acciones reales.</p>
-        <div class="presence-actions"><a class="presence-button" href={booking}>Agenda una sesión de orientación <Arrow /></a><a class="presence-link" href={path('conceptos/wireframes/speaker')}>Contrátame como speaker <Arrow /></a></div>
-        <p class="presence-disclosure">La agenda se abre en Google Calendar.</p>
-      </div>
-      <a class="stage-explore" href="#caminos"><span>DESCUBRE TU SIGUIENTE PASO</span><svg aria-hidden="true" width="18" height="28" viewBox="0 0 18 28"><path d="M9 1v24m-6-6 6 6 6-6" fill="none" stroke="currentColor" /></svg></a>
-    </section>
-    <Journey />
-  </main>
+  <main id="contenido" tabindex="-1"><StageHero /><Journey approvedGallery /></main>
 </Concept>
