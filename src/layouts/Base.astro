@@ -1,0 +1,53 @@
+---
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/global.css';
+import { base, path, booking } from '../data/site';
+const { title, description, current = '' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const image = new URL(`${base}/images/juanca-escenario.webp`, Astro.site).href;
+const nav = [{ label: 'Coaching POWER 4', href: `${path()}#power4`, key: 'coaching' }, { label: 'Speaker', href: path('speaker'), key: 'speaker' }, { label: 'Contacto', href: path('contacto'), key: 'contacto' }];
+---
+<!doctype html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#0B0D17" />
+  <title>{title} | JuanCa Power</title>
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" type="image/png" href={`${base}/images/isotipo.png`} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_PE" />
+  <meta property="og:title" content={`${title} | JuanCa Power`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={image} />
+  <meta property="og:image:alt" content="JuanCa Power durante una conferencia" />
+  <meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="header wrap">
+  <a class="brand" href={path()} aria-label="JuanCa Power, inicio">
+    <img src={`${base}/images/isotipo.png`} alt="" width="40" height="40" />
+    <span>JUANCA <strong>POWER</strong></span>
+  </a>
+  <nav class="desktop-nav" aria-label="Principal">
+    {nav.map(item => <a href={item.href} aria-current={item.key === current ? 'page' : undefined}>{item.label}</a>)}
+  </nav>
+  <a class="button header-book" href={booking}>Agenda tu sesión <span aria-hidden="true">↗</span></a>
+  <details class="mobile-menu">
+    <summary>Menú <span aria-hidden="true">＋</span></summary>
+    <nav aria-label="Principal móvil">{nav.map(item => <a href={item.href} aria-current={item.key === current ? 'page' : undefined}>{item.label}</a>)}</nav>
+  </details>
+</header>
+<main id="contenido" tabindex="-1"><slot /></main>
+<footer class="footer wrap">
+  <div class="footer-main"><a class="brand" href={path()}>JUANCA <strong>POWER</strong></a><p>Propósito que se convierte en acción.</p><a href={path('contacto')}>Conversemos <span aria-hidden="true">↗</span></a></div>
+  <div class="footer-bottom"><span>© 2026 JuanCa Power</span><a href={`${path('contacto')}#privacidad`}>Privacidad de esta versión</a><span>Versión de prueba · Sprint 0</span></div>
+</footer>
+</body>
+</html>
+
