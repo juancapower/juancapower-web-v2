@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import { base, speakerContact, path } from '../data/site';
+---
+<Base current="speaker" title="Conferencias y talleres" description="Conversa con JuanCa Power sobre una conferencia o taller para tu organización. Liderazgo personal, mentalidad y propósito.">
+  <section class="section wrap page-hero"><p class="eyebrow">JUANCA POWER · SPEAKER</p><h1>Ideas que abren<br /><span>nuevas decisiones.</span></h1><p class="intro">Conferencias y talleres para conversar sobre liderazgo personal, mentalidad y propósito. Empecemos por lo que tu equipo necesita.</p><a class="button" href={speakerContact}>Solicitar una propuesta <span aria-hidden="true">↗</span></a><p class="provider-note">Abre WhatsApp. Tú decides cuándo enviar el mensaje.</p></section>
+  <figure class="wrap event-wide"><img src={`${base}/images/juanca-taller.webp`} alt="JuanCa Power durante un taller presencial con participantes." width="1000" height="750" /><figcaption>JuanCa Power en un encuentro presencial.</figcaption></figure>
+  <section class="section wrap brief"><div><p class="eyebrow">CONSTRUYAMOS EL ENCUENTRO</p><h2>Cuéntame qué<br />quieres movilizar.</h2></div><div><p>Al contactarme, comparte el objetivo del encuentro, el perfil del público, la fecha tentativa y si será presencial o virtual.</p><p>Con esa información podremos conversar sobre el formato y preparar una propuesta. Disponibilidad y condiciones se confirman personalmente.</p><a class="text-link" href={speakerContact}>Conversar por WhatsApp <span aria-hidden="true">↗</span></a><a class="secondary-link" href={path('contacto')}>Ver otros canales de contacto</a></div></section>
+</Base>
