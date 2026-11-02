@@ -1,0 +1,108 @@
+{
+  "reviewDate": "2026-11-02",
+  "timezone": "America/Lima",
+  "automated": [
+    {
+      "name": "shola",
+      "width": 1440,
+      "status": 200,
+      "url": "https://sholarichards.com/",
+      "title": "Shola Richards - Workplace Kindness Expert, International Keynote Speaker, Best-selling Author",
+      "headingCount": 40,
+      "linkCount": 75,
+      "fontFamilies": [
+        "Montserrat, sans-serif",
+        "Karl, sans-serif",
+        "\"Mia Culver\", sans-serif",
+        "\"Des Montilles\", sans-serif"
+      ],
+      "videoCount": 0
+    },
+    {
+      "name": "shola",
+      "width": 390,
+      "status": 200,
+      "url": "https://sholarichards.com/",
+      "title": "Shola Richards - Workplace Kindness Expert, International Keynote Speaker, Best-selling Author",
+      "headingCount": 40,
+      "linkCount": 75,
+      "fontFamilies": [
+        "Montserrat, sans-serif",
+        "Karl, sans-serif",
+        "\"Mia Culver\", sans-serif",
+        "\"Des Montilles\", sans-serif"
+      ],
+      "videoCount": 0
+    },
+    {
+      "name": "tony",
+      "width": 1440,
+      "status": 200,
+      "url": "https://www.tonyrobbins.com/",
+      "title": "Official Website of Tony Robbins: Personal & Business Results Coach | Tony Robbins",
+      "headingCount": 40,
+      "linkCount": 100,
+      "fontFamilies": [
+        "sans, \"sans Fallback\", ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "mono, \"mono Fallback\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+      ],
+      "videoCount": 17
+    },
+    {
+      "name": "tony",
+      "width": 390,
+      "status": 200,
+      "url": "https://www.tonyrobbins.com/",
+      "title": "Official Website of Tony Robbins: Personal & Business Results Coach | Tony Robbins",
+      "headingCount": 40,
+      "linkCount": 100,
+      "fontFamilies": [
+        "sans, \"sans Fallback\", ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "mono, \"mono Fallback\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+      ],
+      "videoCount": 17
+    },
+    {
+      "name": "orlando",
+      "width": 1440,
+      "status": 403,
+      "url": "https://orlandodenegri.com/",
+      "title": "Just a moment...",
+      "headingCount": 3,
+      "linkCount": 2,
+      "fontFamilies": [
+        "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+      ],
+      "videoCount": 0
+    },
+    {
+      "name": "orlando",
+      "width": 390,
+      "status": 403,
+      "url": "https://orlandodenegri.com/",
+      "title": "Just a moment...",
+      "headingCount": 3,
+      "linkCount": 2,
+      "fontFamilies": [
+        "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+      ],
+      "videoCount": 0
+    }
+  ],
+  "nativeChrome": {
+    "orlando": {
+      "accessible": true,
+      "desktopReviewed": true,
+      "mobileReviewed": true,
+      "serviceArea": "Sesiones 1-1",
+      "notes": "Automated 403 is not a visual audit. Native Chrome screenshots are the source of visual observations."
+    },
+    "shola": {
+      "serviceReviewed": "https://sholarichards.com/speaking/"
+    },
+    "tony": {
+      "serviceReviewed": "https://www.tonyrobbins.com/results-coaching",
+      "mobileServiceCapture": "timeout; not marked verified"
+    }
+  }
+}
