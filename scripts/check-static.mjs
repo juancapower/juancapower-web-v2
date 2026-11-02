@@ -9,6 +9,7 @@ const walk = dir => readdirSync(dir).flatMap(x => statSync(join(dir,x)).isDirect
 for (const file of pages) {
   const html = readFileSync(`dist/${file}`, 'utf8');
   assert.match(html, /name="robots" content="noindex,nofollow"/);
+  assert(!/[ÃÂ�]/.test(html), `Text encoding corruption in ${file}`);
   assert.match(html, /<html lang="es-PE"/);
   assert.equal((html.match(/<h1[ >]/g)||[]).length,1, file);
   assert(!/fbq\(|ttq\.|metricool|GEMINI_API_KEY|localStorage|sessionStorage|<iframe/i.test(html));
