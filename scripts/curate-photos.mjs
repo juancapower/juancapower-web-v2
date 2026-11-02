@@ -1,0 +1,7 @@
+import { chromium } from '@playwright/test';
+import {readFile,mkdir,writeFile} from 'node:fs/promises';
+const items=JSON.parse(await readFile('docs/photo-candidates.json','utf8'));await mkdir('docs/photo-curation',{recursive:true});
+for(const asset of items){const url=asset.secure_url.replace('/upload/','/upload/f_webp,q_85,w_680/');const r=await fetch(url);await writeFile(`docs/photo-curation/${asset.public_id}.webp`,Buffer.from(await r.arrayBuffer()));}
+const browser=await chromium.launch();const page=await browser.newPage({viewport:{width:1440,height:1100},deviceScaleFactor:1});
+for(let i=0;i<items.length;i+=6){let html='<html><head><meta charset="utf-8"><style>*{box-sizing:border-box}body{background:#151720;color:#fff;font:14px Arial;padding:24px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}figure{margin:0}img{display:block;width:100%;height:420px;object-fit:contain;background:#252a37}figcaption{padding:10px;line-height:1.6}</style></head><body><div class="grid">';for(const a of items.slice(i,i+6)){const buf=await readFile(`docs/photo-curation/${a.public_id}.webp`);html+=`<figure><img src="data:image/webp;base64,${buf.toString('base64')}"><figcaption>${a.public_id}<br>${a.width} × ${a.height}</figcaption></figure>`;}html+='</div></body></html>';await page.setContent(html);await page.screenshot({path:`docs/photo-curation/contact-${Math.floor(i/6)+1}.png`,fullPage:true});}
+await browser.close();console.log(`Downloaded and rendered ${items.length} candidate assets.`);

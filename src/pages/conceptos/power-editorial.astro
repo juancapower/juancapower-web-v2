@@ -1,0 +1,20 @@
+---
+import Concept from '../../layouts/Concept.astro';
+import Header from '../../components/presence/Header.astro';
+import Journey from '../../components/presence/Journey.astro';
+import Arrow from '../../components/presence/Arrow.astro';
+import { path, booking } from '../../data/site';
+---
+<Concept title="B · Power Editorial" theme="light">
+  <Header editorial />
+  <main id="contenido" tabindex="-1">
+    <section class="editorial-hero presence-wrap" aria-labelledby="editorial-title">
+      <p class="presence-kicker editorial-kicker">JUANCA POWER · COACH & SPEAKER</p>
+      <h1 id="editorial-title"><span class="editorial-lead">No esperes<br />motivación.</span><span class="editorial-result">Crea el resultado.</span></h1>
+      <figure class="editorial-image"><img src={`${path()}images/presence/stage-1066.webp`} srcset={`${path()}images/presence/stage-480.webp 480w, ${path()}images/presence/stage-768.webp 768w, ${path()}images/presence/stage-1066.webp 1066w`} sizes="(max-width:700px) 43vw, 42vw" width="1066" height="1600" alt="JuanCa Power en plena intervención, de perfil en un escenario con luz azul." fetchpriority="high" loading="eager" /><figcaption>EL PROPÓSITO SE PONE EN ACCIÓN.</figcaption></figure>
+      <div class="editorial-copy"><p>Coaching personalizado con <strong>POWER 4</strong> para conectar propósito, mente, cuerpo y emociones con decisiones y acciones reales.</p><div class="presence-actions"><a class="presence-button" href={booking}>Agenda una sesión de orientación <Arrow /></a><a class="presence-link" href={path('conceptos/wireframes/speaker')}>Contrátame como speaker <Arrow /></a></div><p class="presence-disclosure">La agenda se abre en Google Calendar.</p></div>
+      <div class="editorial-signature"><span>MENTE CLARA.</span><span>ACCIÓN CON PROPÓSITO.</span></div>
+    </section>
+    <Journey />
+  </main>
+</Concept>

@@ -1,0 +1,24 @@
+---
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/presence.css';
+import { path } from '../data/site';
+const { title, theme = 'dark', showReview = true } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="Exploración visual POWER PRESENCE. Propuestas de diseño para revisión de JuanCa Power." />
+  <title>{title} · POWER PRESENCE</title>
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" href={`${path()}images/isotipo.png`} type="image/png" />
+</head>
+<body class:list={['presence-canvas', theme]}>
+  <a class="presence-skip" href="#contenido">Saltar al contenido</a>
+  {showReview && <div class="review-strip"><span>SPRINT 1 · DIRECCIÓN VISUAL EN REVISIÓN</span><a href={path('conceptos')}>Comparar A y B <span aria-hidden="true">↗</span></a></div>}
+  <slot />
+</body>
+</html>
