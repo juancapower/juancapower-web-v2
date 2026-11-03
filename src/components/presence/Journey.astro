@@ -9,7 +9,7 @@ const { live = false, approvedGallery = false } = Astro.props;
   <div class="presence-wrap">
     <div class="chapter-heading"><p class="presence-kicker">DOS FORMAS DE TRABAJAR CONMIGO</p><h2 id="choice-heading">Tu siguiente paso.<br /><span>A tu medida.</span></h2></div>
     <div class="choice-layout">
-      <article class="choice-personal"><p class="choice-audience">PARA TI</p><h3>Coaching<br />POWER 4</h3><p>Un espacio personalizado para conectar lo que quieres con lo que haces.</p><a class="presence-link" href={live ? '#power4' : path('conceptos/wireframes/coaching')}>Explora el proceso <Arrow /></a><span class="choice-note">Orientación directa · Test opcional</span></article>
+      <article class="choice-personal"><p class="choice-audience">PARA TI</p><h3>Coaching<br />POWER 4</h3><p>Un espacio personalizado para conectar lo que quieres con lo que haces.</p><a class="presence-link" href={live ? path('coaching') : path('conceptos/wireframes/coaching')}>Explora el proceso <Arrow /></a><span class="choice-note">Orientación directa · Test opcional</span></article>
       <article class="choice-organizations"><p class="choice-audience">PARA TU ORGANIZACIÓN</p><h3>Speaker<br />y talleres</h3><p>Conferencias y experiencias que abren conversaciones y movilizan decisiones.</p><a class="presence-link" href={path(live ? 'speaker' : 'conceptos/wireframes/speaker')}>Conversemos sobre tu evento <Arrow /></a><span class="choice-note">Objetivo · Público · Formato</span></article>
     </div>
   </div>
