@@ -41,7 +41,7 @@ test('keyboard, menu, navigation and reduced motion',async({page})=>{
   await page.setViewportSize({width:812,height:375});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 test('404 and 200% text zoom remain usable',async({page})=>{
- await page.goto(base+'404.html');await expect(page.getByRole('link',{name:'Ir al inicio'})).toHaveAttribute('href',base);
+ await page.goto(base+'404.html');await expect(page.getByRole('link',{name:'Volver al inicio'})).toHaveAttribute('href',base);
  await page.goto(base);await page.setViewportSize({width:1024,height:768});await page.evaluate(()=>document.documentElement.style.fontSize='200%');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });

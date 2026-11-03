@@ -12,14 +12,17 @@
     "preview": "astro preview --host 127.0.0.1",
     "test": "playwright test",
     "check:static": "node scripts/check-static.mjs",
-    "preview:concepts": "node scripts/serve-concepts.mjs"
+    "preview:concepts": "node scripts/serve-concepts.mjs",
+    "check": "astro check"
   },
   "dependencies": {
-    "astro": "7.4.4",
-    "@fontsource-variable/plus-jakarta-sans": "^5.2.8"
+    "@fontsource-variable/plus-jakarta-sans": "^5.2.8",
+    "astro": "7.4.4"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "4.14.0",
     "@playwright/test": "1.64.1",
-    "@axe-core/playwright": "4.14.0"
+    "typescript": "^6.0.3"
   }
 }
