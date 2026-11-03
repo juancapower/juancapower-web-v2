@@ -361,3 +361,5 @@
   .presence-gallery .gallery-closing { margin-top:16px; }
   .presence-gallery figcaption { font-size:12px; margin-top:12px; }
 }
+
+.gallery-next{margin-top:48px;max-width:600px}.gallery-next p{margin-bottom:24px}.gallery-next .presence-button{max-width:100%}

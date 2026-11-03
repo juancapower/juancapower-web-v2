@@ -31,7 +31,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: browser-evidence
-          path: test-results/
+          path: |
+            test-results/
+            docs/gallery-review/
       - name: Upload independent design preview
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
