@@ -1,42 +1,30 @@
 # JuanCa Power 2.0
 
-Base independiente de la nueva web de coaching POWER 4 y contratación de conferencias.
+Astro estático, identidad Stage Presence y publicación independiente en GitHub Pages. Producción y DNS permanecen en la web anterior.
 
-Repositorio exclusivo: https://github.com/juancapower/juancapower-web-v2
+## Revisión integral
 
-Sprint 0 / JUA-41. Producción y DNS no se modifican. No CNAME, claves API ni rastreadores.
+PR #8, rama `feature/platform-mega-sprint`. No fusionar automáticamente. Informe del producto, pruebas y bloqueos: [docs/MEGA-SPRINT.md](docs/MEGA-SPRINT.md). Evidencia: [docs/EVIDENCE.md](docs/EVIDENCE.md).
 
-## Desarrollo
+Node 24 LTS:
 
-Node 24 LTS. `npm ci`, `npm run dev`, `npm run build`, `npm test`.
+```sh
+npm ci
+npm run check
+npm run build
+npm run check:static
+npm test
+npm run preview:concepts
+```
 
-Astro genera HTML estático por ruta. `BASE_PATH` permite probar el subdirectorio Pages (por defecto `/juancapower-web-v2`) o raíz (`BASE_PATH=/`). `SITE_URL` es el origen de staging. No cambiarlo al dominio de producción durante este sprint.
+Preview local completo: http://127.0.0.1:4322/juancapower-web-v2/ . El comando de preview conserva su nombre histórico y sirve todas las rutas. Los artifacts de CI incluyen preview estático y capturas reales.
 
-Consultar `design-system/MASTER.md`, `docs/AUDIT.md`, `docs/ARCHITECTURE.md` y `docs/SPRINT-0.md`.
+`BASE_PATH=/` permite verificar raíz; por defecto `/juancapower-web-v2`. `SITE_URL` fija el origen. No apuntar al dominio de producción durante revisión. Mantener noindex, robots restrictivo y ausencia de CNAME.
+
+## Contenido y privacidad
+
+Sistema visual en `design-system/MASTER.md`; catálogo en `src/data/resources.ts`; precios propuestos ocultos en `src/data/coaching.ts`; preguntas literales del test en `src/data/power4.json`. Test sin persistencia ni transmisión. Sin trackers, formularios de recepción simulada o testimonios públicos. `.private/` excluido de Git y build.
 
 ## Publicación
 
-GitHub Actions valida pull requests; solo main publica en el entorno `github-pages`. Revisar el workflow y su URL efectiva antes de declarar publicación. Preview con `noindex,nofollow` en todas las páginas: no es un control de acceso.
-
-## Alcance
-
-Home, entrada comercial speaker y contacto mínimo. Las rutas futuras están documentadas, sin páginas vacías publicadas. El test y los precios no se implementan en Sprint 0. Los enlaces comerciales recuperados de la web anterior requieren validación operativa del propietario (disponibilidad, reserva y recepción reales).
-
-## Migración y recuperación
-
-Este sprint no autoriza migrar producción. Un sprint futuro debe inventariar rutas legadas, validar reservas, privacidad y textos legales; aprobar dominio, HTTPS y plan de retorno antes de cambiar Pages/DNS. Para recuperar staging, revertir el commit defectuoso en main mediante PR y comprobar un nuevo deployment. La web anterior conserva su repositorio y configuración.
-
-## Sprint 1 · Stage Presence aprobada
-
-Trabajo aislado en `design/sprint-1-power-presence`, sin fusionar ni desplegar el rediseño. La Home pública de Sprint 0 no cambia.
-
-Después de `npm ci` y `npm run build`, ejecutar `npm run preview:concepts`. Galería local: http://127.0.0.1:4322/juancapower-web-v2/conceptos/.
-
-- A: `/conceptos/stage-presence/`.
-- B: `/conceptos/power-editorial/`.
-- Wireframes: `/conceptos/wireframes/home/`, `/conceptos/wireframes/coaching/`, `/conceptos/wireframes/speaker/`.
-- Revisión: `docs/SPRINT-1-REVIEW.md`, benchmark, curaduría y capturas.
-
-El PR valida pero no publica Pages. El workflow también exige `refs/heads/main` para desplegar: un dispatch desde una rama de exploración no reemplaza staging. Los artifacts del PR incluyen el build estático de revisión y las capturas de pruebas. La dirección A está aprobada. La rama ya integra Stage Presence en la Home y una galería editorial de ocho fotos; falta revisar la galería antes de fusionar.
-
-Revisión actual: `docs/GALLERY-REVIEW.md`. Inventarios: `docs/GALLERY-PHOTO-INVENTORY.md` y `docs/TESTIMONIAL-INVENTORY.md`. Preview de la Home aprobada: http://127.0.0.1:4322/juancapower-web-v2/. Los testimonios no se publican; `.private/` queda excluido del repositorio.
+Los PR validan sin desplegar. Solo main puede publicar en el staging existente. Migración futura necesita aprobación expresa; checklist en el informe. Para revertir staging, hacer un PR de reversión y verificar deployment; no modificar el repositorio anterior.

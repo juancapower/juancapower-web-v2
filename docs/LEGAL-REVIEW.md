@@ -12,3 +12,5 @@ Fuente oficial consultada 03/11/2026: [DS 016-2024-JUS, publicación oficial en 
 | Imágenes/testimonios | Sin nuevos terceros o testimonios no autorizados | Confirmar permisos de fotografías existentes antes del dominio final |
 
 No presumir exención por usar links externos ni cumplimiento por tener footer. Pendiente revisión legal final y datos del responsable. No habilitar captación o tracking mientras falte definición del tratamiento. Página de privacidad describe comportamiento probado, no certificación. Fuente oficial accesible también en ANPD: https://www.gob.pe/institucion/anpd/normas-legales/6554453-16-2024-jus .
+
+Referencia oficial de vigencia: [campaña ANPD](https://www.gob.pe/institucion/anpd/campa%C3%B1as/128319-nuevo-reglamento-de-proteccion-de-datos-personales), entrada en vigencia 31/03/2025. No se detectó en la consulta oficial un sustituto del reglamento; la validación jurídica final debe considerar la operación concreta del responsable.
