@@ -12,6 +12,11 @@ for (const file of pages) {
   assert(!/[ÃÂ�]/.test(html), `Text encoding corruption in ${file}`);
   assert.match(html, /<html lang="es-PE"/);
   assert.equal((html.match(/<h1[ >]/g)||[]).length,1, file);
+  assert.equal((html.match(/<footer[ >]/g)||[]).length,1, `One shared footer: ${file}`);
+  assert.match(html, /property="og:description"/);
+  assert.match(html, /name="twitter:card"/);
+  const schema=html.match(/type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/);
+  assert(schema, `WebPage schema: ${file}`);assert.equal(JSON.parse(schema[1])['@type'],'WebPage');
   assert(!/fbq\(|ttq\.|metricool|GEMINI_API_KEY|localStorage|sessionStorage|<iframe/i.test(html));
   for (const match of html.matchAll(/(?:href|src)="([^"#]+)"/g)) {
     const url = match[1].split('#')[0].split('?')[0];

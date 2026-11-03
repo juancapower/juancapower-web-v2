@@ -1,6 +1,6 @@
 # JuanCa Power 2.0 · Sistema maestro
 
-> Dirección oficial aprobada: **A · Stage Presence** (02/11/2026). La implementación de Home se prepara en el PR, sin fusionar ni publicar. Hero, paleta, tipografía y alternancia se conservan; la nueva galería sigue pendiente de revisión. Excepciones activas en [pages/home.md](pages/home.md). B queda como archivo de exploración.
+> Dirección oficial aprobada: **A · Stage Presence**. Home, Coaching y galería B escritorio/A móvil están publicados solo en staging. El PR integral #8 extiende el sistema al resto de rutas, con header y footer únicos; pendiente aprobación final, sin migración de dominio.
 
 ## Función y evidencia
 Audiencia: personas que buscan coaching personal y responsables de conferencias/talleres. Trabajo principal: llevar a orientación; secundario: contratación speaker. CTA dominante: «Agenda una sesión de orientación». Brief del Sprint 0 prevalece sobre identidades previas: Plus Jakarta Sans única familia y dorado #F1E5AC. No precios definitivos, garantías, estadísticas ni testimonios sin verificar.
@@ -31,3 +31,6 @@ Scroll nativo; feedback de botones 160ms ease-out, una entrada opcional de image
 
 ## Calidad y presupuesto
 HTML semántico, lang es-PE, un h1 por ruta, skip link, encabezados ordenados, alt significativo, nombres accesibles y foco visible. No trackers, embeds, cookies propias ni almacenamiento. Fuente local, sin peticiones de terceros al cargar. Hero objetivo <=250KB; secundaria <=180KB. Ningún runtime de UI enviado. Noindex en preview, canonical y OG propios del staging. Build + enlaces/deep links + navegador en 360,375,768,1024,1440 + axe + teclado + capturas. Cada estado de publicación se informa por separado.
+
+## Plataforma integral
+Header compartido con navegación principal y exploración, menú móvil nativo con scroll y footer único. Test de cuatro pasos, cálculo y estado solo en memoria; foco al paso/error/resultado, cinco opciones en una fila móvil. Comunidad y Speaker usan mensajes de contacto específicos. Recursos usa catálogo en datos y portada auténtica del Kit. No se publican materiales pendientes de terceros. SEO WebPage por ruta; noindex y robots de staging activos.
