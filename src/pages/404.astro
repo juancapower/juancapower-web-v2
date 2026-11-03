@@ -1,5 +1,4 @@
 ---
-import Base from '../layouts/Base.astro';
-import { path } from '../data/site';
+import Platform from '../layouts/Platform.astro';import {path} from '../data/site';
 ---
-<Base title="Página no encontrada" description="Vuelve al inicio de JuanCa Power."><section class="section wrap page-hero"><p class="eyebrow">404</p><h1>Volvamos<br /><span>al camino.</span></h1><p>Esta página no está disponible en la versión de prueba.</p><a class="button" href={path()}>Ir al inicio</a></section></Base>
+<Platform title="Página no encontrada" description="Encuentra tu siguiente paso en JuanCa Power."><section class="platform-hero presence-wrap"><div><p class="presence-kicker">404 · ESTE CAMINO NO ESTÁ AQUÍ</p><h1>Tu siguiente paso<br/><span>sí tiene dirección.</span></h1><p>La página solicitada no existe o cambió de lugar.</p><a class="presence-button" href={path()}>Volver al inicio ↗</a><p><a href={path('coaching')}>Explorar Coaching</a> · <a href={path('speaker')}>Conferencias y talleres</a></p></div></section></Platform>

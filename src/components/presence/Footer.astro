@@ -1,0 +1,5 @@
+---
+import {path} from '../../data/site';
+const links=[['coaching','Coaching POWER 4'],['speaker','Speaker y talleres'],['test-power4','Mapa POWER 4'],['comunidad','Comunidad'],['recursos','Recursos'],['sobre-mi','Sobre mí'],['contacto','Contacto'],['privacidad','Privacidad'],['cookies','Cookies'],['terminos','Condiciones']];
+---
+<footer class="platform-footer presence-wrap"><a href={path()} class="footer-brand">JUANCA POWER</a><p>Propósito que se convierte en acción.</p><nav aria-label="Explorar la plataforma">{links.map(([url,label])=><a href={path(url)}>{label}</a>)}</nav><p class="footer-note">Versión de revisión · Condiciones comerciales y textos legales sujetos a validación final.</p></footer>

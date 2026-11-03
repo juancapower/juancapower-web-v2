@@ -1,8 +1,11 @@
 ---
 import '@fontsource-variable/plus-jakarta-sans';
 import '../styles/presence.css';
+import Footer from '../components/presence/Footer.astro';
+import '../styles/platform.css';
 import { path } from '../data/site';
 const { title, theme = 'dark', showReview = true, product = false, description } = Astro.props;
+const pageDescription=description || (Astro.url.pathname.includes('/coaching') ? 'Coaching POWER 4 personalizado: explora tu situación, conoce ACTIVA y EXPANDE y agenda orientación sin realizar un test obligatorio.' : product ? 'JuanCa Power: propósito y acción a través de Coaching POWER 4, conferencias y talleres para personas y organizaciones.' : 'Exploración visual POWER PRESENCE para revisión de JuanCa Power.');
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 <!doctype html>
@@ -11,10 +14,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <meta name="description" content={description || (product ? "Coaching personalizado con POWER 4 y conferencias con JuanCa Power. Propósito, mente, cuerpo y emociones puestos en decisiones y acciones reales." : "Exploración visual POWER PRESENCE. Propuestas de diseño para revisión de JuanCa Power.")} />
+  <meta name="description" content={pageDescription} />
   <title>{title}{product ? " | JuanCa Power" : " · POWER PRESENCE"}</title>
+  <meta property="og:description" content={pageDescription} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={`${title} | JuanCa Power`} />
+  <meta name="twitter:description" content={pageDescription} />
+  <meta name="twitter:image" content={new URL(`${path()}images/presence/stage-1066.webp`, Astro.site).href} />
   <meta name="theme-color" content="#0B0D17" />
   {product && <><meta property="og:type" content="website" /><meta property="og:title" content={`${title} | JuanCa Power`} /><meta property="og:url" content={canonical} /><meta property="og:image" content={new URL(`${path()}images/presence/stage-1066.webp`, Astro.site).href} /><meta property="og:image:alt" content="JuanCa Power en un escenario" /></>}
+  {product && <script is:inline type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'WebPage',name:`${title} | JuanCa Power`,description:pageDescription,url:canonical,inLanguage:'es-PE'}).replace(/</g,'\u003c')} />}
   <link rel="canonical" href={canonical} />
   <link rel="icon" href={`${path()}images/isotipo.png`} type="image/png" />
 </head>
@@ -22,5 +31,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <a class="presence-skip" href="#contenido">Saltar al contenido</a>
   {showReview && <div class="review-strip"><span>A APROBADA · GALERÍA EN REVISIÓN</span><a href={path('conceptos')}>Revisión y archivo <span aria-hidden="true">↗</span></a></div>}
   <slot />
+  {product && <Footer />}
 </body>
 </html>

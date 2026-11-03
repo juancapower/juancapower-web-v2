@@ -1,6 +1,5 @@
 ---
-import Concept from './Concept.astro';import Header from '../components/presence/Header.astro';import {path} from '../data/site';import '../styles/platform.css';
+import Concept from './Concept.astro';import Header from '../components/presence/Header.astro';import '../styles/platform.css';
 const {title,description}=Astro.props;
-const links=[['coaching','Coaching'],['speaker','Speaker'],['test-power4','Mapa POWER 4'],['comunidad','Comunidad'],['recursos','Recursos'],['sobre-mi','Sobre mí'],['contacto','Contacto'],['privacidad','Privacidad'],['cookies','Cookies'],['terminos','Condiciones']];
 ---
-<Concept title={title} description={description} product showReview={false}><Header live/><main id="contenido" tabindex="-1"><slot/></main><footer class="platform-footer presence-wrap"><p>JUANCA POWER · Propósito que se convierte en acción.</p><nav aria-label="Explorar la plataforma">{links.map(([url,label])=><a href={path(url)}>{label}</a>)}</nav><p>Versión de revisión. Condiciones comerciales y textos legales pendientes de validación final.</p></footer></Concept>
+<Concept title={title} description={description} product showReview={false}><Header live/><main id="contenido" tabindex="-1"><slot/></main></Concept>
