@@ -1,0 +1,138 @@
+[
+  {
+    "slug": "auditorio",
+    "publicId": "JuanCa-Power-Libera-tu-Proposito_nq99ob",
+    "assetId": "bae48ec97982c9670090020a738f86a7",
+    "source": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1793036307/JuanCa-Power-Libera-tu-Proposito_nq99ob.png",
+    "width": 720,
+    "height": 1280,
+    "caption": "Escenario y audiencia",
+    "alt": "Vista del auditorio desde las filas de asistentes, con JuanCa Power en el escenario.",
+    "layout": "lead",
+    "variants": [
+      360,
+      540,
+      720
+    ],
+    "sizes": "(max-width:700px) calc(100vw - 48px), 42vw"
+  },
+  {
+    "slug": "en-escena",
+    "publicId": "escenario_naywym",
+    "assetId": "e9456fb2100c7259327803ffb370e12c",
+    "source": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1775514826/escenario_naywym.png",
+    "width": 1280,
+    "height": 720,
+    "caption": "Conversaciones en vivo",
+    "alt": "JuanCa Power con micrófono frente a una pantalla, visto desde el público de una sala.",
+    "layout": "stage",
+    "variants": [
+      480,
+      800,
+      1280
+    ],
+    "sizes": "(max-width:700px) calc(100vw - 48px), 50vw"
+  },
+  {
+    "slug": "en-equipo",
+    "publicId": "CajaArequipa_Piura3_f9pi1u",
+    "assetId": "71b6cce9818bc894fb45dec6bc201a72",
+    "source": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1776364279/CajaArequipa_Piura3_f9pi1u.jpg",
+    "width": 4000,
+    "height": 3000,
+    "caption": "Trabajo con equipos",
+    "alt": "Participantes sentados en una sala de trabajo durante una actividad corporativa.",
+    "layout": "team",
+    "variants": [
+      480,
+      800,
+      1280
+    ],
+    "sizes": "(max-width:700px) calc(100vw - 48px), 50vw"
+  },
+  {
+    "slug": "grupo-corporativo",
+    "publicId": "CajaArequipa_Piura4_jifq7j",
+    "assetId": "377cd1ad6496d008c60d0a18d831a4a4",
+    "source": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1776364279/CajaArequipa_Piura4_jifq7j.jpg",
+    "width": 4000,
+    "height": 3000,
+    "caption": "Un encuentro compartido",
+    "alt": "JuanCa Power y participantes posan juntos al terminar un encuentro corporativo.",
+    "layout": "group",
+    "variants": [
+      480,
+      800,
+      1280
+    ],
+    "sizes": "(max-width:700px) calc(100vw - 48px), 58vw"
+  },
+  {
+    "slug": "dinamica",
+    "publicId": "CajaArequipa_Piura1_h6hbaz",
+    "assetId": "a9c812ee79245f883f5e25270d9e67d3",
+    "source": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1776364279/CajaArequipa_Piura1_h6hbaz.jpg",
+    "width": 3000,
+    "height": 4000,
+    "caption": "Participar, escuchar, conversar",
+    "alt": "JuanCa Power intercambia un material con un participante mientras el grupo observa.",
+    "layout": "interaction",
+    "variants": [
+      360,
+      640,
+      960
+    ],
+    "sizes": "(max-width:700px) 76vw, 33vw"
+  },
+  {
+    "slug": "pizarra",
+    "publicId": "TallerPNL_pizarra_onq7x1",
+    "assetId": "89531dd43384d7ef51f6852afd880053",
+    "source": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1775512311/TallerPNL_pizarra_onq7x1.png",
+    "width": 1080,
+    "height": 1920,
+    "caption": "Ideas que se trabajan",
+    "alt": "JuanCa Power habla junto a una pizarra durante un taller presencial.",
+    "layout": "board",
+    "variants": [
+      280,
+      480,
+      720
+    ],
+    "sizes": "(max-width:700px) 72vw, 25vw"
+  },
+  {
+    "slug": "encuentro",
+    "publicId": "JuanCa-Power-Dr-Bayter_pynzyr",
+    "assetId": "89040dfd54778afb08d5440de16fa9ab",
+    "source": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1793036223/JuanCa-Power-Dr-Bayter_pynzyr.png",
+    "width": 1086,
+    "height": 1448,
+    "caption": "Encuentros de evento",
+    "alt": "JuanCa Power junto a otro hombre en una fotografía de evento, ambos de pie.",
+    "layout": "encounter",
+    "variants": [
+      360,
+      640,
+      960
+    ],
+    "sizes": "(max-width:700px) 76vw, 33vw"
+  },
+  {
+    "slug": "grupo-abierto",
+    "publicId": "TrascendiendoElDuelo_grupal_mzytdc",
+    "assetId": "e74a1e55a791d4aa24d936dd936e9278",
+    "source": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1778769044/TrascendiendoElDuelo_grupal_mzytdc.jpg",
+    "width": 1280,
+    "height": 960,
+    "caption": "Personas que comparten una experiencia",
+    "alt": "Fotografía de un encuentro grupal al aire libre, con participantes reunidos frente a los materiales del evento.",
+    "layout": "closing",
+    "variants": [
+      480,
+      800,
+      1280
+    ],
+    "sizes": "(max-width:700px) calc(100vw - 48px), 75vw"
+  }
+]

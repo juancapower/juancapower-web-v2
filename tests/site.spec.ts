@@ -22,7 +22,7 @@ for (const width of [360,375,768,1024,1440]) {
       expect(await page.context().cookies()).toEqual([]);
       expect(await page.evaluate(()=>({local:localStorage.length,session:sessionStorage.length}))).toEqual({local:0,session:0});
       if(width===360||width===1440) await page.screenshot({path:testInfo.outputPath(`${route.replace('/','')||'home'}-${width}.png`),fullPage:true});
-      if(!route) await expect(page.locator('h1')).toHaveText(/No esperes\s+motivación\.\s*Crea el\s*resultado\./);
+      if(!route) await expect(page.locator('h1')).toHaveText(/No esperes\s*motivación\.\s*Crea el\s*resultado\./);
       if(!route && width===360){const box=await page.getByRole('link',{name:'Agenda una sesión de orientación',exact:false}).first().boundingBox();expect(box!.y+box!.height).toBeLessThan(800);}
     });
   }
@@ -32,12 +32,12 @@ test('keyboard, menu, navigation and reduced motion',async({page})=>{
   await page.keyboard.press('Tab'); await expect(page.getByRole('link',{name:'Saltar al contenido'})).toBeFocused();
   await page.keyboard.press('Enter'); await expect(page.locator('main')).toBeFocused();
   await page.locator('summary').focus();await page.keyboard.press('Enter');
-  await expect(page.locator('.mobile-menu')).toHaveAttribute('open','');
-  await page.getByRole('navigation',{name:'Principal móvil',exact:true}).getByRole('link',{name:'Speaker',exact:true}).click();
+  await expect(page.locator('.presence-menu')).toHaveAttribute('open','');
+  await page.getByRole('navigation',{name:'Navegación móvil',exact:true}).getByRole('link',{name:'Speaker y talleres',exact:true}).click();
   await expect(page).toHaveURL(/speaker\/$/); await expect(page.getByRole('heading',{level:1})).toContainText('Ideas');
   await expect(page.getByRole('link',{name:'Solicitar una propuesta'})).toHaveAttribute('href',/^https:\/\/wa.me\/51963335717/);
   await page.emulateMedia({reducedMotion:'reduce'});await page.goto(base);
-  expect(await page.locator('.button').first().evaluate(el=>getComputedStyle(el).transitionDuration)).toBe('0s');
+  expect(await page.locator('.presence-button').first().evaluate(el=>getComputedStyle(el).transitionDuration)).toBe('0s');
   await page.setViewportSize({width:812,height:375});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 test('404 and 200% text zoom remain usable',async({page})=>{

@@ -1,0 +1,90 @@
+[
+  {
+    "public_id": "JuanCa-Power-Libera-tu-Proposito_nq99ob",
+    "asset_id": "bae48ec97982c9670090020a738f86a7",
+    "asset_folder": "",
+    "width": 720,
+    "height": 1280,
+    "secure_url": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1793036307/JuanCa-Power-Libera-tu-Proposito_nq99ob.png",
+    "bytes": 677007,
+    "format": "png",
+    "tags": []
+  },
+  {
+    "public_id": "escenario_naywym",
+    "asset_id": "e9456fb2100c7259327803ffb370e12c",
+    "asset_folder": "",
+    "width": 1280,
+    "height": 720,
+    "secure_url": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1775514826/escenario_naywym.png",
+    "bytes": 490074,
+    "format": "png",
+    "tags": []
+  },
+  {
+    "public_id": "CajaArequipa_Piura1_h6hbaz",
+    "asset_id": "a9c812ee79245f883f5e25270d9e67d3",
+    "asset_folder": "",
+    "width": 3000,
+    "height": 4000,
+    "secure_url": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1776364279/CajaArequipa_Piura1_h6hbaz.jpg",
+    "bytes": 5510291,
+    "format": "jpg",
+    "tags": []
+  },
+  {
+    "public_id": "CajaArequipa_Piura3_f9pi1u",
+    "asset_id": "71b6cce9818bc894fb45dec6bc201a72",
+    "asset_folder": "",
+    "width": 4000,
+    "height": 3000,
+    "secure_url": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1776364279/CajaArequipa_Piura3_f9pi1u.jpg",
+    "bytes": 5128014,
+    "format": "jpg",
+    "tags": []
+  },
+  {
+    "public_id": "CajaArequipa_Piura4_jifq7j",
+    "asset_id": "377cd1ad6496d008c60d0a18d831a4a4",
+    "asset_folder": "",
+    "width": 4000,
+    "height": 3000,
+    "secure_url": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1776364279/CajaArequipa_Piura4_jifq7j.jpg",
+    "bytes": 6072525,
+    "format": "jpg",
+    "tags": []
+  },
+  {
+    "public_id": "TallerPNL_pizarra_onq7x1",
+    "asset_id": "89531dd43384d7ef51f6852afd880053",
+    "asset_folder": "",
+    "width": 1080,
+    "height": 1920,
+    "secure_url": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1775512311/TallerPNL_pizarra_onq7x1.png",
+    "bytes": 1016453,
+    "format": "png",
+    "tags": []
+  },
+  {
+    "public_id": "JuanCa-Power-Dr-Bayter_pynzyr",
+    "asset_id": "89040dfd54778afb08d5440de16fa9ab",
+    "asset_folder": "",
+    "width": 1086,
+    "height": 1448,
+    "secure_url": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1793036223/JuanCa-Power-Dr-Bayter_pynzyr.png",
+    "bytes": 2073337,
+    "format": "png",
+    "tags": []
+  },
+  {
+    "public_id": "TrascendiendoElDuelo_grupal_mzytdc",
+    "asset_id": "e74a1e55a791d4aa24d936dd936e9278",
+    "asset_folder": "",
+    "width": 1280,
+    "height": 960,
+    "secure_url": "https://res.cloudinary.com/ddn6qh7ve/image/upload/v1778769044/TrascendiendoElDuelo_grupal_mzytdc.jpg",
+    "bytes": 276466,
+    "format": "jpg",
+    "tags": []
+  }
+]

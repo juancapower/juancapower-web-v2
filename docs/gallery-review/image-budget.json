@@ -1,0 +1,122 @@
+[
+  {
+    "file": "auditorio-360.webp",
+    "bytes": 21792,
+    "requestedWidth": 360
+  },
+  {
+    "file": "auditorio-540.webp",
+    "bytes": 40476,
+    "requestedWidth": 540
+  },
+  {
+    "file": "auditorio-720.webp",
+    "bytes": 60262,
+    "requestedWidth": 720
+  },
+  {
+    "file": "en-escena-480.webp",
+    "bytes": 9668,
+    "requestedWidth": 480
+  },
+  {
+    "file": "en-escena-800.webp",
+    "bytes": 18252,
+    "requestedWidth": 800
+  },
+  {
+    "file": "en-escena-1280.webp",
+    "bytes": 38390,
+    "requestedWidth": 1280
+  },
+  {
+    "file": "en-equipo-480.webp",
+    "bytes": 25216,
+    "requestedWidth": 480
+  },
+  {
+    "file": "en-equipo-800.webp",
+    "bytes": 53334,
+    "requestedWidth": 800
+  },
+  {
+    "file": "en-equipo-1280.webp",
+    "bytes": 136724,
+    "requestedWidth": 1280
+  },
+  {
+    "file": "grupo-corporativo-480.webp",
+    "bytes": 24842,
+    "requestedWidth": 480
+  },
+  {
+    "file": "grupo-corporativo-800.webp",
+    "bytes": 54106,
+    "requestedWidth": 800
+  },
+  {
+    "file": "grupo-corporativo-1280.webp",
+    "bytes": 149952,
+    "requestedWidth": 1280
+  },
+  {
+    "file": "dinamica-360.webp",
+    "bytes": 22698,
+    "requestedWidth": 360
+  },
+  {
+    "file": "dinamica-640.webp",
+    "bytes": 63732,
+    "requestedWidth": 640
+  },
+  {
+    "file": "dinamica-960.webp",
+    "bytes": 134686,
+    "requestedWidth": 960
+  },
+  {
+    "file": "pizarra-280.webp",
+    "bytes": 8402,
+    "requestedWidth": 280
+  },
+  {
+    "file": "pizarra-480.webp",
+    "bytes": 14204,
+    "requestedWidth": 480
+  },
+  {
+    "file": "pizarra-720.webp",
+    "bytes": 26528,
+    "requestedWidth": 720
+  },
+  {
+    "file": "encuentro-360.webp",
+    "bytes": 28238,
+    "requestedWidth": 360
+  },
+  {
+    "file": "encuentro-640.webp",
+    "bytes": 78896,
+    "requestedWidth": 640
+  },
+  {
+    "file": "encuentro-960.webp",
+    "bytes": 140968,
+    "requestedWidth": 960
+  },
+  {
+    "file": "grupo-abierto-480.webp",
+    "bytes": 50252,
+    "requestedWidth": 480
+  },
+  {
+    "file": "grupo-abierto-800.webp",
+    "bytes": 126062,
+    "requestedWidth": 800
+  },
+  {
+    "file": "grupo-abierto-1280.webp",
+    "bytes": 390838,
+    "requestedWidth": 1280
+  }
+]

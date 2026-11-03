@@ -1,0 +1,21 @@
+---
+const { monochrome = false } = Astro.props;
+---
+<figure class:list={['power-drawing',{monochrome}]} aria-labelledby="power-caption">
+  <div class="power-drawing-canvas">
+    <svg viewBox="0 0 700 550" fill="none" aria-hidden="true" preserveAspectRatio="none">
+      <path class="drawing-guide" d="M350 12v522M42 209h616M42 426h616" stroke-dasharray="4 8" />
+      <path class="drawing-roof" d="M64 211 350 32l286 179M94 218 350 57l256 161" />
+      <path class="drawing-pillar" d="M178 222v183h36V222M486 222v183h36V222" />
+      <path class="drawing-base" d="M96 407h508v22H96zM96 440h508" />
+      <path class="drawing-guide" d="M196 222h-72m380 0h72M156 407v60m388-60v60" />
+      <circle class="drawing-joint" cx="350" cy="32" r="4" /><circle class="drawing-joint" cx="196" cy="407" r="4" /><circle class="drawing-joint" cx="504" cy="407" r="4" />
+    </svg>
+    <div class="drawing-label roof"><small>EL TECHO</small><strong>Plenitud<br />y Abundancia</strong></div>
+    <div class="drawing-label body"><small>COLUMNA</small><strong>Cuerpo</strong></div>
+    <div class="drawing-label emotion"><small>COLUMNA</small><strong>Emoción</strong></div>
+    <div class="drawing-label spirit"><small>BASE</small><strong>Espíritu</strong></div>
+    <div class="drawing-label mind"><small>BASE</small><strong>Mente</strong></div>
+  </div>
+  <figcaption id="power-caption">Dos bases. Dos columnas. Un horizonte para construir.</figcaption>
+</figure>
