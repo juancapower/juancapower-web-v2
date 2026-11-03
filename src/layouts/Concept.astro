@@ -2,7 +2,7 @@
 import '@fontsource-variable/plus-jakarta-sans';
 import '../styles/presence.css';
 import { path } from '../data/site';
-const { title, theme = 'dark', showReview = true, product = false } = Astro.props;
+const { title, theme = 'dark', showReview = true, product = false, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 <!doctype html>
@@ -11,7 +11,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <meta name="description" content={product ? "Coaching personalizado con POWER 4 y conferencias con JuanCa Power. Propósito, mente, cuerpo y emociones puestos en decisiones y acciones reales." : "Exploración visual POWER PRESENCE. Propuestas de diseño para revisión de JuanCa Power."} />
+  <meta name="description" content={description || (product ? "Coaching personalizado con POWER 4 y conferencias con JuanCa Power. Propósito, mente, cuerpo y emociones puestos en decisiones y acciones reales." : "Exploración visual POWER PRESENCE. Propuestas de diseño para revisión de JuanCa Power.")} />
   <title>{title}{product ? " | JuanCa Power" : " · POWER PRESENCE"}</title>
   <meta name="theme-color" content="#0B0D17" />
   {product && <><meta property="og:type" content="website" /><meta property="og:title" content={`${title} | JuanCa Power`} /><meta property="og:url" content={canonical} /><meta property="og:image" content={new URL(`${path()}images/presence/stage-1066.webp`, Astro.site).href} /><meta property="og:image:alt" content="JuanCa Power en un escenario" /></>}
