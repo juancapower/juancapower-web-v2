@@ -2,7 +2,7 @@
 import { path, booking } from '../../data/site';
 import Arrow from './Arrow.astro';
 const { editorial = false, live = false } = Astro.props;
-const links = [{name:'Coaching POWER 4',url:live ? '#power4' : path('conceptos/wireframes/coaching')},{name:'Speaker y talleres',url:path(live ? 'speaker' : 'conceptos/wireframes/speaker')},{name:live ? 'Experiencia' : 'Sobre mí',url:'#experiencia'}];
+const links = [{name:'Coaching POWER 4',url:live ? path('coaching') : path('conceptos/wireframes/coaching')},{name:'Speaker y talleres',url:path(live ? 'speaker' : 'conceptos/wireframes/speaker')},{name:live ? 'Experiencia' : 'Sobre mí',url:live ? `${path()}#experiencia` : '#experiencia'}];
 ---
 <header class:list={['presence-header', { editorial }]}>
   <a class="presence-brand" href={path(live ? '' : 'conceptos')} aria-label={live ? 'JuanCa Power, inicio' : 'JuanCa Power, propuestas de diseño'}><img src={`${path()}images/isotipo.png`} alt="" width="34" height="34" /><span>JUANCA <strong>POWER</strong></span></a>
