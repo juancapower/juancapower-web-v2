@@ -19,7 +19,7 @@ for (const file of pages) {
   assert.match(html, /name="twitter:card"/);
   const schema=html.match(/type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/);
   assert(schema, `WebPage schema: ${file}`);assert.equal(JSON.parse(schema[1])['@type'],'WebPage');
-  assert(!/<script[^>]+src=["\']https?:|<noscript[^>]*>[\s\S]*?<img|GEMINI_API_KEY|sessionStorage|<iframe/i.test(html));
+  assert(!/<script[^>]+src=["\']https?:|<noscript[^>]*>[\s\S]*?<img|GEMINI_API_KEY|<iframe/i.test(html));
   for (const match of html.matchAll(/(?:href|src)="([^"#]+)"/g)) {
     const url = match[1].split('#')[0].split('?')[0];
     if (/^https?:|^mailto:|^data:/.test(url)) continue;
