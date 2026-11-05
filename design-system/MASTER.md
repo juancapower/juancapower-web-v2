@@ -34,3 +34,6 @@ HTML semántico, lang es-PE, un h1 por ruta, skip link, encabezados ordenados, a
 
 ## Plataforma integral
 Header compartido con navegación principal y exploración, menú móvil nativo con scroll y footer único. Test de cuatro pasos, cálculo y estado solo en memoria; foco al paso/error/resultado, cinco opciones en una fila móvil. Comunidad y Speaker usan mensajes de contacto específicos. Recursos usa catálogo en datos y portada auténtica del Kit. No se publican materiales pendientes de terceros. SEO WebPage por ruta; noindex y robots de staging activos.
+
+## Preparación de consentimiento y cumplimiento (JUA-37)
+Preferencias locales solo al guardar/rechazar una elección; nunca respuestas del test. Proveedores opcionales OFF en publicación normal hasta aprobación y opt-in independiente. Footer añade Aviso legal, Libro y Configurar cookies; excepciones en pages/legal-consent.md. Captación y Libro reales siguen bloqueados por configuración y aprobación.

@@ -67,9 +67,27 @@ jobs:
         with:
           name: capture-synthetic-evidence
           path: capture-results/
+  legal-synthetic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build:legal-preview
+      - run: npm run test:legal
+      - name: Upload consent and legal evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legal-synthetic-evidence
+          path: legal-results/
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    needs: [build, capture-synthetic]
+    needs: [build, capture-synthetic, legal-synthetic]
     runs-on: ubuntu-latest
     permissions:
       pages: write
