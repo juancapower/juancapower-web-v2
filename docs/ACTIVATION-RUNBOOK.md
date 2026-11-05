@@ -17,7 +17,7 @@ El conector devolvió error interno (-32603) al consultar guía y cuenta; no se 
 
 | Paso | Codex prepara/puede ejecutar después de autorización | Propietario realiza/autoriza personalmente |
 |---|---|---|
-| Legal | Reflejar datos/textos aprobados en páginas, manifest de consentimiento y versiones, probar gates | Confirmar responsable/RUC/domicilio, finalidades/retención/derechos, asesoría y formato del Libro |
+| Legal | Reflejar datos/textos aprobados en páginas, manifest de consentimiento y versiones, probar gates | Responsable/RUC y correo ya confirmados; aportar dirección válida solo para Privacidad/Hoja, finalidades/retención/derechos, asesoría y formato del Libro |
 | Brevo | Plan de lista/atributos/DOI, comprobar config y pruebas sintéticas; configuración solo con autorización de cambio y acceso disponible | Confirmar remitente/verificación y plan/cuotas; aprobar plantilla DOI y lista marketing, revisar/autorizar automatizaciones y canales |
 | Cloudflare | Worker/D1/Turnstile preparados sin deploy; configurar bindings/variables tras permiso | Elegir cuenta/plan/región, aprobar costes/contratos/permisos y crear o introducir secretos en gestor del servidor; no pegarlos en chat |
 | Seguridad | Validación, mocks, rate limits, cifrado, idempotencia, CORS y prueba de fallo | Aprobar retención, acceso de operadores, recuperación/rotación de claves, incidentes y backups |
@@ -60,3 +60,5 @@ Publicación normal: TRACKING_LEGAL_APPROVED ausente/false; sin banner inicial d
 Retirada: guardar elección, Meta consent revoke y limpieza accesible _fbp/_fbc, recarga completa que elimina contexto de scripts. No se garantiza deshacer datos ni peticiones ya iniciadas; verificar comportamiento real/on-unload y cookies externas antes de aprobar. No hay mecanismos de evasión de consentimiento. PageView sin eventos/PII; autoConfig false, no advanced matching ni Event Setup Tool en captación. Test/contacto/Libro/legal y URLs con query/hash están fuera de allowlist. No se integra CAPI.
 
 Si el navegador impide guardar el retiro, se intenta borrar la preferencia y se recarga con ?privacy=off para bloquear cargas en ese documento incluso si quedó una preferencia anterior. Borrar/permitir preferencias en el navegador antes de abandonar esa URL si el almacenamiento está completamente bloqueado. No se transmite ese parámetro a rastreadores.
+
+Actualización del propietario: JC ESTRATEGIA Y DISEÑO INTEGRAL E.I.R.L. / RUC 20615315525 / marca JuanCa Power; canal oficial de privacidad, derechos y reclamos hola@juancapower.com. Usar estos datos reales en la configuración futura del Libro, nunca fixtures. Dirección pendiente únicamente donde obligatoria; no añadir al footer o páginas comerciales. Revisión mínima indispensable con textos breves.

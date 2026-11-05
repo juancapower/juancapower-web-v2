@@ -15,9 +15,11 @@ Libro: Worker separado, esquema D1, validación/antispam/límites/cifrado, corre
 ## Evidencia y límites
 
 - Astro check sin errores, build raíz/base, chequeo estático, noindex, enlaces y presupuesto JS.
-- Tests backend de POWER4 y Libro: 15 casos; pruebas legales/CMP y Libro sintético: 23; flujo captación sintética: 10; regresión normal ampliada: 138.
+- Tests backend de POWER4 y Libro: 15 casos; pruebas legales/CMP y Libro sintético: 23; flujo captación sintética: 10; regresión normal ampliada: 139.
 - Cinco anchos en Libro (360/390/768/1024/1440), políticas/CMP a 390/1440, axe y foco/teclado. Revisión visual de screenshots completa y de diálogos/viewport. Evidencias en CI, no gráficos pesados añadidos al repositorio.
 - Los scripts de proveedores y correos se sustituyen por mocks en E2E. Ningún dato se ha enviado a Brevo/Meta/Metricool para probar. No prueba el comportamiento interno real de los proveedores, la entrega al buzón, ni el cumplimiento normativo final.
 - Brevo vía navegador: una automatización activa #1, solo lista Ikigai #4, con envío tras un minuto. Revisada sin cambios; no se presume que los nuevos leads estén libres de otros disparadores futuros.
 
 Ver [matriz y datos pendientes](PERU-COMPLIANCE-MATRIX.md), [acciones de Codex/propietario y prueba controlada](ACTIVATION-RUNBOOK.md), [backend POWER4](../backend/README.md) y [excepción visual](../design-system/pages/legal-consent.md). Mantener JUA-37/JUA-39 abiertos: datos del responsable, revisión legal, permisos y prueba real continúan como BLOCKED antes de lanzamiento.
+
+Confirmación posterior incorporada en el mismo PR: JC ESTRATEGIA Y DISEÑO INTEGRAL E.I.R.L., RUC 20615315525, canal oficial hola@juancapower.com. Políticas abreviadas y footer reducido; no datos fiscales o dirección en páginas comerciales/footer. Art. 6/69 del reglamento verificados mediante fuente oficial SAT; dirección sigue pendiente para Privacidad y Libro, retención/condiciones no inventadas. Evidencia y CI anteriores se actualizarán al nuevo SHA.
