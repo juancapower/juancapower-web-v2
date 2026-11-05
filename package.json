@@ -13,7 +13,11 @@
     "test": "playwright test",
     "check:static": "node scripts/check-static.mjs",
     "preview:concepts": "node scripts/serve-concepts.mjs",
-    "check": "astro check"
+    "check": "astro check",
+    "test:backend": "node --test backend/worker.test.mjs",
+    "build:capture-preview": "node scripts/build-capture-preview.mjs",
+    "test:capture": "playwright test --config playwright.capture.config.ts",
+    "preview:capture": "node backend/preview-server.mjs"
   },
   "dependencies": {
     "@fontsource-variable/plus-jakarta-sans": "^5.2.8",
