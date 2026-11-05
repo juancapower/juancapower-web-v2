@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS nonces (token TEXT PRIMARY KEY, expires INTEGER NOT NULL, used INTEGER NOT NULL DEFAULT 0);
+CREATE TABLE IF NOT EXISTS limits (key TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS requests (id TEXT PRIMARY KEY, fingerprint TEXT NOT NULL, email_hash TEXT NOT NULL, consent TEXT NOT NULL, payload TEXT, state TEXT NOT NULL, created INTEGER NOT NULL, payload_expires INTEGER NOT NULL, ledger_expires INTEGER NOT NULL);
+CREATE INDEX IF NOT EXISTS requests_expiry ON requests(ledger_expires);

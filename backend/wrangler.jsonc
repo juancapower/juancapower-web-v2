@@ -1,0 +1,8 @@
+{
+  "name": "power4-capture",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-05",
+  "workers_dev": true,
+  "vars": {"CAPTURE_ENABLED":"false","PRIVACY_APPROVED":"false","LIVE_SENDS_ENABLED":"false","ALLOWED_ORIGINS":"https://juancapower.github.io","PRIVACY_VERSION":"PENDING_APPROVAL","RATE_MAX":"30"},
+  "observability": {"enabled": false}
+}

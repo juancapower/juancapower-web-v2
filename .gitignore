@@ -8,3 +8,7 @@ test-results/
 /docs/PR-BODY.md
 
 .private/
+
+capture-results/
+.dev.vars
+.wrangler/
