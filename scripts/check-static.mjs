@@ -2,7 +2,7 @@ import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import assert from 'node:assert/strict';
 const base = (process.env.BASE_PATH ?? '/juancapower-web-v2').replace(/\/$/, '');
-const pages = ['index.html','404.html', ...['coaching','speaker','contacto','test-power4','comunidad','recursos','sobre-mi','privacidad','cookies','terminos'].map(x=>`${x}/index.html`)];
+const pages = ['index.html','404.html', ...['coaching','speaker','contacto','test-power4','comunidad','conversaciones-que-despiertan','recursos','sobre-mi','privacidad','cookies','terminos'].map(x=>`${x}/index.html`)];
 assert(!existsSync('dist/CNAME'), 'Production CNAME is forbidden');
 assert(!existsSync('.env'), 'No .env in staging project');
 const walk = dir => readdirSync(dir).flatMap(x => statSync(join(dir,x)).isDirectory() ? walk(join(dir,x)) : [join(dir,x)]);
