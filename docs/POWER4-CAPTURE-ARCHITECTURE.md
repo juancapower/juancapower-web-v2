@@ -4,7 +4,7 @@
 
 Se auditó el test existente: cuatro pasos, 16 reactivos, resultados locales de 4–20, validación, retorno y reinicio; no hay endpoint, persistencia, registro ni comunicación con Brevo. Su código y preguntas permanecen intactos. Este documento propone la siguiente integración, no la implementa ni conecta cuentas. No se crea lista, atributo, contacto, correo o secreto en Brevo.
 
-El ticket señala cuenta «Juanca Power», remitente y listas existentes; son contexto aportado por Linear, no autorización de destino. El propietario debe confirmar cuenta/organización, lista exclusiva y remitente antes de cualquier escritura. Los precios no cambian en este sprint aunque el ticket los mencione: siguen sujetos al control comercial de la web.
+Cuenta CONFIRMADA por el propietario: JuanCa Power, hola@juancapower.com. La configuración real de CRM, lista exclusiva, integración backend, consentimiento, seguridad y pruebas permanece pendiente antes de cualquier escritura. Los precios no cambian en este sprint aunque el ticket los mencione: siguen sujetos al control comercial de la web.
 
 ## UX propuesta
 
@@ -78,6 +78,6 @@ Clave única por solicitud en D1 y outbox transaccional. Contacto identificado p
 
 ## Dependencias y aceptación
 
-Pendientes: confirmación de cuenta Brevo, proveedor externo y su contrato, lista/atributos/remitente, textos/retención/derechos, destinatario de resúmenes, DOI y prueba operativa aprobada. Secretos se configuran en el gestor del proveedor, no se piden por chat. Aceptación: sin interrupción del modo anónimo, no marketing implícito, no scores sin autorización y sin duplicados observados bajo reintento. Ninguna de estas condiciones se considera verificada en backend por este documento.
+Pendientes: configuración de la cuenta Brevo confirmada, proveedor externo y su contrato, lista/atributos/remitente, textos/retención/derechos, destinatario de resúmenes, DOI y prueba operativa aprobada. Secretos se configuran en el gestor del proveedor, no se piden por chat. Aceptación: sin interrupción del modo anónimo, no marketing implícito, no scores sin autorización y sin duplicados observados bajo reintento. Ninguna de estas condiciones se considera verificada en backend por este documento.
 
 Fuentes primarias consultadas 05/11/2026: [Brevo contacto](https://developers.brevo.com/reference/create-contact), [Cloudflare secretos](https://developers.cloudflare.com/workers/configuration/secrets/). La API Brevo exige atributos preexistentes y sus tipos; Worker separa secretos de variables públicas. El resto son decisiones propuestas de arquitectura, por validar con pruebas y privacidad.
