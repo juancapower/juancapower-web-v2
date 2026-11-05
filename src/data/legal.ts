@@ -1,0 +1,3 @@
+// Datos del responsable pendientes de confirmación; no inferirlos de otras marcas.
+export const legal: {version:string;contact:string;identity:string|null;taxId:string|null;address:string|null;retention:string|null}={version:'BORRADOR · 05/11/2026',contact:'hola@juancapower.com',identity:null,taxId:null,address:null,retention:null};
+export const consentConfig={preview:import.meta.env.CONSENT_PREVIEW==='1',enabled:import.meta.env.TRACKING_LEGAL_APPROVED==='1'&&!/^(DRAFT|PENDING)/i.test(import.meta.env.PUBLIC_CONSENT_VERSION||'PENDING'),version:import.meta.env.PUBLIC_CONSENT_VERSION||'DRAFT_2026_11_05',days:Number(import.meta.env.PUBLIC_CONSENT_MAX_DAYS)||180};

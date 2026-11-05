@@ -12,3 +12,5 @@ test-results/
 capture-results/
 .dev.vars
 .wrangler/
+
+legal-results/

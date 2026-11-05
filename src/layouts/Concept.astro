@@ -1,6 +1,7 @@
 ---
 import '@fontsource-variable/plus-jakarta-sans';
 import '../styles/presence.css';
+import Consent from '../components/Consent.astro';
 import Footer from '../components/presence/Footer.astro';
 import '../styles/platform.css';
 import { path } from '../data/site';
@@ -12,6 +13,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 <html lang="es-PE">
 <head>
   <meta charset="UTF-8" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
   <meta name="description" content={pageDescription} />
@@ -31,6 +33,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <a class="presence-skip" href="#contenido">Saltar al contenido</a>
   {showReview && <div class="review-strip"><span>A APROBADA · GALERÍA EN REVISIÓN</span><a href={path('conceptos')}>Revisión y archivo <span aria-hidden="true">↗</span></a></div>}
   <slot />
-  {product && <Footer />}
+  {product && <><Footer /><Consent /></>}
 </body>
 </html>

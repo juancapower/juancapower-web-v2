@@ -1,0 +1,5 @@
+{
+ "name":"juancapower-complaints", "main":"complaints.mjs", "compatibility_date":"2026-11-05", "workers_dev":true,
+ "vars":{"COMPLAINTS_ENABLED":"false","LEGAL_APPROVED":"false","LIVE_SENDS_ENABLED":"false","ALLOWED_ORIGINS":"https://juancapower.github.io"},
+ "observability":{"enabled":false}
+}
