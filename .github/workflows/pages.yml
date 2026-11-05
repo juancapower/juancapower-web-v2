@@ -20,6 +20,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm run check
       - name: Validate root deployment paths
         run: BASE_PATH=/ npm run build && BASE_PATH=/ npm run check:static
       - run: npm run build

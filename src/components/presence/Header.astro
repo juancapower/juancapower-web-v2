@@ -8,5 +8,7 @@ const links = [{name:'Coaching POWER 4',url:live ? path('coaching') : path('conc
   <a class="presence-brand" href={path(live ? '' : 'conceptos')} aria-label={live ? 'JuanCa Power, inicio' : 'JuanCa Power, propuestas de diseño'}><img src={`${path()}images/isotipo.png`} alt="" width="34" height="34" /><span>JUANCA <strong>POWER</strong></span></a>
   <nav class="presence-nav" aria-label="Navegación principal">{links.map(link => <a href={link.url}>{link.name}</a>)}</nav>
   <a class="presence-header-cta" href={booking}>Agenda tu sesión <Arrow /></a>
-  <details class="presence-menu"><summary>Menú <span aria-hidden="true">＋</span></summary><nav aria-label="Navegación móvil">{links.map(link => <a href={link.url}>{link.name}</a>)}</nav></details>
+  <details class="presence-menu"><summary>Menú <span aria-hidden="true">＋</span></summary><nav aria-label="Navegación móvil">{links.map(link => <a href={link.url}>{link.name}</a>)}{live && ['test-power4','comunidad','recursos','sobre-mi','contacto'].map((route,i)=><a href={path(route)}>{['Mapa POWER 4','Comunidad','Recursos','Sobre mí','Contactar'][i]}</a>)}</nav></details>
 </header>
+
+{live && <nav class="explore-nav presence-wrap" aria-label="Más de JuanCa Power">{['test-power4','comunidad','recursos','sobre-mi','contacto'].map((route,i)=><a href={path(route)}>{['Mapa POWER 4','Comunidad','Recursos','Sobre mí','Contactar'][i]}</a>)}</nav>}

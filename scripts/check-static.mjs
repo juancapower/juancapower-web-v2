@@ -2,16 +2,23 @@ import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import assert from 'node:assert/strict';
 const base = (process.env.BASE_PATH ?? '/juancapower-web-v2').replace(/\/$/, '');
-const pages = ['index.html', 'speaker/index.html', 'contacto/index.html', '404.html'];
+const pages = ['index.html','404.html', ...['coaching','speaker','contacto','test-power4','comunidad','recursos','sobre-mi','privacidad','cookies','terminos'].map(x=>`${x}/index.html`)];
 assert(!existsSync('dist/CNAME'), 'Production CNAME is forbidden');
 assert(!existsSync('.env'), 'No .env in staging project');
 const walk = dir => readdirSync(dir).flatMap(x => statSync(join(dir,x)).isDirectory() ? walk(join(dir,x)) : [join(dir,x)]);
+const inlineScripts = new Set();
 for (const file of pages) {
   const html = readFileSync(`dist/${file}`, 'utf8');
+  for (const match of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)) if (!match[1].includes('application/ld+json') && !match[1].includes('src=')) inlineScripts.add(match[2]);
   assert.match(html, /name="robots" content="noindex,nofollow"/);
   assert(!/[ÃÂ�]/.test(html), `Text encoding corruption in ${file}`);
   assert.match(html, /<html lang="es-PE"/);
   assert.equal((html.match(/<h1[ >]/g)||[]).length,1, file);
+  assert.equal((html.match(/<footer[ >]/g)||[]).length,1, `One shared footer: ${file}`);
+  assert.match(html, /property="og:description"/);
+  assert.match(html, /name="twitter:card"/);
+  const schema=html.match(/type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/);
+  assert(schema, `WebPage schema: ${file}`);assert.equal(JSON.parse(schema[1])['@type'],'WebPage');
   assert(!/fbq\(|ttq\.|metricool|GEMINI_API_KEY|localStorage|sessionStorage|<iframe/i.test(html));
   for (const match of html.matchAll(/(?:href|src)="([^"#]+)"/g)) {
     const url = match[1].split('#')[0].split('?')[0];
@@ -23,7 +30,9 @@ for (const file of pages) {
   }
 }
 const assets=walk('dist');
-assert(assets.every(x=>!x.endsWith('.js')), 'No client JS required for Sprint 0');
+const clientBytes=assets.filter(x=>x.endsWith('.js')).reduce((n,x)=>n+statSync(x).size,0)+[...inlineScripts].reduce((n,x)=>n+Buffer.byteLength(x),0);
+assert(clientBytes<50000, 'Client JS budget 50KB including inline modules');
+console.log(`Client script budget: ${clientBytes} bytes including inline modules.`);
 assert(statSync('dist/images/juanca-escenario.webp').size < 250000);
 assert(statSync('dist/images/juanca-taller.webp').size < 180000);
-console.log(`PASS: ${pages.length} static pages, base ${base || '/'}, internal links, noindex, zero client JS, image budgets, no CNAME/trackers/storage.`);
+console.log(`PASS: ${pages.length} static pages, base ${base || '/'}, internal links, noindex, client JS budget, image budgets, no CNAME/trackers/storage.`);

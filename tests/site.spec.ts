@@ -35,13 +35,13 @@ test('keyboard, menu, navigation and reduced motion',async({page})=>{
   await expect(page.locator('.presence-menu')).toHaveAttribute('open','');
   await page.getByRole('navigation',{name:'Navegación móvil',exact:true}).getByRole('link',{name:'Speaker y talleres',exact:true}).click();
   await expect(page).toHaveURL(/speaker\/$/); await expect(page.getByRole('heading',{level:1})).toContainText('Ideas');
-  await expect(page.getByRole('link',{name:'Solicitar una propuesta'})).toHaveAttribute('href',/^https:\/\/wa.me\/51963335717/);
+  await expect(page.getByRole('link',{name:'Solicita una conferencia o taller'}).first()).toHaveAttribute('href',/^https:\/\/wa.me\/51963335717/);
   await page.emulateMedia({reducedMotion:'reduce'});await page.goto(base);
   expect(await page.locator('.presence-button').first().evaluate(el=>getComputedStyle(el).transitionDuration)).toBe('0s');
   await page.setViewportSize({width:812,height:375});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 test('404 and 200% text zoom remain usable',async({page})=>{
- await page.goto(base+'404.html');await expect(page.getByRole('link',{name:'Ir al inicio'})).toHaveAttribute('href',base);
+ await page.goto(base+'404.html');await expect(page.getByRole('link',{name:'Volver al inicio'})).toHaveAttribute('href',base);
  await page.goto(base);await page.setViewportSize({width:1024,height:768});await page.evaluate(()=>document.documentElement.style.fontSize='200%');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
