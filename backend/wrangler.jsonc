@@ -3,6 +3,23 @@
   "main": "worker.mjs",
   "compatibility_date": "2026-11-05",
   "workers_dev": true,
-  "vars": {"CAPTURE_ENABLED":"false","PRIVACY_APPROVED":"false","LIVE_SENDS_ENABLED":"false","ALLOWED_ORIGINS":"https://juancapower.github.io","PRIVACY_VERSION":"PENDING_APPROVAL","RATE_MAX":"30"},
-  "observability": {"enabled": false}
+  "vars": {
+    "CAPTURE_ENABLED": "false",
+    "PRIVACY_APPROVED": "false",
+    "LIVE_SENDS_ENABLED": "false",
+    "ALLOWED_ORIGINS": "https://juancapower.github.io",
+    "PRIVACY_VERSION": "PENDING_APPROVAL",
+    "RATE_MAX": "30"
+  },
+  "observability": {
+    "enabled": false
+  },
+  "account_id": "1db247860dbe1ecf3409497ba24e6c9f",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "power4-capture",
+      "database_id": "9e11e5db-ecb4-49ad-b68a-993a1618c262"
+    }
+  ]
 }
