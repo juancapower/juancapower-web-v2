@@ -1,6 +1,6 @@
 # Workers · alcance preparado, sin autorización remota
 
-Estado: preparación local. OAuth anterior revocado; no iniciar nuevo login ni deploy. Sin escrituras Cloudflare en esta fase. D1 y esquemas previamente verificados; no se vuelven a ejecutar.
+Estado histórico de la fase de preparación. El propietario autorizó posteriormente el despliegue apagado: resultado vigente en [WORKERS-DEPLOYMENT.md](WORKERS-DEPLOYMENT.md). Los comandos y pendientes de abajo describen la planificación anterior; no autorizan activaciones adicionales.
 
 ## Permisos OAuth propuestos para revisión previa
 
@@ -43,4 +43,3 @@ Después del despliegue autorizado: usar las URLs workers.dev realmente devuelta
 Rollback: si hay versión previa, restaurar únicamente esa versión revisada (comando rollback ID_REAL con config respectiva, tras confirmar sintaxis de Wrangler usado); nunca inventar ID. En primera publicación sin versión previa, deshabilitar acceso público workers.dev/rutas desde Cloudflare, bajo aprobación de rollback, en lugar de asumir rollback disponible. No borrar D1, secretos ni datos. No alterar DNS. Mantener flags false y frontend apagado; comprobar estado remoto nuevamente. Cada operación remota de rollback tiene su alcance y debe estar aprobada.
 
 Pendiente manual indispensable: revisar/aprobar scopes; introducir secretos directamente en Cloudflare cuando el recurso lo permita sin publicar; autorizar aparte el despliegue apagado. Sin esta última autorización, la prueba HTTP real y la configuración remota de Workers siguen pendientes.
-
