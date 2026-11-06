@@ -1,5 +1,23 @@
 {
- "name":"juancapower-complaints", "main":"complaints.mjs", "compatibility_date":"2026-11-05", "workers_dev":true,
- "vars":{"COMPLAINTS_ENABLED":"false","LEGAL_APPROVED":"false","LIVE_SENDS_ENABLED":"false","ALLOWED_ORIGINS":"https://juancapower.github.io"},
- "observability":{"enabled":false}
+  "name": "juancapower-complaints",
+  "main": "complaints.mjs",
+  "compatibility_date": "2026-11-05",
+  "workers_dev": true,
+  "vars": {
+    "COMPLAINTS_ENABLED": "false",
+    "LEGAL_APPROVED": "false",
+    "LIVE_SENDS_ENABLED": "false",
+    "ALLOWED_ORIGINS": "https://juancapower.github.io"
+  },
+  "observability": {
+    "enabled": false
+  },
+  "account_id": "1db247860dbe1ecf3409497ba24e6c9f",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "juancapower-complaints",
+      "database_id": "c57526de-9de9-4f6c-9b0f-bde8a0c89d19"
+    }
+  ]
 }
