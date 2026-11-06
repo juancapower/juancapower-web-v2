@@ -6,7 +6,7 @@ Fecha: 06/11/2026. **NOT READY para lanzamiento; prueba real todavía bloqueada 
 
 | Capa | Hecho / límite |
 |---|---|
-| Staging | PR #12 integrado en main mediante 8e981ccb492885ccda15b1b72a88833dd9e0f02f. Pages mantiene Stage Presence y noindex. Resultados CI y publicación se registran en el PR de este sprint. |
+| Staging | PR #12 integrado mediante 8e981cc y PR #13 mediante 18c598e01302d2ead67101076b5b219f0920789b, exclusivamente en main de staging. CI #13 aprobado (42261080328). Verificación de Pages del merge en el PR y diagnóstico de la demora en CI-LEGAL-INSTALL.md. |
 | Frontend | Captación opcional antes del test, cuatro pasos/16 preguntas, resultados y reserva siempre accesibles; consentimiento comercial y de compartir puntajes independientes. URLs reales y Site Keys públicas preparadas. Build público sin formularios reales, Turnstile o trackers. |
 | POWER 4 backend | Worker/D1 existentes, rutas remotas apagadas. Código de este sprint añade ventana controlada <=1 hora, allowlist de destinatarios y separación obligatoria de listas. **Nuevo código todavía no desplegado**; versiones remotas anteriores en WORKERS-DEPLOYMENT.md. |
 | Libro | Worker/D1 existentes, correlativo durable, cifrado, constancia descargable/impresión y dos notificaciones verificadas con mocks. Sin registro CRM/marketing. Aprobación de conservación ahora estricta: false no es aprobación. Operación real OFF. |
