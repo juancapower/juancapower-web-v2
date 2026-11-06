@@ -9,7 +9,10 @@
     "LIVE_SENDS_ENABLED": "false",
     "ALLOWED_ORIGINS": "https://juancapower.github.io",
     "PRIVACY_VERSION": "PENDING_APPROVAL",
-    "RATE_MAX": "30"
+    "RATE_MAX": "30",
+    "CONTROLLED_TEST_ONLY": "true",
+    "BREVO_LIST_ID": "15",
+    "BREVO_MARKETING_LIST_ID": "16"
   },
   "observability": {
     "enabled": false

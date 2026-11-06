@@ -1,0 +1,17 @@
+{
+  "account": "JuanCa Power",
+  "sender": "hola@juancapower.com",
+  "lists": {"leads": {"id":15,"name":"POWER 4 · Leads web"},"marketing": {"id":16,"name":"POWER 4 · Marketing confirmado"}},
+  "attributes": [
+    {"name":"POWER4_NAME","type":"text"},
+    {"name":"POWER4_PHONE","type":"text"},
+    {"name":"POWER4_SOURCE","type":"text"},
+    {"name":"POWER4_REQUEST_ID","type":"text"},
+    {"name":"POWER4_CONTACT_CONSENT","type":"boolean"},
+    {"name":"POWER4_PRIVACY_VERSION","type":"text"},
+    {"name":"POWER4_CONTACT_AT","type":"text"}
+  ],
+  "doiTemplateId": null,
+  "privacyApproved": false,
+  "liveSendsEnabled": false
+}

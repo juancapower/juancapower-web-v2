@@ -1,53 +1,45 @@
-# Servicio POWER 4 · implementación desactivada
+# Servicio POWER 4 · integrado y desactivado
 
-Cuenta confirmada: **JuanCa Power, hola@juancapower.com**. Este PR no crea listas/contactos, no despliega Worker y no envía correos reales. `wrangler.jsonc` mantiene CAPTURE_ENABLED, PRIVACY_APPROVED y LIVE_SENDS_ENABLED en false. Sin las tres autorizaciones y configuración válida, responde 503 antes de registrar datos.
+Cuenta confirmada **JuanCa Power · hola@juancapower.com**. Recursos remotos ya creados: no volver a crear D1, widgets ni Workers. URLs/versiones publicadas y revocación OAuth en [WORKERS-DEPLOYMENT.md](../docs/WORKERS-DEPLOYMENT.md). Estado vivo del sprint, checklist manual único y prueba real propuesta en [MEGA-INTEGRATION.md](../docs/MEGA-INTEGRATION.md).
 
-## Qué funciona
+## Estado operativo
 
-Worker con puertos D1 y HTTP, adaptador Brevo, nonce de un uso (5 min), Turnstile Siteverify con hostname/action, rate limit por IP pseudonimizada y correo, validación/allowlist, AES-GCM del payload, ledger de consentimiento con texto/hash/versión/timestamp, idempotencia y estados de procesamiento. Ninguna respuesta individual sale del navegador; se pueden enviar cuatro enteros solo con consentimiento de puntajes. Contacto sin marketing es válido. Marketing solicita DOI, no campaña ni confirmación automática del opt-in.
+Captación, privacidad y envíos permanecen false en backend/wrangler.jsonc. Libro: COMPLAINTS_ENABLED, LEGAL_APPROVED y LIVE_SENDS_ENABLED false. Frontend por defecto no renderiza formularios reales ni carga Turnstile o rastreadores. El test anónimo conserva sus cuatro pasos y reserva directa. Las URLs/Site Keys públicas están integradas en src/data/services.json, no son secretos ni activan nada.
 
-D1 guarda la solicitud antes de llamar al proveedor y reclama su procesamiento atómicamente. No se añaden Queues ni reintentos automáticos de proveedor en esta entrega: un timeout incierto pasa a `review_required`, conserva payload cifrado hasta su TTL y NO reenvía. Es una adaptación deliberada del plan para evitar duplicados. No se promete exactamente una entrega; 201 de Brevo es aceptación, no recepción de buzón. Reconciliar en Brevo por POWER4_REQUEST_ID antes de permitir cualquier reenvío manual. Estado `processing` tras un fallo abrupto también requiere revisión. El endpoint de estado usa bearer opaco firmado en header, nunca email/puntajes en URL.
+La protección adicional de este sprint (release-gate.mjs) está en el código versionado; **las versiones remotas descritas en WORKERS-DEPLOYMENT.md son anteriores**. No se redesplegaron Workers en este sprint. Al preparar la prueba, actualizar el código existente manteniendo flags false antes de introducir secretos o activar una ventana.
 
-## Ejecutar pruebas y demo sin cuentas externas
+## Arquitectura y garantías comprobadas con mocks
 
-Node 24 desde raíz:
+Worker/D1/Turnstile, nonce de un uso, rate limit, validación allowlist, AES-GCM del payload, ledger de consentimiento con versión/hash/texto/fecha, idempotencia y estado firmado opaco. Contacto, compartir cuatro puntajes y marketing son permisos distintos. No respuestas individuales fuera del navegador ni puntajes en atributos Brevo. El resultado permanece accesible si falla la integración.
 
-```sh
-npm ci
-npm run test:backend
-npm run build:capture-preview
-npm run test:capture
-npm run preview:capture
-```
+BrevoAdapter crea/actualiza únicamente el contacto solicitado en Leads #15, sin forzar fusiones ni quitar bajas globales. DOI solicita inclusión en Marketing #16 solo tras confirmación gestionada por Brevo. No campañas. Verificar comportamiento con contactos preexistentes/dados de baja en la prueba real. La lista marketing debe diferir de Leads: configuración coincidente falla cerrada.
 
-Abrir http://127.0.0.1:4323/juancapower-web-v2/test-power4/ . La demo usa SQLite en memoria y un adaptador HTTP simulado que rechaza URLs inesperadas; no requiere claves. Usar exclusivamente fixtures `example.invalid`. Incluye banner «Demostración local». TEST_MODE no basta para saltar la protección: la inyección sintética requiere código de testing, fetch simulado y host local. El Worker exportado de producción no habilita ese bypass.
+Una respuesta 201/2xx de Brevo no acredita recepción de buzón. Fallos inciertos pasan a review_required; no hay reintento ciego. Reconciliar por POWER4_REQUEST_ID antes de reenviar manualmente. Estado processing tras fallo abrupto también requiere revisión. Payload de solicitud máximo 24 horas (propuesta técnica aún pendiente de aprobación por finalidad); ledger requiere LEDGER_RETENTION_DAYS aprobado y limpieza operativa. La función scheduled existe, pero no hay cron desplegado: configurar su ejecución o procedimiento equivalente antes de recepción real. El Libro conserva su archivo y no elimina reclamaciones automáticamente.
 
-Para regresar al build de publicación: `npm run build`. El preview de captación NO se publica como artifact de Pages ni reemplaza el build de producción. El frontend de demo se desactiva fuera de localhost/127.0.0.1. CI usa un job aislado para las pruebas sintéticas y otro para la web normal.
+## Contratos
 
-## Contrato
+- POST /v1/power4/challenge: nonce, versión y hash del consentimiento.
+- POST /v1/power4/requests: requestId, nonce, botToken, website vacío, contact {name,email,phone?}, consent {contact:true,shareScores,marketing,version,textHash}, scores opcionales {spirit,mind,body,emotion} enteros 4–20.
+- GET /v1/power4/status: token opaco en Authorization, solo estado; nunca datos en URL.
+- POST /v1/complaints: formulario allowlist; correlativo durable, payload cifrado, copia imprimible/descargable y dos notificaciones (operador/solicitante), sin alta CRM ni marketing.
 
-- POST /v1/power4/challenge → nonce y versión/hash del texto.
-- POST /v1/power4/requests → requestId UUID, nonce, botToken, website vacío, contact {name,email,phone?}, consent {contact:true, shareScores:boolean, marketing:boolean, version, textHash}, scores opcional {spirit,mind,body,emotion}.
-- GET /v1/power4/status con Authorization bearer devuelto → solo estado.
+Origin exacto obligatorio. CORS no sustituye antispam. Siteverify exige hostname autorizado y action power4/complaints respectivamente. El modo sintético solo funciona con código de testing, fetch simulado y host local; el handler de producción no admite el bypass.
 
-Payload máximo 8 KB; rechaza claves desconocidas, consentimiento ausente, versión/hash distintos, puntuaciones fuera de 4–20, scores sin permiso, bots, replays y datos mal formados. Sin logging de body/PII. El objeto resultado del cliente es autopercepción editable, no prueba clínica ni dato de integridad certificada. CORS no sustituye antispam; github.io comparte origen entre repositorios del propietario.
+## Variables y secretos (sin valores privados)
 
-## Configuración futura · NO ejecutada
+Ambos Workers: TURNSTILE_SECRET propio, HMAC_SECRET aleatorio >=32 bytes, ENCRYPTION_KEY de 32 bytes en 64 hex y BREVO_API_KEY. Introducir exclusivamente como Secret en el panel Cloudflare, nunca Git/frontend/chat/logs. Cada Worker debe tener claves de HMAC/cifrado independientes; conservar acceso seguro para recuperación y rotación.
 
-1. Actualizar el aviso público para describir captación/Brevo/Cloudflare/Turnstile al habilitarlo. Aprobar privacidad, responsable, finalidades, textos exactos en `consent-texts.json`, retención, encargados/transferencias y prueba controlada. Asignar versión aprobada (no PENDING/DRAFT/TEST). Los plazos son decisiones del responsable; no hay retención legal inventada.
-2. En Brevo de la cuenta confirmada crear lista propia «POWER 4 · Leads web», lista separada para marketing confirmado y atributos abajo. Revisar que ninguna automatización/campaña se active por añadir un contacto a Leads. Confirmar remitente hola@juancapower.com y destinatario fijo de notificación; validar plantilla DOI y URL de retorno. No modificar listas de eventos, bajas globales o contactos ajenos.
-3. Elegir cuenta Cloudflare con aprobación del propietario. Accesos necesarios: gestión de Workers/scripts y secretos, creación/edición de D1 en esa cuenta y administración del widget Turnstile. No se requieren permisos DNS ni zona. Autenticar Wrangler mediante OAuth del propietario o token limitado a esos recursos; nunca copiar secretos en chat.
-4. Desde `backend/`, comandos preparados para ejecutar SOLO tras autorización de proveedor y costes: `npx wrangler login`, `npx wrangler d1 create power4-capture`, añadir binding DB y database_id real devuelto a wrangler.jsonc, `npx wrangler d1 execute power4-capture --remote --file schema.sql`. No hay ID ficticio operativo en el archivo.
-5. Configurar en gestor de secretos o `npx wrangler secret put NOMBRE`: BREVO_API_KEY, HMAC_SECRET (aleatorio >=32 bytes), ENCRYPTION_KEY (32 bytes aleatorios codificados en 64 hex), TURNSTILE_SECRET. Generarlos localmente con gestor seguro; no usar claves de tests. `.dev.vars` y `.wrangler` están ignorados. El backend no lee secretos del frontend ni de GitHub Pages.
-6. Variables no secretas servidor: BREVO_LIST_ID, BREVO_MARKETING_LIST_ID, BREVO_DOI_TEMPLATE_ID, DOI_REDIRECT_URL HTTPS, PRIVACY_VERSION, LEDGER_RETENTION_DAYS aprobado, ALLOWED_ORIGINS exactos y RATE_MAX/EMAIL_RATE_MAX. Propuesta de límites: 30 llamadas/10 min por IP y 3 solicitudes nuevas/día por email. Ajustar después de pruebas de falsos positivos. No se aceptan listas/destinatarios del cliente.
-7. Crear widget Turnstile con hosts exactos, action power4. Definir cron de limpieza (`*/15 * * * *`) para scheduled, revisar residencia, backups y acceso a D1. Payload cifrado se elimina al procesar; si falla expira lógicamente en 24 h y scheduled lo purga. La supresión física de backups depende del proveedor y debe validarse; no se garantiza borrado de snapshots por un DELETE.
-8. Desplegar inicialmente desactivado con `npx wrangler deploy`, únicamente tras autorizar el proveedor. Usar hostname workers.dev, sin modificar DNS. Probar 503 y ausencia de escrituras/envíos. No activar flags de envíos hasta autorización expresa de prueba controlada.
-9. Para la prueba aprobada: configurar destinatarios controlados y cuenta/listas correctas, aprobar texto y versión, habilitar las tres variables servidor y frontend solo en entorno controlado. Variables frontend: POWER4_CAPTURE_ENABLED=1, POWER4_PRIVACY_APPROVED=1, POWER4_SENDS_APPROVED=1; PUBLIC_POWER4_CAPTURE_API HTTPS terminado en /v1/power4, PUBLIC_POWER4_PRIVACY_VERSION y PUBLIC_TURNSTILE_SITE_KEY. Solo URL/site key son públicas; ninguna credencial Brevo.
-10. Validar registro una vez, cuatro scores solo autorizados, correo al buzón, DOI, opt-out, supresión, rate limits, fallos y conciliación. Capturas/logs con datos sintéticos; nunca PII en artifacts. Aprobación adicional antes de abrir captación pública.
+POWER 4 no secretas: BREVO_LIST_ID=15, BREVO_MARKETING_LIST_ID=16, BREVO_DOI_TEMPLATE_ID pendiente, DOI_REDIRECT_URL HTTPS aprobado, PRIVACY_VERSION aprobado (no PENDING/DRAFT/TEST), LEDGER_RETENTION_DAYS aprobado, ALLOWED_ORIGINS, RATE_MAX/EMAIL_RATE_MAX. Todas las flags reales false. La configuración de conservación del Libro requiere COMPLAINTS_RETENTION_APPROVED exactamente true; la cadena false ya no cuenta como aprobación. Identidad: PROVIDER_LEGAL_NAME, PROVIDER_RUC y PROVIDER_ADDRESS, coincidentes con src/data/legal.ts; dirección solo en Privacidad y Libro.
 
-## Atributos y semántica CRM
+Prueba controlada: CONTROLLED_TEST_ONLY=true, CONTROLLED_TEST_FROM / CONTROLLED_TEST_UNTIL ISO UTC a futuro máximo una hora y CONTROLLED_TEST_EMAILS como Secret con los únicos buzones del propietario autorizados. Falta/expiración de ventana detiene antes de DB/red. Correos ajenos se rechazan antes de Siteverify/CRM/registro. Las flags principales también deben estar autorizadas; esta configuración no las sustituye. Apertura pública futura requiere decisión explícita CONTROLLED_TEST_ONLY=false y aprobación aparte.
 
-| Atributo | Tipo en Brevo |
+Frontend POWER 4: POWER4_CAPTURE_ENABLED, POWER4_PRIVACY_APPROVED y POWER4_SENDS_APPROVED todas 1, más PUBLIC_POWER4_PRIVACY_VERSION aprobado. URLs/Site Keys verificadas por defecto; overrides PUBLIC_POWER4_CAPTURE_API/PUBLIC_TURNSTILE_SITE_KEY para entorno controlado. Libro: COMPLAINTS_ENABLED, COMPLAINTS_SENDS_APPROVED y COMPLAINTS_LEGAL_APPROVED todas 1. Sin esas decisiones el build público sigue apagado. No guardar flags de activación en GitHub ni ejecutar ese build en Pages sin autorización. Los previews sintéticos nunca se publican en Pages.
+
+## CRM · tipos requeridos
+
+Configuración verificada de listas y esquema preparado en backend/brevo-setup.json. El conector no ofrece creación de atributos: aún faltan en la cuenta.
+
+| Atributo | Tipo |
 |---|---|
 | POWER4_NAME | Texto |
 | POWER4_PHONE | Texto opcional E.164; no alta SMS/WhatsApp |
@@ -57,18 +49,10 @@ Payload máximo 8 KB; rechaza claves desconocidas, consentimiento ausente, versi
 | POWER4_PRIVACY_VERSION | Texto |
 | POWER4_CONTACT_AT | Texto ISO con hora |
 
-Email estándar identifica contacto. Puntajes NO se guardan en atributos CRM. Estado de marketing se determina por lista DOI de Brevo; no hay webhook de confirmación propio ni estado CONFIRMED decidido por el cliente. El adaptador no establece flags globales emailBlacklisted/smsBlacklisted; el comportamiento de DOI y bajas existentes debe verificarse en la prueba real. El ledger D1 guarda los tres consentimientos, versión/hash/textos exactos y fecha servidor. Actualización por email con updateEnabled, forceMerge=false; conservar campos ajenos. Brevo puede ignorar atributos no creados: verificar tipos antes de activar.
+Email estándar identifica contacto. No crear atributos de puntajes ni reutilizar consentimientos/eventos. DOI requiere plantilla específica revisada; no asumir que la plantilla predeterminada #1 sea válida para POWER 4.
 
-## Costes y permisos económicos
+## Pruebas reproducibles (sin proveedores)
 
-Consulta oficial 05/11/2026: Workers dispone de nivel Free (100.000 solicitudes/día, 10 ms CPU por invocación); Paid parte de US$5/mes más consumo. D1 tiene cuotas Free propias; Turnstile ofrece plan Free. No se garantiza coste cero ni que el trabajo cifrado encaje en el límite CPU sin medirlo en el proveedor. Plan/cuota Brevo y condiciones de envío requieren comprobar la cuenta confirmada. No se contrató ni desplegó ningún servicio, gratuito o de pago.
+Node 24: npm ci; npm run test:backend. Luego npm run build:capture-preview y npm run test:capture; después npm run build:legal-preview y npm run test:legal. Finalmente npm run check, npm run build, npm run check:static y npm test para restaurar/verificar el build normal. No paralelizar builds distintos en el mismo dist. Los previews utilizan SQLite en memoria, fixtures example.invalid y mocks de proveedores; nunca equivalen a integración Brevo real aprobada.
 
-Fuentes: https://developers.cloudflare.com/workers/platform/pricing/ , https://developers.cloudflare.com/turnstile/plans/ , https://developers.cloudflare.com/turnstile/get-started/server-side-validation/ , https://developers.brevo.com/reference/create-contact , https://developers.brevo.com/reference/send-transac-email . Revisar precios y cuotas de nuevo al contratar.
-
-## Checklist corto de activación
-
-- [ ] Privacidad, versión/textos, retención y permisos aprobados.
-- [ ] Lista Leads y marketing DOI, atributos y remitente configurados en JuanCa Power.
-- [ ] Cuenta/proveedor/coste autorizado, DB/schema/cron, secretos y Turnstile verificados.
-- [ ] Prueba controlada explícitamente autorizada, con recepción y bajas/supresión confirmadas.
-- [ ] Solo entonces activar flags; rollback: apagar frontend y las tres flags servidor, revisar solicitudes inciertas y limpiar conforme a retención. No rotar la clave de cifrado sin plan para payloads pendientes.
+Fuentes oficiales: [DOI Brevo](https://developers.brevo.com/reference/create-doi-contact), [Cloudflare Siteverify](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/). No se contrataron servicios ni se amplió OAuth en este sprint.

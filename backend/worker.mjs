@@ -1,3 +1,4 @@
+import {releaseAvailable,recipientAllowed} from './release-gate.mjs';
 import consentTexts from './consent-texts.json' with {type:'json'};
 import {BrevoAdapter} from './brevo.mjs';
 const encoder=new TextEncoder();
@@ -26,8 +27,10 @@ export function createHandler({fetcher=fetch,synthetic=false}={}){return async f
  if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{...headers,'Access-Control-Allow-Methods':'POST, GET, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization'}});
  const local=synthetic&&fetcher!==globalThis.fetch&&env.TEST_MODE==='local'&&['127.0.0.1','localhost'].includes(url.hostname);
  if(env.CAPTURE_ENABLED!=='true'||env.PRIVACY_APPROVED!=='true'||(!local&&env.LIVE_SENDS_ENABLED!=='true'))return reply(503,{error:'DISABLED'});
+ if(!local&&!releaseAvailable(env))return reply(503,{error:'RELEASE_NOT_APPROVED'});
  if(!env.DB||!env.HMAC_SECRET||env.HMAC_SECRET.length<32||!/^[0-9a-f]{64}$/i.test(env.ENCRYPTION_KEY||'')||!env.PRIVACY_VERSION||!Number(env.LEDGER_RETENTION_DAYS)||!Number(env.BREVO_LIST_ID)||!env.BREVO_API_KEY)return reply(503,{error:'NOT_CONFIGURED'});
  if(!local&&/^(PENDING|DRAFT|TEST)/i.test(env.PRIVACY_VERSION))return reply(503,{error:'PRIVACY_PENDING'});
+ if(env.BREVO_MARKETING_LIST_ID&&Number(env.BREVO_MARKETING_LIST_ID)===Number(env.BREVO_LIST_ID))return reply(503,{error:'LIST_CONFIG'});
  const retention=Number(env.LEDGER_RETENTION_DAYS);if(!Number.isInteger(retention)||retention<1||retention>3650)return reply(503,{error:'RETENTION_CONFIG'});
  const max=Number(env.RATE_MAX||30),emailMax=Number(env.EMAIL_RATE_MAX||3);if(!Number.isInteger(max)||max<1||!Number.isInteger(emailMax)||emailMax<1)return reply(503,{error:'RATE_CONFIG'});
  const db=env.DB;const now=Date.now();const consentHash=hex(await crypto.subtle.digest('SHA-256',encoder.encode(JSON.stringify(consentTexts))));
@@ -41,6 +44,7 @@ export function createHandler({fetcher=fetch,synthetic=false}={}){return async f
  if(Number(request.headers.get('Content-Length')||0)>8192)return reply(413,{error:'SIZE'});
  let raw='';let size=0;const decoder=new TextDecoder();const reader=request.body?.getReader();if(!reader)return reply(400,{error:'INVALID'});for(;;){const item=await reader.read();if(item.done)break;size+=item.value.byteLength;if(size>8192){await reader.cancel();return reply(413,{error:'SIZE'})}raw+=decoder.decode(item.value,{stream:true})}raw+=decoder.decode();let data;try{data=JSON.parse(raw)}catch{return reply(400,{error:'INVALID'})}
  if(!validate(data,env,consentHash))return reply(400,{error:'INVALID'});
+ if(!local&&!recipientAllowed(env,data.contact.email))return reply(403,{error:'CONTROLLED_ONLY'});
  if(local&&!data.contact.email.endsWith('.invalid'))return reply(400,{error:'SYNTHETIC_ONLY'});
  if(data.consent.marketing&&(!Number(env.BREVO_MARKETING_LIST_ID)||!Number(env.BREVO_DOI_TEMPLATE_ID)||!/^https:\/\//.test(env.DOI_REDIRECT_URL||'')))return reply(503,{error:'MARKETING_NOT_CONFIGURED'});
  const key=await hmac(data.nonce,env.HMAC_SECRET);const nonce=await db.prepare('SELECT expires,used FROM nonces WHERE token=?').bind(key).first();if(!nonce||nonce.used||nonce.expires<now)return reply(403,{error:'NONCE'});
