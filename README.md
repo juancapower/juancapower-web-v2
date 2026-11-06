@@ -4,7 +4,7 @@ Astro estático, identidad Stage Presence y publicación independiente en GitHub
 
 ## Revisión integral
 
-PR #8, rama `feature/platform-mega-sprint`. No fusionar automáticamente. Informe del producto, pruebas y bloqueos: [docs/MEGA-SPRINT.md](docs/MEGA-SPRINT.md). Evidencia: [docs/EVIDENCE.md](docs/EVIDENCE.md).
+PR #8–#12 integrados exclusivamente en staging. Estado actual de integración, checklist manual único y propuesta E2E real: [docs/MEGA-INTEGRATION.md](docs/MEGA-INTEGRATION.md). Informe del producto: [docs/MEGA-SPRINT.md](docs/MEGA-SPRINT.md). Evidencia: [docs/EVIDENCE.md](docs/EVIDENCE.md).
 
 Node 24 LTS:
 

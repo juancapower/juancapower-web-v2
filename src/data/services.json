@@ -1,0 +1,12 @@
+{
+  "power4": {
+    "api": "https://power4-capture.juan-cabrera-1db.workers.dev/v1/power4",
+    "sitekey": "0x4AAAAAAF1rPJkAdac63E7W",
+    "action": "power4"
+  },
+  "complaints": {
+    "api": "https://juancapower-complaints.juan-cabrera-1db.workers.dev/v1/complaints",
+    "sitekey": "0x4AAAAAAF1rXQNGtCgN_DjH",
+    "action": "complaints"
+  }
+}

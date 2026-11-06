@@ -1,5 +1,7 @@
 # Privacidad · revisión de aplicabilidad
 
+Actualización 06/11/2026: responsable, RUC, domicilio y canal confirmados. Las referencias a su falta en esta revisión histórica están superadas. Bloqueos actuales y fuentes revalidadas en [MEGA-INTEGRATION.md](MEGA-INTEGRATION.md). No acreditar todavía conservación, transferencias o aprobación final.
+
 Fuente oficial consultada 03/11/2026: [DS 016-2024-JUS, publicación oficial en repositorio del Congreso](https://www3.congreso.gob.pe/Docs/DGP/DIDP/files/ds_016-2024-jus.pdf), pp. 1–3, disposiciones finales y tratamiento/consentimiento/derechos. Sustituye el reglamento anterior. No equivale a dictamen jurídico.
 
 | Tratamiento real | Implementación | Validación pendiente |
