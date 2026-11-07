@@ -38,5 +38,6 @@ Header compartido con navegación principal y exploración, menú móvil nativo 
 ## Preparación de consentimiento y cumplimiento (JUA-37)
 Preferencias locales solo al guardar/rechazar una elección; nunca respuestas del test. Proveedores opcionales OFF en publicación normal hasta aprobación y opt-in independiente. Footer añade Aviso legal, Libro y Configurar cookies; excepciones en pages/legal-consent.md. Captación y Libro reales siguen bloqueados por configuración y aprobación.
 
-## Visual Authority · mejora localizada en revisión (06/11/2026)
-Hero y CSS maestro permanecen intactos. Propuesta Home: secuencia horizontal nativa de10 fotos reales, navegación/swipe y carga adaptativa; autoridad mediante lista editorial de siete nombres y fotografía propia. Sin animación automática ni dependencias nuevas. Excepción y criterios en pages/home-experience.md y docs/VISUAL-AUTHORITY.md. Mantener estado de revisión hasta aprobación del PR.
+## Visual Authority · Home
+
+El carrusel de diez fotos de experiencias conserva navegación nativa y carga adaptativa. La autoridad editorial muestra siete fotos de encuentros con panel expansible en escritorio y tira táctil en pantallas menores. Ambas galerías funcionan sin autoplay ni dependencias adicionales. Ver [Home · Experiencia y autoridad](pages/home-experience.md).

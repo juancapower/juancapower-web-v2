@@ -1,5 +1,21 @@
-# Home · experiencia y autoridad (propuesta en revisión)
+# Home · Experiencia y autoridad
 
-Se conserva MASTER.md y el hero aprobado. La excepción localizada de experiencia usa carrusel nativo con fotografía grande y vista parcial siguiente; 10 imágenes auténticas, sin autoplay ni dependencias adicionales. Fondos, color, espaciado y fuente proceden de Stage Presence. Sección de autoridad editorial de siete nombres y retrato propio de JuanCa, con contexto biográfico y sin aval inferido.
+Stage Presence conserva el hero, la oferta, el método POWER 4 y el carrusel de diez fotos de experiencias del PR #15.
 
-Móvil3:2 contextual; escritorio16:9 con posiciones explícitas y controles44px. Sin JS: scroll nativo y captions. Movimiento reducido: navegación instantánea. Solo imágenes inferiores lazy; hero intacto. Documento de curaduría/criterios: docs/VISUAL-AUTHORITY.md. No equivale a aprobación de publicación o permisos fotográficos de terceros.
+## He compartido escenario con...
+
+La sección de autoridad usa siete fotos de encuentros, un panel expandido desde 1100 px y una tira nativa con scroll-snap en tamaños menores. La tira también funciona sin JavaScript. En escritorio, los botones indican el panel seleccionado y admiten Tab, flechas, Inicio, Fin, Enter y Espacio. La transición se elimina con movimiento reducido. Las menciones de Ana Pierr, Regina Carrot, Rita Denegri y Gisela Rosales aparecen en texto.
+
+Las fotos fueron suministradas por JuanCa Power en el brief de Visual Authority 2.0. Los pies y textos alternativos describen lo visible. Las imágenes documentan encuentros, sin afirmar avales ni alianzas comerciales. Alcance de revisión y publicación limitado a staging.
+
+| Persona | Original de Cloudinary | Orientación y contexto |
+| --- | --- | --- |
+| Orlando Denegri | `juanca_y_orlando_denegri_wxy2xs.jpg` | 585 × 1040, ambos ante una proyección. |
+| Stefanny Berdejo | `juanca_y_estefany_berdejo_kmjprg.jpg` | 960 × 1280, ambos frente a una pantalla oscura. |
+| Wilfredo Guevara | `juganca_y_wilfredo_guevara_wcvaja.jpg` | 960 × 1280, ambos junto a una pared de madera. |
+| Daniela Sarfati | `DanielaSarfati_eozbgp.jpg` | 4000 × 3000, orientación EXIF 6, ambos al aire libre. |
+| Dr. Bayter | `JuanCa-Power-Dr-Bayter_pynzyr.png` | 1086 × 1448, ambos en un espacio interior. |
+| Héctor Raúl González | `JuanCa-Power-Hector-Raul-Gonzalez_taisqx.jpg` | 1126 × 1500, ambos en una terraza. |
+| Jorge Loza | `juanca_y_jorge_loza_tyijnt.jpg` | 960 × 1280, ambos ante el cartel «Libera tu propósito». |
+
+Derivados locales WebP de 360 y hasta 720 px. Se respeta la orientación original y se usa un punto focal por foto, con un ajuste independiente para el panel estrecho. Las fotos son lazy, sin consultas a Cloudinary al navegar. Capturas y pruebas de 360, 390, 768, 1024 y 1440 px en el artefacto `browser-evidence` de CI.
