@@ -2,6 +2,7 @@
 import { path, socialProfiles } from '../../data/site';
 import { leanRelease } from '../../data/release';
 import { socialIcons } from '../../data/social-icons';
+import QuickWhatsApp from '../QuickWhatsApp.astro';
 
 const services = [['coaching', 'Coaching POWER 4'], ['speaker', 'Speaker y talleres'], ['contacto', 'Contacto']];
 const legal = [['privacidad', 'Privacidad'], ['cookies', 'Cookies'], ['terminos', 'Condiciones'], ['aviso-legal', 'Aviso legal'], ['libro-de-reclamaciones', 'Libro de Reclamaciones']];
@@ -22,6 +23,7 @@ const legal = [['privacidad', 'Privacidad'], ['cookies', 'Cookies'], ['terminos'
     {!leanRelease && <button type="button" data-cookie-settings>Configurar cookies</button>}
   </nav>
   {!leanRelease && <p class="footer-note">Staging · Validación previa al lanzamiento.</p>}
+  <QuickWhatsApp />
 </footer>
 <style>
   .platform-footer .social-profiles { gap: 8px; }
