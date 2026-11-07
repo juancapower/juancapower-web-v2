@@ -9,7 +9,7 @@ permissions:
   contents: read
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,8 +22,17 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run test:backend
-      - name: Validate root deployment paths
-        run: BASE_PATH=/ npm run build && BASE_PATH=/ npm run check:static
+      - name: Validate root production artifact with synthetic legal values
+        env:
+          BASE_PATH: /
+          SITE_URL: https://www.juancapower.com
+          GO_LIVE_LEAN: '1'
+          LEAN_REHEARSAL: '1'
+          LEAN_COMPLAINTS_URL: https://libro.example.com/reclamos/
+          LEAN_COMPLAINTS_PRIVACY_URL: https://libro.example.com/privacidad/
+          LEAN_PRIVACY_DISCLOSURE: Configuración sintética de CI.
+          LEAN_CONTACT_RETENTION: Configuración sintética de CI.
+        run: npm run build && npm run check:static
       - run: npm run build
       - run: npm run check:static
       - run: npx playwright install --with-deps chromium
@@ -43,9 +52,9 @@ jobs:
           name: power-presence-static-preview
           path: dist/
       - uses: actions/configure-pages@v5
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.LEAN_RELEASE_APPROVED_SHA == ''
       - uses: actions/upload-pages-artifact@v4
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.LEAN_RELEASE_APPROVED_SHA == ''
         with:
           path: dist
   capture-synthetic:
@@ -97,7 +106,7 @@ jobs:
           name: legal-synthetic-evidence
           path: legal-results/
   deploy:
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.LEAN_RELEASE_APPROVED_SHA == ''
     needs: [build, capture-synthetic, legal-synthetic]
     runs-on: ubuntu-latest
     permissions:

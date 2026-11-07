@@ -3,9 +3,10 @@ import '@fontsource-variable/plus-jakarta-sans';
 import '../styles/presence.css';
 import Consent from '../components/Consent.astro';
 import Footer from '../components/presence/Footer.astro';
+import { leanRelease } from '../data/release';
 import '../styles/platform.css';
 import { path } from '../data/site';
-const { title, theme = 'dark', showReview = true, product = false, description } = Astro.props;
+const { title, theme = 'dark', showReview = true, product = false, indexable = product, description } = Astro.props;
 const pageDescription=description || (Astro.url.pathname.includes('/coaching') ? 'Coaching POWER 4 personalizado: explora tu situación, conoce ACTIVA y EXPANDE y agenda orientación sin realizar un test obligatorio.' : product ? 'JuanCa Power: propósito y acción a través de Coaching POWER 4, conferencias y talleres para personas y organizaciones.' : 'Exploración visual POWER PRESENCE para revisión de JuanCa Power.');
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
@@ -15,7 +16,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <meta charset="UTF-8" />
   <meta name="referrer" content="no-referrer" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
+  {(!leanRelease || !indexable) && <meta name="robots" content="noindex,nofollow" />}
   <meta name="description" content={pageDescription} />
   <title>{title}{product ? " | JuanCa Power" : " · POWER PRESENCE"}</title>
   <meta property="og:description" content={pageDescription} />
@@ -33,6 +34,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <a class="presence-skip" href="#contenido">Saltar al contenido</a>
   {showReview && <div class="review-strip"><span>A APROBADA · GALERÍA EN REVISIÓN</span><a href={path('conceptos')}>Revisión y archivo <span aria-hidden="true">↗</span></a></div>}
   <slot />
-  {product && <><Footer /><Consent /></>}
+  {product && <><Footer />{!leanRelease && <Consent />}</>}
 </body>
 </html>
