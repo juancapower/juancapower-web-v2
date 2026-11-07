@@ -1,18 +1,23 @@
 ---
-import photos from '../../data/gallery.json';
+import photos from '../../data/home-experience.json';
 import { path, speakerContact } from '../../data/site';
+import '../../styles/home-experience.css';
 ---
-<section class="presence-experience presence-experience-editorial" id="experiencia" aria-labelledby="experience-title">
+<section class="presence-experience presence-experience-editorial" id="experiencia" aria-labelledby="experience-title" data-experience-reel>
   <div class="presence-wrap">
-    <div class="experience-top"><p class="presence-kicker">PERSONAS. CONVERSACIONES. ACCIÓN.</p><h2 id="experience-title">La presencia<br />también se comparte.</h2><p>En el escenario y en el trabajo con equipos, el punto de partida sigue siendo humano.</p></div>
-    <div class="presence-gallery" aria-label="Fotografías de encuentros, talleres y presentaciones">
-      {['en-escena','dinamica','en-equipo'].map(slug => photos.find(photo => photo.slug===slug)).map(photo => <figure class={`gallery-photo gallery-${photo.slug}`} data-photo={photo.slug}>
-        <img src={`${path()}images/gallery/${photo.slug}-${photo.variants[photo.variants.length-1]}.webp`}
-          srcset={photo.variants.map(width => `${path()}images/gallery/${photo.slug}-${width}.webp ${width}w`).join(', ')}
-          sizes={photo.sizes} width={photo.width} height={photo.height} alt={photo.alt} loading="lazy" decoding="async" />
-        <figcaption>{photo.caption}</figcaption>
+    <div class="experience-top"><p class="presence-kicker">EN ESCENA · CON PERSONAS</p><h2 id="experience-title">La presencia<br />también se comparte.</h2><p>Del auditorio a una mesa de trabajo. Una selección de momentos reales de mis conferencias y encuentros con equipos.</p></div>
+    <div class="reel-toolbar" data-reel-controls hidden>
+      <p class="reel-hint">Recorre los encuentros<span class="reel-touch"> · Desliza para explorar</span></p>
+      <div class="reel-navigation"><button type="button" data-reel-prev aria-label="Fotografía anterior" aria-controls="experience-reel" disabled><span aria-hidden="true">←</span></button><p class="reel-count" role="status" aria-live="polite" aria-atomic="true"><span class="reel-sr">Fotografía </span><span data-reel-index>01</span><span aria-hidden="true"> / </span><span class="reel-sr"> de </span>{String(photos.length).padStart(2,'0')}</p><button type="button" data-reel-next aria-label="Fotografía siguiente" aria-controls="experience-reel"><span aria-hidden="true">→</span></button></div>
+    </div>
+    <div class="experience-reel" id="experience-reel" role="region" aria-roledescription="carrusel" aria-label="Conferencias y trabajo con equipos" tabindex="0">
+      {photos.map((photo,i)=><figure class="experience-slide" role="group" aria-roledescription="diapositiva" aria-label={`${i+1} de ${photos.length}`} data-reel-slide>
+        <div class="reel-image"><img src={`${path()}images/experience/${photo.slug}-960.webp`} srcset={photo.variants.map(w=>`${path()}images/experience/${photo.slug}-${w}.webp ${w}w`).join(', ')} sizes="(max-width:700px) 88vw, (max-width:1280px) 80vw, 1020px" width={photo.width} height={photo.height} alt={photo.alt} style={`object-position:${photo.position}`} loading="lazy" decoding="async" /></div>
+        <figcaption><div><span class="reel-category">{photo.category}</span><h3>{photo.title}</h3><p>{photo.caption}</p></div><span class="reel-frame-number" aria-hidden="true">{String(i+1).padStart(2,'0')}</span></figcaption>
       </figure>)}
     </div>
-    <div class="gallery-next"><p>Conversemos sobre lo que quieres movilizar en tu equipo.</p><a class="presence-button" href={speakerContact}>Solicita una conferencia o taller <span aria-hidden="true">↗</span></a></div>
+    <div class="reel-thumbnails" role="group" aria-label="Elegir una fotografía" data-reel-controls hidden>{photos.map((photo,i)=><button type="button" data-reel-thumb={i} aria-label={`Ver fotografía ${String(i+1).padStart(2,'0')}: ${photo.title}`} aria-pressed={i===0?'true':'false'} aria-controls="experience-reel"><img src={`${path()}images/experience/${photo.slug}-160.webp`} width="160" height="107" alt="" loading="lazy" decoding="async" /><span aria-hidden="true">{String(i+1).padStart(2,'0')}</span></button>)}</div>
+    <div class="reel-next"><p>¿Qué conversación quieres abrir en tu organización?</p><a class="presence-button" href={speakerContact}>Solicita una conferencia o taller <span aria-hidden="true">↗</span></a></div>
   </div>
 </section>
+<script>import '../../scripts/experience-reel';</script>

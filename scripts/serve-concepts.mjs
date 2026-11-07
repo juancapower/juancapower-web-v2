@@ -3,7 +3,7 @@ import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
 const root=resolve('dist'); const base='/juancapower-web-v2';
-const types={'.xml':'application/xml','.txt':'text/plain','.html':'text/html; charset=utf-8','.css':'text/css','.woff2':'font/woff2','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.txt':'text/plain'};
+const types={'.js':'application/javascript; charset=utf-8','.xml':'application/xml','.txt':'text/plain','.html':'text/html; charset=utf-8','.css':'text/css','.woff2':'font/woff2','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.txt':'text/plain'};
 createServer(async(req,res)=>{
  try{
   const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);

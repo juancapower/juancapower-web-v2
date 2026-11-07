@@ -14,7 +14,7 @@ for (const width of [360,375,768,1024,1440]) {
       await page.evaluate(()=>document.fonts.ready);
       await expect(page.locator('h1')).toHaveCount(1);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-      for (const image of await page.locator('img').all()) { await image.scrollIntoViewIfNeeded(); await expect(image).toHaveJSProperty('complete',true); expect(await image.evaluate((i:HTMLImageElement)=>i.naturalWidth)).toBeGreaterThan(0); }
+      for (const image of await page.locator('img:visible').all()) { await image.scrollIntoViewIfNeeded(); await expect(image).toHaveJSProperty('complete',true); expect(await image.evaluate((i:HTMLImageElement)=>i.naturalWidth)).toBeGreaterThan(0); }
       await page.evaluate(()=>scrollTo(0,0));
       const results=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze();
       expect(results.violations).toEqual([]);
