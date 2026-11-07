@@ -46,7 +46,10 @@ if (lean) {
   assert(!sitemap.includes('github.io') && !sitemap.includes('/conceptos'));
   const book = readFileSync('dist/libro-de-reclamaciones/index.html', 'utf8');
   assert(book.includes('Abrir el Libro de Reclamaciones virtual'));
-  assert(book.includes(process.env.LEAN_COMPLAINTS_URL.replaceAll('&', '&amp;')));
+  const bookUrl = process.env.LEAN_COMPLAINTS_URL.replaceAll('&', '&amp;');
+  assert(book.includes(bookUrl));
+  const home = readFileSync('dist/index.html', 'utf8');
+  assert(home.includes(`href="${bookUrl}"`), 'Direct Book access from Home');
 } else {
   assert.match(robots, /Disallow: \//);
 }
