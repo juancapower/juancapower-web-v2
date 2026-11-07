@@ -55,3 +55,7 @@ Móvil 360/390: foto contextual 3:2, tarjeta 90% del contenedor, siguiente encua
 - Capturas completas Home y secciones 390/1440 en artifacts de CI. No se agregan evidencias gráficas grandes al repositorio.
 - Calendar, speaker/WhatsApp, comunidad y recursos conservados; sin captación real, trackers, precios o testimonios nuevos.
 - Build, validación estática y regresión aprobados antes de proponer fusión. No se fusiona ni despliega este PR automáticamente. El bloqueo previo de Pages es independiente y no se intenta resolver alterando DNS.
+
+## Ajustes encontrados en regresión
+
+La autoridad se renderiza solo en Home, no en las rutas de conceptos históricas. El retrato secundario está omitido por CSS en móvil: la prueba general de imágenes comprueba las visibles y la prueba específica afirma que ese retrato está oculto a360/390, visible a768/1024/1440. No se omitieron comprobaciones de imágenes que el visitante pueda ver. El servidor local de revisión declara application/javascript para los módulos: la preview conserva navegación real, no solo un render estático. Los12 casos dirigidos (incluidos los4 fallos de regresión detectados) pasan después del ajuste.
