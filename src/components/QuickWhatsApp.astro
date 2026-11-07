@@ -1,0 +1,25 @@
+---
+import { whatsapp } from '../data/site';
+import { socialIcons } from '../data/social-icons';
+---
+<a class="quick-whatsapp" href={whatsapp} aria-label="Escribir a JuanCa Power por WhatsApp">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d={socialIcons.whatsapp} /></svg>
+</a>
+<style>
+  .quick-whatsapp {
+    position: fixed;
+    z-index: 9;
+    inset-inline-end: max(16px, env(safe-area-inset-right));
+    inset-block-end: max(16px, env(safe-area-inset-bottom));
+    display: grid;
+    place-items: center;
+    inline-size: 52px;
+    block-size: 52px;
+    border: 1px solid #F1E5AC;
+    border-radius: 50%;
+    background: #0B0D17;
+    color: #F1E5AC !important;
+  }
+  .quick-whatsapp:hover { background: #F1E5AC; color: #0B0D17 !important; }
+  :global(body:has(#consent-banner:not([hidden]))) .quick-whatsapp { visibility: hidden; }
+</style>

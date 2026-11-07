@@ -1,6 +1,30 @@
 ---
-import {path} from '../../data/site';
-const services=[['coaching','Coaching POWER 4'],['speaker','Speaker y talleres'],['contacto','Contacto']];
-const legal=[['privacidad','Privacidad'],['cookies','Cookies'],['terminos','Condiciones'],['aviso-legal','Aviso legal'],['libro-de-reclamaciones','Libro de Reclamaciones']];
+import { path, socialProfiles } from '../../data/site';
+import { leanRelease } from '../../data/release';
+import { socialIcons } from '../../data/social-icons';
+
+const services = [['coaching', 'Coaching POWER 4'], ['speaker', 'Speaker y talleres'], ['contacto', 'Contacto']];
+const legal = [['privacidad', 'Privacidad'], ['cookies', 'Cookies'], ['terminos', 'Condiciones'], ['aviso-legal', 'Aviso legal'], ['libro-de-reclamaciones', 'Libro de Reclamaciones']];
 ---
-<footer class="platform-footer presence-wrap"><a href={path()} class="footer-brand">JUANCA POWER</a><p>Propósito que se convierte en acción.</p><nav aria-label="Servicios y contacto">{services.map(([url,label])=><a href={path(url)}>{label}</a>)}</nav><nav aria-label="Información legal">{legal.map(([url,label])=><a href={path(url)}>{label}</a>)}<button type="button" data-cookie-settings>Configurar cookies</button></nav><p class="footer-note">Staging · Validación previa al lanzamiento.</p></footer>
+<footer class="platform-footer presence-wrap">
+  <a href={path()} class="footer-brand">JUANCA POWER</a>
+  <p>Propósito que se convierte en acción.</p>
+  <nav aria-label="Servicios y contacto">{services.map(([url, label]) => <a href={path(url)}>{label}</a>)}</nav>
+  <nav class="social-profiles" aria-label="Redes sociales">
+    {socialProfiles.map(({ icon, label, href }) => (
+      <a href={href} aria-label={label}>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d={socialIcons[icon]} /></svg>
+      </a>
+    ))}
+  </nav>
+  <nav aria-label="Información legal">
+    {legal.map(([url, label]) => <a href={path(url)}>{label}</a>)}
+    {!leanRelease && <button type="button" data-cookie-settings>Configurar cookies</button>}
+  </nav>
+  {!leanRelease && <p class="footer-note">Staging · Validación previa al lanzamiento.</p>}
+</footer>
+<style>
+  .platform-footer .social-profiles { gap: 8px; }
+  .social-profiles a { justify-content: center; min-width: 44px; border: 1px solid #626B80; border-radius: 4px; }
+  .social-profiles a:hover { border-color: #F1E5AC; color: #F1E5AC; }
+</style>

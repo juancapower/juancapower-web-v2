@@ -1,5 +1,5 @@
 ---
 import Concept from './Concept.astro';import Header from '../components/presence/Header.astro';import '../styles/platform.css';
-const {title,description}=Astro.props;
+const {title,description,indexable=true}=Astro.props;
 ---
-<Concept title={title} description={description} product showReview={false}><Header live/><main id="contenido" tabindex="-1"><slot/></main></Concept>
+<Concept title={title} description={description} indexable={indexable} product showReview={false}><Header live/><main id="contenido" tabindex="-1"><slot/></main></Concept>
