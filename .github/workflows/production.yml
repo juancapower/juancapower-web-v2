@@ -1,0 +1,55 @@
+name: Publish approved lean production
+on: workflow_dispatch
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    env:
+      BASE_PATH: /
+      SITE_URL: https://www.juancapower.com
+      GO_LIVE_LEAN: '1'
+      LEAN_COMPLAINTS_URL: ${{ vars.LEAN_COMPLAINTS_URL }}
+      LEAN_COMPLAINTS_PRIVACY_URL: ${{ vars.LEAN_COMPLAINTS_PRIVACY_URL }}
+      LEAN_PRIVACY_DISCLOSURE: ${{ vars.LEAN_PRIVACY_DISCLOSURE }}
+      LEAN_CONTACT_RETENTION: ${{ vars.LEAN_CONTACT_RETENTION }}
+    steps:
+      - name: Verify approved revision and custom domain
+        env:
+          APPROVED_SHA: ${{ vars.LEAN_RELEASE_APPROVED_SHA }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$GITHUB_REF" = refs/heads/main
+          test "$APPROVED_SHA" = "$GITHUB_SHA"
+          test "$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.cname')" = www.juancapower.com
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build && npm run check:static
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deploy

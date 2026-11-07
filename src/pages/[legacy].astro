@@ -1,0 +1,9 @@
+---
+import { legacyRedirects } from '../data/legacy';
+import { path } from '../data/site';
+export function getStaticPaths() {
+  return Object.entries(legacyRedirects).filter(([legacy]) => legacy !== 'ltp-2026')
+    .map(([legacy, target]) => ({ params: { legacy }, props: { target } }));
+}
+return Astro.redirect(Astro.props.target === '/' ? path() : Astro.props.target, 301);
+---
