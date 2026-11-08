@@ -28,8 +28,8 @@ jobs:
           SITE_URL: https://www.juancapower.com
           GO_LIVE_LEAN: '1'
           LEAN_REHEARSAL: '1'
-          LEAN_COMPLAINTS_URL: https://libro.example.com/reclamos/
-          LEAN_COMPLAINTS_PRIVACY_URL: https://libro.example.com/privacidad/
+          PUBLIC_COMPLAINTS_API: https://juancapower-complaints.juan-cabrera-1db.workers.dev/v1/complaints
+          PUBLIC_TURNSTILE_COMPLAINTS_KEY: 0x4AAAAAAF1rXQNGtCgN_DjH
           LEAN_PRIVACY_DISCLOSURE: Configuración sintética de CI.
           LEAN_CONTACT_RETENTION: Configuración sintética de CI.
         run: npm run build && npm run check:static

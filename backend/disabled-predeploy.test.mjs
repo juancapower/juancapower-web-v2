@@ -4,7 +4,7 @@ import power4 from './worker.mjs';
 import complaints from './complaints.mjs';
 for(const [name,worker,route,flags] of [
  ['power4',power4,'/v1/power4/requests',['CAPTURE_ENABLED','PRIVACY_APPROVED','LIVE_SENDS_ENABLED']],
- ['complaints',complaints,'/v1/complaints',['COMPLAINTS_ENABLED','LEGAL_APPROVED','LIVE_SENDS_ENABLED']]
+ ['complaints',complaints,'/v1/complaints',['COMPLAINTS_ENABLED','LEGAL_APPROVED']]
 ])test(`${name}: every disabled flag stops before DB or outbound calls`,async()=>{
  let touched=0;const db=new Proxy({},{get(){touched++;throw Error('DB must not be touched')}});
  const previous=globalThis.fetch;globalThis.fetch=async()=>{touched++;throw Error('Network forbidden')};

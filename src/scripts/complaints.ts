@@ -1,9 +1,97 @@
-const root=document.querySelector<HTMLElement>('#complaints-demo');
-if(root){const preview=root.dataset.preview==='true';if(preview&&!['localhost','127.0.0.1'].includes(location.hostname))root.remove();else{
- const labels:Record<string,string>={name:'Nombre',documentType:'Tipo de documento',documentNumber:'Documento',address:'Domicilio',email:'Correo',phone:'Teléfono',guardian:'Representante',service:'Servicio',amount:'Monto reclamado (S/)',kind:'Tipo',detail:'Detalle',request:'Pedido',minor:'Menor de edad'};
- const form=document.querySelector<HTMLFormElement>('#complaints-form')!;const status=document.querySelector<HTMLElement>('#complaints-status')!;let requestId=crypto.randomUUID();let copy='';let widget:string|undefined;
- const token=async()=>{if(preview)return 'LOCAL_SYNTHETIC_ONLY';if(!window.turnstile)await new Promise<void>((resolve,reject)=>{const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';s.onload=()=>resolve();s.onerror=()=>reject(Error());document.head.append(s)});return new Promise<string>((resolve,reject)=>{const box=document.querySelector<HTMLElement>('#complaints-bot')!;if(widget)window.turnstile!.remove(widget);const timer=setTimeout(()=>reject(Error()),120000);widget=window.turnstile!.render(box,{sitekey:root.dataset.sitekey,action:'complaints',callback:(v:string)=>{clearTimeout(timer);resolve(v)},'error-callback':()=>{clearTimeout(timer);reject(Error())}})})};
- form.addEventListener('submit',async e=>{e.preventDefault();if(!form.reportValidity())return;const fields=Object.fromEntries(new FormData(form).entries());const minor=(form.elements.namedItem('minor') as HTMLInputElement).checked;if(minor&&!String(fields.guardian||'').trim()){status.textContent='Indica los datos de tu representante.';return}if(!minor)fields.guardian='';const button=form.querySelector<HTMLButtonElement>('button[type=submit]')!;button.disabled=true;status.textContent='Registrando…';try{const response=await fetch(root.dataset.api!,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...fields,requestId,minor,website:'',botToken:await token()}),signal:AbortSignal.timeout(25000)});if(!response.ok)throw Error();const result=await response.json();copy=(preview?'SIMULACIÓN LOCAL · NO ES UN RECLAMO REAL\n':'')+result.provider.name+' · RUC '+result.provider.ruc+'\n'+result.provider.address+'\nHoja '+result.number+'\nFecha: '+result.date+'\n'+Object.entries({...fields,minor} as Record<string,FormDataEntryValue|boolean>).filter(([,v])=>v!=='').map(([k,v])=>(labels[k]||k)+': '+(typeof v==='boolean'?(v?'Sí':'No'):v)).join('\n')+'\nAcciones u observaciones del proveedor: por completar durante la atención.\nRespuesta: máximo 15 días hábiles improrrogables. La presentación no limita otras vías de solución.';document.querySelector('#complaints-copy')!.textContent=copy;document.querySelector<HTMLElement>('#complaints-receipt')!.hidden=false;status.textContent=preview?'Registro sintético completado. No hubo envíos reales.':result.state==='notified'?'Hoja registrada. El proveedor aceptó la notificación; conserva tu copia.':'Hoja registrada. La notificación requiere revisión; conserva tu copia.';form.hidden=true}catch{status.textContent='No pudimos confirmar el registro. Conserva tus datos en esta pantalla y reintenta. No se ha mostrado una constancia sin verificar el registro.'}finally{button.disabled=false}});
- document.querySelector('#complaints-print')!.addEventListener('click',()=>print());document.querySelector('#complaints-download')!.addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([copy],{type:'text/plain;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='hoja-reclamacion.txt';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
-}}
+const root = document.querySelector<HTMLElement>('#complaints-demo');
+
+if (root) {
+  const preview = root.dataset.preview === 'true';
+  if (preview && !['localhost', '127.0.0.1'].includes(location.hostname)) {
+    root.remove();
+  } else {
+    const form = root.querySelector<HTMLFormElement>('#complaints-form')!;
+    const status = root.querySelector<HTMLElement>('#complaints-status')!;
+    const receipt = root.querySelector<HTMLElement>('#complaints-receipt')!;
+    const requestId = crypto.randomUUID();
+    let copy = '';
+    let widget: string | undefined;
+
+    async function token(): Promise<string> {
+      if (preview) return 'LOCAL_SYNTHETIC_ONLY';
+      if (!window.turnstile) {
+        await new Promise<void>((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+          const timer = setTimeout(() => { script.remove(); reject(Error()); }, 15000);
+          script.onload = () => { clearTimeout(timer); resolve(); };
+          script.onerror = () => { clearTimeout(timer); script.remove(); reject(Error()); };
+          document.head.append(script);
+        });
+      }
+      return new Promise((resolve, reject) => {
+        const turnstile = window.turnstile!;
+        if (widget !== undefined) turnstile.remove(widget);
+        const timer = setTimeout(() => reject(Error()), 120000);
+        widget = turnstile.render(root!.querySelector<HTMLElement>('#complaints-bot')!, {
+          sitekey: root!.dataset.sitekey,
+          action: 'complaints',
+          callback: (value: string) => { clearTimeout(timer); resolve(value); },
+          'error-callback': () => { clearTimeout(timer); reject(Error()); },
+        });
+      });
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const fields = Object.fromEntries(new FormData(form));
+      const minor = (form.elements.namedItem('minor') as HTMLInputElement).checked;
+      if (minor && !String(fields.guardian || '').trim()) {
+        status.textContent = 'Indica los datos de tu representante.';
+        (form.elements.namedItem('guardian') as HTMLInputElement).focus();
+        return;
+      }
+      if (!minor) fields.guardian = '';
+      const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+      button.disabled = true;
+      status.textContent = 'Registrando…';
+      try {
+        const response = await fetch(root.dataset.api!, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...fields, requestId, minor, website: '', botToken: await token() }),
+          signal: AbortSignal.timeout(25000),
+        });
+        if (response.status === 409) {
+          status.textContent = 'Ya existe una hoja con este intento. Restablece los datos del envío original para recuperar la constancia, o contacta al responsable.';
+          return;
+        }
+        if (!response.ok) throw Error();
+        const result = await response.json();
+        if (!result.number || typeof result.receipt !== 'string' || !result.receipt) throw Error();
+        copy = (preview ? 'SIMULACIÓN LOCAL · NO ES UN RECLAMO REAL\n' : '') + result.receipt;
+        root.querySelector('#complaints-copy')!.textContent = copy;
+        receipt.hidden = false;
+        status.textContent = preview
+          ? 'Registro sintético completado. No hubo envíos reales.'
+          : result.state === 'notified'
+            ? 'Hoja registrada. El servicio de correo aceptó el envío. Conserva tu constancia.'
+            : 'Hoja registrada. Al menos un correo está pendiente de revisión. Descarga o imprime tu constancia.';
+        form.reset();
+        form.hidden = true;
+        receipt.querySelector<HTMLElement>('#receipt-title')!.focus();
+      } catch {
+        status.textContent = 'No pudimos confirmar el registro. Conserva los mismos datos en esta pantalla y reintenta. Si el Libro sigue sin responder, solicita el Libro de respaldo al responsable.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    root.querySelector('#complaints-print')!.addEventListener('click', () => print());
+    root.querySelector('#complaints-download')!.addEventListener('click', () => {
+      const url = URL.createObjectURL(new Blob([copy], { type: 'text/plain;charset=utf-8' }));
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'hoja-reclamacion.txt';
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+  }
+}
 export {};
