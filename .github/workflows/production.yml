@@ -18,8 +18,8 @@ jobs:
       BASE_PATH: /
       SITE_URL: https://www.juancapower.com
       GO_LIVE_LEAN: '1'
-      LEAN_COMPLAINTS_URL: ${{ vars.LEAN_COMPLAINTS_URL }}
-      LEAN_COMPLAINTS_PRIVACY_URL: ${{ vars.LEAN_COMPLAINTS_PRIVACY_URL }}
+      PUBLIC_COMPLAINTS_API: ${{ vars.PUBLIC_COMPLAINTS_API }}
+      PUBLIC_TURNSTILE_COMPLAINTS_KEY: ${{ vars.PUBLIC_TURNSTILE_COMPLAINTS_KEY }}
       LEAN_PRIVACY_DISCLOSURE: ${{ vars.LEAN_PRIVACY_DISCLOSURE }}
       LEAN_CONTACT_RETENTION: ${{ vars.LEAN_CONTACT_RETENTION }}
     steps:
@@ -38,6 +38,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build && npm run check:static
+      - name: Require the approved production Libro to be ready
+        run: |
+          curl --fail --silent --show-error --max-time 15 -H "Origin: $SITE_URL" "$PUBLIC_COMPLAINTS_API/health" | jq -e '.status == "READY" and .version == 2'
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist

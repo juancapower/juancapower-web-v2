@@ -1,6 +1,6 @@
 ---
 import { path, socialProfiles } from '../../data/site';
-import { leanComplaintsUrl, leanRelease } from '../../data/release';
+import { leanRelease } from '../../data/release';
 import { socialIcons } from '../../data/social-icons';
 import QuickWhatsApp from '../QuickWhatsApp.astro';
 
@@ -19,7 +19,7 @@ const legal = [['privacidad', 'Privacidad'], ['cookies', 'Cookies'], ['terminos'
     ))}
   </nav>
   <nav aria-label="Información legal">
-    {legal.map(([url, label]) => <a href={leanRelease && url === 'libro-de-reclamaciones' ? leanComplaintsUrl : path(url)}>{label}</a>)}
+    {legal.map(([url, label]) => <a href={path(url)}>{label}</a>)}
     {!leanRelease && <button type="button" data-cookie-settings>Configurar cookies</button>}
   </nav>
   {!leanRelease && <p class="footer-note">Staging · Validación previa al lanzamiento.</p>}

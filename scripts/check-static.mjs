@@ -16,7 +16,7 @@ for (const file of pages) {
     assert.doesNotMatch(html, /name="robots" content="noindex,nofollow"/, file);
     const route = '/' + file.replace(/index\.html$/, '');
     assert(html.includes(`rel="canonical" href="${site}${route}"`), `Canonical ${file}`);
-    assert.doesNotMatch(html, /id="consent-root"|id="complaints-form"|data-capture-panel|class="footer-note"/, file);
+    assert.doesNotMatch(html, /id="consent-root"|data-capture-panel|class="footer-note"/, file);
   } else {
     assert.match(html, /name="robots" content="noindex,nofollow"/, file);
   }
@@ -45,13 +45,14 @@ if (lean) {
   assert.match(robots, /^User-agent: \*\nAllow: \/\nSitemap: https:\/\/www\.juancapower\.com\/sitemap\.xml\n$/);
   assert(!sitemap.includes('github.io') && !sitemap.includes('/conceptos'));
   const book = readFileSync('dist/libro-de-reclamaciones/index.html', 'utf8');
-  assert(book.includes('Abrir el Libro de Reclamaciones virtual'));
-  const bookUrl = process.env.LEAN_COMPLAINTS_URL.replaceAll('&', '&amp;');
-  assert(book.includes(bookUrl));
+  assert.match(book, /id="complaints-form"/);
+  assert(book.includes(`data-api="${process.env.LEAN_REHEARSAL === '1' ? '/v1/complaints' : process.env.PUBLIC_COMPLAINTS_API}"`));
+  assert(book.includes(`data-sitekey="${process.env.PUBLIC_TURNSTILE_COMPLAINTS_KEY}"`));
   const home = readFileSync('dist/index.html', 'utf8');
-  assert(home.includes(`href="${bookUrl}"`), 'Direct Book access from Home');
+  assert(home.includes('href="/libro-de-reclamaciones/"'), 'Direct Book access from Home');
 } else {
   assert.match(robots, /Disallow: \//);
+  assert.doesNotMatch(readFileSync('dist/libro-de-reclamaciones/index.html', 'utf8'), /id="complaints-form"/);
 }
 for (const file of ['libera-tu-proposito/index.html', 'libera-tu-proposito.html', 'ltp-2026.html', 'powerprompts/index.html']) {
   const html = readFileSync(`dist/${file}`, 'utf8');
