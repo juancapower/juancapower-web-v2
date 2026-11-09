@@ -6,7 +6,7 @@ export const speakerContact = 'https://wa.me/51963335717?text=' + encodeURICompo
 export const communityContact = 'https://wa.me/51963335717?text=' + encodeURIComponent('Hola JuanCa, quiero información para participar en la Comunidad JuanCa Power.');
 export const conversationsContact = 'https://wa.me/51963335717?text=' + encodeURIComponent('Hola JuanCa, quiero información para participar en Conversaciones que Despiertan y conocer sus próximos encuentros.');
 
-export const whatsapp = 'https://wa.me/51963335717';
+export const whatsapp = 'https://wa.me/51963335717?text=' + encodeURIComponent('¡Hola, JuanCa! 👋 Llegué desde tu página web y me gustaría conversar contigo sobre tus programas, talleres o servicios.');
 export const socialProfiles = [
   { icon: 'tiktok', label: 'TikTok de JuanCa Power', href: 'https://www.tiktok.com/@soyjuancapower' },
   { icon: 'instagram', label: 'Instagram de JuanCa Power', href: 'https://www.instagram.com/soyjuancapower/' },
