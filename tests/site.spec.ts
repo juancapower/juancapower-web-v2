@@ -23,7 +23,7 @@ for (const width of [360,375,768,1024,1440]) {
       expect(await page.evaluate(()=>({local:localStorage.length,session:sessionStorage.length}))).toEqual({local:0,session:0});
       if(width===360||width===1440) await page.screenshot({path:testInfo.outputPath(`${route.replace('/','')||'home'}-${width}.png`),fullPage:true});
       if(!route) await expect(page.locator('h1')).toHaveText(/No esperes\s*motivación\.\s*Crea el\s*resultado\./);
-      if(!route && width===360){const box=await page.getByRole('link',{name:'Agenda una sesión de orientación',exact:false}).first().boundingBox();expect(box!.y+box!.height).toBeLessThan(800);}
+      if(!route && width===360){const box=await page.getByRole('link',{name:'¿Qué te está impidiendo avanzar?',exact:true}).first().boundingBox();expect(box!.y+box!.height).toBeLessThan(800);}
     });
   }
 }

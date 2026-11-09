@@ -38,12 +38,12 @@ for(const width of [360,390,768,1024,1440])test(`Editorial experience and author
 
 test('Photo controls, keyboard, thumbnails, reduced motion and commercial destinations',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.emulateMedia({reducedMotion:'reduce'});await page.goto(root);
- await expect(page.locator('.stage-hero').getByRole('link',{name:'Contrátame como speaker',exact:true})).toHaveAttribute('href',root+'speaker/');
+ await expect(page.locator('.stage-hero').getByRole('link',{name:'Únete a la Comunidad Power',exact:true})).toHaveAttribute('href',root+'comunidad/');
  await page.locator('[data-reel-next]').click();await expect(page.locator('[data-reel-index]')).toHaveText('02');await expect(page.locator('[data-reel-thumb="1"]')).toHaveAttribute('aria-pressed','true');
  await page.locator('#experience-reel').focus();await page.keyboard.press('ArrowRight');await expect(page.locator('[data-reel-index]')).toHaveText('03');await page.keyboard.press('End');await expect(page.locator('[data-reel-index]')).toHaveText('10');await expect(page.locator('[data-reel-next]')).toBeDisabled();await page.keyboard.press('Home');await expect(page.locator('[data-reel-index]')).toHaveText('01');
  await page.locator('[data-reel-thumb="3"]').click();await expect(page.locator('[data-reel-index]')).toHaveText('04');await page.locator('[data-reel-prev]').click();await expect(page.locator('[data-reel-index]')).toHaveText('03');
  await page.emulateMedia({reducedMotion:'no-preference'});await page.locator('[data-reel-next]').click();await expect(page.locator('[data-reel-index]')).toHaveText('04');await page.emulateMedia({reducedMotion:'reduce'});await page.locator('[data-reel-prev]').click();await expect(page.locator('[data-reel-index]')).toHaveText('03');
- await expect(page.locator('.reel-next a')).toHaveAttribute('href',/https:\/\/wa.me\/51963335717/);await expect(page.locator('.shared-stage .presence-link')).toHaveAttribute('href',/https:\/\/wa.me\/51963335717/);await expect(page.locator('.stage-hero .presence-button')).toHaveAttribute('href',/^https:\/\/calendar.google.com/);
+ await expect(page.locator('.reel-next a')).toHaveAttribute('href',/https:\/\/wa.me\/51963335717/);await expect(page.locator('.shared-stage .presence-link')).toHaveAttribute('href',/https:\/\/wa.me\/51963335717/);await expect(page.locator('.stage-hero').getByRole('link',{name:'¿Qué te está impidiendo avanzar?',exact:true})).toHaveAttribute('href',root+'test-power4/');
  await page.locator('summary').focus();await page.keyboard.press('Enter');await page.getByRole('navigation',{name:'Navegación móvil'}).getByRole('link',{name:'Experiencia',exact:true}).click();await expect(page).toHaveURL(/#experiencia$/);
 });
 
