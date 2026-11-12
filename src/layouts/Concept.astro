@@ -37,3 +37,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   {product && <><Footer />{!leanRelease && <Consent />}</>}
 </body>
 </html>
+<script>
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  if ('IntersectionObserver' in window && !motion.matches) {
+    const observer = new IntersectionObserver((entries) => {
+      for (const { target, isIntersecting } of entries) {
+        if (!isIntersecting) continue;
+        observer.unobserve(target);
+        if (motion.matches || target.matches(':focus-within') || target.getBoundingClientRect().top < 0) continue;
+        target.animate([
+          { transform: 'translateY(8px)', opacity: 0.88 },
+          { transform: 'translateY(0)', opacity: 1 },
+        ], { duration: 320, easing: 'ease-out' });
+      }
+    });
+    for (const target of document.querySelectorAll('main :is(h2, figure, .editorial-row > div, [data-reveal])')) {
+      if (target.getBoundingClientRect().top >= innerHeight) observer.observe(target);
+    }
+  }
+</script>
