@@ -13,37 +13,21 @@ calendar.searchParams.set('gv', 'true');
       <h1>Reserva <span>tu cita.</span></h1>
       <p>Elige un horario disponible y completa tu reserva con JuanCa Power en Google Calendar.</p>
     </div>
+    <figure class="booking-portrait"><img src={path() + 'images/presence/agenda-960.webp'} srcset={path() + 'images/presence/agenda-480.webp 480w, ' + path() + 'images/presence/agenda-960.webp 960w'} sizes="(max-width: 767px) 90vw, 42vw" alt="JuanCa Power presentando frente a una pantalla" fetchpriority="high" /></figure>
   </section>
   <section class="platform-section platform-light" aria-labelledby="calendar-title">
     <div class="presence-wrap">
       <h2 id="calendar-title">Consulta la disponibilidad.</h2>
-      <p id="calendar-privacy">Al cargar la agenda te conectas con Google Calendar, que gestiona la reserva. Consulta nuestra <a href={path('privacidad')}>política de privacidad</a>.</p>
+      <p id="calendar-privacy">Esta página carga automáticamente contenido de Google Calendar. Google recibe datos técnicos de conexión y gestiona la reserva. Consulta nuestra <a href={path('privacidad')}>política de privacidad</a>.</p>
       <div class="agenda-actions">
-        <button type="button" class="presence-button" id="load-calendar" aria-describedby="calendar-privacy" hidden>Cargar agenda aquí</button>
         <a href={booking} target="_blank" rel="noopener noreferrer">Abrir en Google Calendar (nueva pestaña)</a>
       </div>
-      <iframe id="booking-calendar" data-src={calendar.href} title="Página de reservas Citas Power de Google Calendar" referrerpolicy="no-referrer" hidden></iframe>
+      <iframe id="booking-calendar" src={calendar.href} loading="lazy" title="Página de reservas Citas Power de Google Calendar" referrerpolicy="no-referrer" aria-describedby="calendar-privacy"></iframe>
     </div>
   </section>
 </Platform>
-<script>
-  const button = document.querySelector<HTMLButtonElement>('#load-calendar');
-  const frame = document.querySelector<HTMLIFrameElement>('#booking-calendar');
-
-  if (button && frame?.dataset.src) {
-    button.hidden = false;
-    button.addEventListener('click', () => {
-      frame.src = frame.dataset.src!;
-      frame.hidden = false;
-      frame.focus();
-      button.hidden = true;
-    }, { once: true });
-  }
-</script>
 <style>
-  .agenda-hero { grid-template-columns: 1fr; }
   .agenda-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
   .agenda-actions a { display: inline-flex; align-items: center; min-height: 44px; }
-  .agenda-actions button[hidden] { display: none; }
-  iframe { width: 100%; height: clamp(650px, 85vh, 850px); border: 1px solid #89909c; margin-top: 24px; background: white; }
+  iframe { width: 100%; display: block; height: clamp(650px, 85vh, 850px); border: 1px solid #89909c; margin-top: 24px; background: white; }
 </style>

@@ -9,6 +9,7 @@ import { booking, speakerContact, path } from '../data/site';
       <h1>Hablemos de tu<br /><span>siguiente paso.</span></h1>
       <p>Reserva una cita, explora el coaching individual o cuéntame qué quieres organizar.</p>
     </div>
+    <figure class="booking-portrait"><img src={path() + 'images/presence/contacto-960.webp'} srcset={path() + 'images/presence/contacto-480.webp 480w, ' + path() + 'images/presence/contacto-960.webp 960w'} sizes="(max-width: 767px) 90vw, 42vw" alt="JuanCa Power sonriendo durante una presentación" fetchpriority="high" /></figure>
   </section>
   <section class="platform-section platform-light" aria-label="Canales de contacto">
     <div class="presence-wrap">
@@ -54,7 +55,6 @@ import { booking, speakerContact, path } from '../data/site';
   </section>
 </Platform>
 <style>
-  .contact-hero { grid-template-columns: 1fr; }
   .editorial-row > .presence-kicker { margin-block: 4px; }
   .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
   .contact-actions a { min-height: 44px; display: inline-flex; align-items: center; }
