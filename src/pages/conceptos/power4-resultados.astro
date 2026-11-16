@@ -1,0 +1,39 @@
+---
+import Platform from '../../layouts/Platform.astro';
+
+const examples = [
+  { pillar: 'Espíritu', answers: [4, 4, 5], prompt: '¿Qué decisión se acerca más a lo que valoras?' },
+  { pillar: 'Mente', answers: [3, 3, 4], prompt: '¿Qué pensamiento te gustaría observar antes de decidir?' },
+  { pillar: 'Cuerpo', answers: [2, 3, 3], prompt: '¿Qué hábito pequeño te ayudaría a cuidar tu energía?' },
+  { pillar: 'Emoción', answers: [3, 4, 4], prompt: '¿Qué emoción podrías nombrar y escuchar con más atención?' },
+];
+
+function normalize(answers: number[]) {
+  const sum = answers.reduce((total, value) => total + value, 0);
+  return Math.round(100 * (sum - answers.length) / (4 * answers.length));
+}
+---
+<Platform title="Propuesta de resultados POWER 4" description="Vista de revisión con respuestas de ejemplo." indexable={false}>
+  <section class="platform-hero presence-wrap">
+    <div>
+      <p class="presence-kicker">PROPUESTA PARA REVISIÓN</p>
+      <h1>Tu mapa de <span>autopercepción.</span></h1>
+      <p>Ejemplo con tres respuestas simuladas por pilar. El porcentaje expresa la posición en la escala de respuestas y sirve como punto de partida para una conversación de coaching. Carece de valor diagnóstico o clínico.</p>
+    </div>
+  </section>
+  <section class="platform-section platform-light" aria-labelledby="result-example">
+    <div class="presence-wrap test-questions">
+      <h2 id="result-example">Cuatro puntos de partida</h2>
+      {examples.map(({ pillar, answers, prompt }) => {
+        const score = normalize(answers);
+        return (
+          <article class="result-row">
+            <h3>{pillar} · {score}%</h3>
+            <meter min="0" max="100" value={score} aria-label={`Autopercepción de ejemplo: ${pillar}`}></meter>
+            <p>{prompt}</p>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+</Platform>
