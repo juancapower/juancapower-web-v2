@@ -20,15 +20,15 @@ const labels = ['Muy poco', 'Poco', 'Moderadamente', 'Bastante', 'Mucho'];
     <figure class="secondary-stage-photo">
       <img src={path() + 'images/presence/power4-1440.webp'}
         srcset={path() + 'images/presence/power4-640.webp 640w, ' + path() + 'images/presence/power4-1440.webp 1440w'}
-        sizes="100vw" width="1440" height="810" alt="JuanCa Power durante una conferencia" fetchpriority="high" />
+        sizes="100vw" width="1440" height="960" alt="JuanCa Power de pie ante un auditorio, con asistentes frente a él." fetchpriority="high" />
     </figure>
   </section><section class="platform-section platform-light"><div class="presence-wrap test-questions"><Power4Capture/><noscript><p>El cálculo necesita JavaScript local. No se envían respuestas; puedes reservar orientación directamente desde el enlace de arriba.</p></noscript>      <form id="power-form" class:list={[{ 'power-editorial': !captureConfig.preview }]} data-synthetic={String(captureConfig.preview)} hidden={captureConfig.enabled} method="dialog" autocomplete="off" novalidate>
-        <div id="step-progress" hidden>
-          <p id="step-label" tabindex="-1"></p>
+        <div id="step-progress">
+          <p id="step-label" tabindex="-1">{captureConfig.preview ? "Paso" : "Pregunta"} 1 de {steps.length} · {steps[0].pillar}</p>
           <progress id="step-meter" max={steps.length} value="1" aria-label="Progreso de la evaluación"></progress>
         </div>
-        {steps.map(({ pillar, entries }) => (
-          <section class="power-step" aria-label={pillar}>
+        {steps.map(({ pillar, entries }, index) => (
+          <section class="power-step" aria-label={pillar} hidden={index !== 0}>
             {entries.map(({ question, id }) => (
               <fieldset>
                 <legend>{question}</legend>
@@ -113,7 +113,6 @@ const maintain = [
 
 form.reset();
 submit.disabled = false;
-form.querySelector<HTMLElement>('#step-progress')!.hidden = false;
 showStep(false);
 previous.addEventListener('click', () => { if (current > 0) { current--; showStep(); } });
 next.addEventListener('click', () => { if (current < steps.length - 1 && validate()) { current++; showStep(); } });
