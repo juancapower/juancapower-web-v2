@@ -29,6 +29,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   {product && <script is:inline type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'WebPage',name:`${title} | JuanCa Power`,description:pageDescription,url:canonical,inLanguage:'es-PE'}).replace(/</g,'\u003c')} />}
   <link rel="canonical" href={canonical} />
   <link rel="icon" href={`${path()}images/isotipo.png`} type="image/png" />
+  <slot name="head" />
 </head>
 <body class:list={['presence-canvas', theme]}>
   <a class="presence-skip" href="#contenido">Saltar al contenido</a>

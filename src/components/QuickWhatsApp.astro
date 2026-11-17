@@ -15,11 +15,18 @@ import { socialIcons } from '../data/social-icons';
     place-items: center;
     inline-size: 52px;
     block-size: 52px;
-    border: 1px solid #F1E5AC;
+    border: 1px solid #f8f9fa;
     border-radius: 50%;
-    background: #0B0D17;
-    color: #F1E5AC !important;
+    background: #4361EE;
+    color: #fff !important;
+    box-shadow: 0 4px 16px #0b0d1766;
   }
-  .quick-whatsapp:hover { background: #F1E5AC; color: #0B0D17 !important; }
+  .quick-whatsapp:hover { background: #304bcf; }
+  .quick-whatsapp:focus-visible { outline: 3px solid #f1e5ac; outline-offset: 3px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .quick-whatsapp { animation: quick-whatsapp-in 280ms ease-out; transition: transform 160ms ease-out, background-color 160ms ease-out; }
+    .quick-whatsapp:hover { transform: scale(1.06); }
+    @keyframes quick-whatsapp-in { from { transform: scale(.92); } }
+  }
   :global(body:has(#consent-banner:not([hidden]))) .quick-whatsapp { visibility: hidden; }
 </style>
