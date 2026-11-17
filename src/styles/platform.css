@@ -88,3 +88,8 @@
   .power-step:not([hidden]), #power-result:not([hidden]) { animation: power-step-in 240ms ease-out; }
   @keyframes power-step-in { from { opacity: .8; transform: translateY(5px); } }
 }
+.secondary-stage--speaker { --stage-focus: 50% 48%; --stage-mobile-focus: 58% 48%; }
+.secondary-stage--recursos { --stage-focus: 55% 47%; --stage-mobile-focus: 61% 47%; }
+.secondary-stage--sobre-mi { --stage-focus: 62% 42%; --stage-mobile-focus: 56% 39%; }
+.secondary-stage--coaching { --stage-focus: 55% 50%; --stage-mobile-focus: 59% 48%; }
+.platform-hero.secondary-stage .secondary-stage-copy > a { max-width: 100%; }
