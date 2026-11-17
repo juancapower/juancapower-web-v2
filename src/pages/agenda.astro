@@ -1,0 +1,33 @@
+---
+import Platform from '../layouts/Platform.astro';
+import { booking, path } from '../data/site';
+
+const calendar = new URL(booking);
+calendar.pathname = calendar.pathname.replace('/calendar/u/0/', '/calendar/');
+calendar.searchParams.set('gv', 'true');
+---
+<Platform title="Agenda · Citas Power" description="Consulta la disponibilidad y reserva una cita con JuanCa Power en Google Calendar.">
+  <section class="platform-hero presence-wrap agenda-hero">
+    <div>
+      <p class="presence-kicker">CITAS POWER</p>
+      <h1>Reserva <span>tu cita.</span></h1>
+      <p>Elige un horario disponible y completa tu reserva con JuanCa Power en Google Calendar.</p>
+    </div>
+    <figure class="booking-portrait"><img src={path() + 'images/presence/agenda-960.webp'} srcset={path() + 'images/presence/agenda-480.webp 480w, ' + path() + 'images/presence/agenda-960.webp 960w'} sizes="(max-width: 767px) 90vw, 42vw" alt="JuanCa Power presentando frente a una pantalla" fetchpriority="high" /></figure>
+  </section>
+  <section class="platform-section platform-light" aria-labelledby="calendar-title">
+    <div class="presence-wrap">
+      <h2 id="calendar-title">Consulta la disponibilidad.</h2>
+      <p id="calendar-privacy">Esta página carga automáticamente contenido de Google Calendar. Google recibe datos técnicos de conexión y gestiona la reserva. Consulta nuestra <a href={path('privacidad')}>política de privacidad</a>.</p>
+      <div class="agenda-actions">
+        <a href={booking} target="_blank" rel="noopener noreferrer">Abrir en Google Calendar (nueva pestaña)</a>
+      </div>
+      <iframe id="booking-calendar" src={calendar.href} loading="lazy" title="Página de reservas Citas Power de Google Calendar" referrerpolicy="no-referrer" aria-describedby="calendar-privacy"></iframe>
+    </div>
+  </section>
+</Platform>
+<style>
+  .agenda-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+  .agenda-actions a { display: inline-flex; align-items: center; min-height: 44px; }
+  iframe { width: 100%; display: block; height: clamp(650px, 85vh, 850px); border: 1px solid #89909c; margin-top: 24px; background: white; }
+</style>
