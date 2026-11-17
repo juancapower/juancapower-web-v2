@@ -1,7 +1,6 @@
 ---
 import '../styles/home-polish.css';
 import brandFont from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url';
-import { leanRelease } from '../data/release';
 import Concept from '../layouts/Concept.astro';
 import Header from '../components/presence/Header.astro';
 import StageHero from '../components/presence/StageHero.astro';
@@ -11,5 +10,5 @@ import Journey from '../components/presence/Journey.astro';
 <Concept title="Coaching POWER 4 y conferencias" showReview={false} product>
   <link slot="head" rel="preload" href={brandFont} as="font" type="font/woff2" crossorigin="anonymous" />
   <Header live />
-  <main class="home-polish" id="contenido" tabindex="-1"><StageHero live /><Journey live approvedGallery>{!leanRelease && <Testimonios slot="before-close" />}</Journey></main>
+  <main class="home-polish" id="contenido" tabindex="-1"><StageHero live /><Journey live approvedGallery><Testimonios slot="before-close" /></Journey></main>
 </Concept>

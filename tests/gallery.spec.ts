@@ -124,3 +124,26 @@ test('Authority uses native touch and offers a desktop fallback without scripts'
   await fallback.close();
  }
 });
+
+test('Testimonial captions are available without downloading video on load', async ({page, request}) => {
+ const mediaRequests: string[] = [];
+ page.on('request', item => { if (item.resourceType() === 'media') mediaRequests.push(item.url()); });
+ await page.goto(root, {waitUntil:'networkidle'});
+ const carousel = page.locator('.home-stories');
+ const tracks = carousel.locator('track[kind="captions"][srclang="es"]');
+ await expect(tracks).toHaveCount(5);
+ expect(mediaRequests).toEqual([]);
+ for (const track of await tracks.all()) {
+  await expect(track).toHaveAttribute('label', 'Español');
+  const response = await request.get((await track.getAttribute('src'))!);
+  expect(response.ok()).toBe(true);
+  expect(response.headers()['content-type']).toContain('text/vtt');
+  expect(await response.text()).toMatch(/^WEBVTT\s+[\s\S]+-->/);
+ }
+ const first = carousel.getByLabel('Testimonio de Ybeth', {exact:true});
+ await first.evaluate((element: HTMLVideoElement) => { element.textTracks[0].mode = 'showing'; });
+ await expect.poll(() => first.evaluate((element: HTMLVideoElement) => element.textTracks[0].cues?.length ?? 0)).toBeGreaterThan(0);
+ await carousel.getByRole('button', {name:'Testimonio siguiente'}).press('Enter');
+ await expect(carousel.locator('.story video:visible')).toHaveCount(1);
+ await expect(carousel.getByLabel('Testimonio de Fiorella', {exact:true})).toBeVisible();
+});
