@@ -50,7 +50,9 @@ const media = 'https://res.cloudinary.com/ddn6qh7ve/video/upload';
             <div class="story-media">
               <video controls playsinline preload="none" aria-label={`Testimonio de ${name}`}
               poster={path() + 'images/testimonios/' + key + '.webp'}
-              src={`${media}/v${v}/${id}.mp4`}></video>
+              src={`${media}/v${v}/${id}.mp4`}>
+                <track kind="captions" srclang="es" label="Español" src={path() + 'captions/testimonios/' + key + '.vtt'} />
+              </video>
               <p class="story-status" role="status"></p>
             </div>
             <div class="story-person"><h3>{name}</h3>{role && <p>{role}</p>}</div>
