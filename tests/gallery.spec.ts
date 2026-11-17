@@ -1,9 +1,9 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 const root='/juancapower-web-v2/';
-for(const width of [360,390,768,1024,1440])test(`Editorial experience and authority ${width}`,async({page,request},info)=>{
+for(const width of [360,390,768,1024,1440])test(`Editorial experience and authority ${width}`,async({page,request,baseURL},info)=>{
  await page.setViewportSize({width,height:width<500?844:900});await page.emulateMedia({reducedMotion:'reduce'});
- const failures:string[]=[],external:string[]=[];page.on('response',r=>{if(r.status()>=400)failures.push(`${r.status()} ${r.url()}`)});page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:4321/'))external.push(r.url())});
+ const failures:string[]=[],external:string[]=[];page.on('response',r=>{if(r.status()>=400)failures.push(`${r.status()} ${r.url()}`)});page.on('request',r=>{if(new URL(r.url()).origin!==new URL(baseURL!).origin)external.push(r.url())});
  expect((await page.goto(root))?.status()).toBe(200);await page.evaluate(()=>document.fonts.ready);await expect(page.locator('.stage-hero')).toBeVisible();await expect(page.locator('.review-strip')).toHaveCount(0);
  await expect(page.locator('[data-reel-slide]')).toHaveCount(10);await expect(page.locator('[data-reel-thumb]')).toHaveCount(10);
  let imageBytes=0;
@@ -32,7 +32,7 @@ for(const width of [360,390,768,1024,1440])test(`Editorial experience and author
  await info.attach('authority-image-budget',{body:JSON.stringify({width,authorityBytes,photoCount:7}),contentType:'application/json'});
  await authority.evaluate(el=>{el.scrollLeft=0});
 
- expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze()).violations).toEqual([]);expect(await page.content()).not.toMatch(/DtP_Testimonio|Testimonio_[A-Za-z]|<video|<iframe/i);expect(failures).toEqual([]);expect(external).toEqual([]);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze()).violations).toEqual([]);await expect(page.locator('.home-stories video')).toHaveCount(5);await expect(page.locator('.home-stories video:visible')).toHaveCount(1);await expect(page.locator('video')).toHaveCount(5);await expect(page.locator('iframe')).toHaveCount(0);expect(failures).toEqual([]);expect(external).toEqual([]);
  await page.locator('#experience-title').click();await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:info.outputPath(`home-full-${width}.png`),fullPage:true});await page.locator('#experiencia').screenshot({path:info.outputPath(`experience-${width}.png`)});await page.locator('.shared-stage').screenshot({path:info.outputPath(`authority-${width}.png`)});
 });
 

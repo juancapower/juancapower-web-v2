@@ -8,6 +8,8 @@ export const conversationsContact = 'https://wa.me/51963335717?text=' + encodeUR
 
 export const whatsapp = 'https://wa.me/51963335717?text=' + encodeURIComponent('¡Hola, JuanCa! 👋 Llegué desde tu página web y me gustaría conversar contigo sobre tus programas, talleres o servicios.');
 export const socialProfiles = [
+  { icon: 'facebook', label: 'Facebook de JuanCa Power', href: 'https://www.facebook.com/soyjuancapower' },
+  { icon: 'linkedin', label: 'LinkedIn de JuanCa Power', href: 'https://www.linkedin.com/in/soyjuancapower/' },
   { icon: 'tiktok', label: 'TikTok de JuanCa Power', href: 'https://www.tiktok.com/@soyjuancapower' },
   { icon: 'instagram', label: 'Instagram de JuanCa Power', href: 'https://www.instagram.com/soyjuancapower/' },
 ] as const;

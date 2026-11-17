@@ -1,0 +1,52 @@
+
+/* Final Home polish. Keep concept previews and secondary layouts separate. */
+body:has(.home-polish) .explore-nav { gap: 8px clamp(18px, 2.6vw, 36px); font-size: .875rem; }
+body:has(.home-polish) .explore-nav a { text-underline-offset: .25em; }
+body:has(.home-polish) .presence-header-cta { min-height: 44px; color: #f1e5ac; }
+body:has(.home-polish) .presence-menu summary { font-size: .75rem; }
+body:has(.home-polish) .presence-menu nav a { min-height: 44px; }
+
+
+.home-polish .presence-choice,
+.home-polish .presence-method { padding-block: clamp(60px, 7vw, 100px); }
+.home-polish .chapter-heading { padding-bottom: clamp(22px, 4vw, 42px); }
+.home-polish .choice-layout { column-gap: clamp(36px, 6vw, 80px); margin-top: clamp(24px, 4vw, 48px); }
+.home-polish .choice-layout article { display: grid; grid-template-rows: auto auto 1fr auto auto; justify-items: start; }
+.home-polish .choice-organizations { margin-top: 0; }
+.home-polish .choice-layout h3 { margin-block: 14px 18px; }
+.home-polish .choice-layout .presence-link { margin-top: 16px; font-size: .9375rem; font-weight: 700; }
+.home-polish .choice-note { margin-top: 12px; font-size: .8125rem; }
+
+.home-polish .method-layout { gap: clamp(24px, 4vw, 56px); }
+.home-polish .drawing-roof { stroke-width: 3; }
+.home-polish .drawing-pillar, .home-polish .drawing-base { stroke-width: 2.5; }
+.home-polish .drawing-label small { font-size: clamp(.625rem, 1vw, .8125rem); margin-bottom: 4px; }
+.home-polish .drawing-label strong { font-size: clamp(1rem, 2vw, 1.75rem); font-weight: 700; }
+.home-polish .drawing-label.body, .home-polish .drawing-label.emotion { width: 26%; }
+
+.home-polish .experience-top h2 { text-wrap: balance; }
+.home-polish .reel-navigation button { border-radius: 50%; border-color: #6e7687; }
+.home-polish .reel-thumbnails button { border-radius: 4px; overflow: clip; }
+.home-polish .reel-thumbnails button[aria-pressed="true"] { outline: 2px solid #4361ee; outline-offset: 2px; }
+.home-polish .reel-thumbnails button:focus-visible { outline: 3px solid #0b0d17; outline-offset: 3px; }
+.home-polish .experience-slide figcaption p { color: #d0d5e1; font-size: .875rem; }
+.home-polish .presence-close {
+  background: #151c2c;
+  border-block: 1px solid #343b50;
+  padding-block: clamp(56px, 7vw, 96px);
+}
+.home-polish .presence-close h2 { margin-block: 18px 28px; text-wrap: balance; }
+.home-polish .presence-close .presence-link { padding: 14px 20px; border: 1px solid #81889d; border-radius: 4px; }
+.home-polish .presence-close .presence-button { border-radius: 4px; }
+.home-polish .presence-close .presence-link:hover { border-color: #f1e5ac; background: #202637; }
+
+@media (min-width: 1100px) {
+  .home-polish .stage-gallery[data-expandable] .stage-frame { flex-basis: 0; min-width: 68px; }
+  .home-polish .stage-gallery[data-expandable] .stage-frame:has([aria-pressed="true"]) { flex-grow: 4.6; }
+}
+@media (max-width: 767px) {
+  .home-polish .stage-content .presence-actions { gap: 12px; }
+  .home-polish .drawing-label.body { left: 0; }
+  .home-polish .drawing-label.emotion { right: 0; }
+  .home-polish .stage-frame { height: clamp(300px, 93vw, 410px); }
+}

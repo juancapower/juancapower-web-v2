@@ -3,7 +3,7 @@ import Arrow from './Arrow.astro';
 import { path, booking } from '../../data/site';
 const { live = false } = Astro.props;
 ---
-<section class="stage-hero" aria-labelledby="stage-title">
+<section class:list={["stage-hero", { "stage-hero-live": live }]} aria-labelledby="stage-title">
       <figure class="stage-image"><img src={`${path()}images/presence/stage-1066.webp`} srcset={`${path()}images/presence/stage-480.webp 480w, ${path()}images/presence/stage-768.webp 768w, ${path()}images/presence/stage-1066.webp 1066w`} sizes="(max-width:700px) 100vw, 65vw" width="1066" height="1600" alt="JuanCa Power en un escenario, de perfil, hablando con un micrófono de diadema." fetchpriority="high" loading="eager" /><figcaption>JUANCA POWER · EN ESCENA</figcaption></figure>
       <div class="stage-shade" aria-hidden="true"></div>
       <div class="stage-content presence-wrap">
@@ -15,3 +15,17 @@ const { live = false } = Astro.props;
       </div>
       <a class="stage-explore" href="#caminos"><span>DESCUBRE TU SIGUIENTE PASO</span><svg aria-hidden="true" width="18" height="28" viewBox="0 0 18 28"><path d="M9 1v24m-6-6 6 6 6-6" fill="none" stroke="currentColor" /></svg></a>
     </section>
+
+<style>
+.stage-hero-live .stage-content h1 { text-shadow: 0 2px 24px #0b0d17; }
+.stage-hero-live .stage-intro { color: #f8f9fa; max-width: 650px; font-size: clamp(1rem, 1.35vw, 1.125rem); line-height: 1.65; text-shadow: 0 1px 12px #0b0d17; }
+.stage-hero-live .presence-actions > a { padding: 16px 20px; min-height: 56px; border-radius: 4px; font-size: .92rem; }
+.stage-hero-live .presence-button { background: #4361ee; min-height: 58px; border-color: #8b9bff; }
+.stage-hero-live .presence-button:hover { background: #324dd4; }
+.stage-hero-live .presence-link { background: #0b0d17; border: 1px solid #81889d; }
+.stage-hero-live .presence-link:hover { background: #202637; border-color: #f1e5ac; }
+.stage-hero-live .presence-actions > a:focus-visible { outline: 3px solid #f1e5ac; outline-offset: 4px; }
+@media (min-width: 1200px) {
+  .stage-hero-live .stage-intro { min-block-size: 2lh; }
+}
+</style>

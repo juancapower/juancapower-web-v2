@@ -4,29 +4,74 @@ import { leanRelease } from '../../data/release';
 import { socialIcons } from '../../data/social-icons';
 import QuickWhatsApp from '../QuickWhatsApp.astro';
 
-const services = [['coaching', 'Coaching POWER 4'], ['speaker', 'Speaker y talleres'], ['contacto', 'Contacto']];
+const groups = [
+  { title: 'Explora', links: [['coaching', 'Coaching POWER 4'], ['test-power4', 'Mapa POWER 4'], ['speaker', 'Speaker y talleres'], ['sobre-mi', 'Sobre mí']] },
+  { title: 'Conecta', links: [['comunidad', 'Comunidad Power'], ['conversaciones-que-despiertan', 'Conversaciones que Despiertan'], ['agenda', 'Agenda'], ['contacto', 'Contacto']] },
+];
 const legal = [['privacidad', 'Privacidad'], ['cookies', 'Cookies'], ['terminos', 'Condiciones'], ['aviso-legal', 'Aviso legal'], ['libro-de-reclamaciones', 'Libro de Reclamaciones']];
+const year = new Date().getUTCFullYear();
 ---
-<footer class="platform-footer presence-wrap">
-  <a href={path()} class="footer-brand">JUANCA POWER</a>
-  <p>Propósito que se convierte en acción.</p>
-  <nav aria-label="Servicios y contacto">{services.map(([url, label]) => <a href={path(url)}>{label}</a>)}</nav>
-  <nav class="social-profiles" aria-label="Redes sociales">
-    {socialProfiles.map(({ icon, label, href }) => (
-      <a href={href} aria-label={label}>
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d={socialIcons[icon]} /></svg>
-      </a>
-    ))}
-  </nav>
-  <nav aria-label="Información legal">
-    {legal.map(([url, label]) => <a href={path(url)}>{label}</a>)}
-    {!leanRelease && <button type="button" data-cookie-settings>Configurar cookies</button>}
-  </nav>
-  {!leanRelease && <p class="footer-note">Staging · Validación previa al lanzamiento.</p>}
-  <QuickWhatsApp />
+<footer class="platform-footer editorial-footer">
+  <div class="presence-wrap">
+    <div class="footer-top">
+      <div class="footer-identity">
+        <a href={path()} class="footer-brand">
+          <img src={path() + 'images/isotipo.png'} alt="" width="44" height="44" loading="lazy" />
+          <span>JUANCA POWER</span>
+        </a>
+        <p>Propósito que se convierte en acción.</p>
+        <nav class="social-profiles" aria-label="Redes sociales">
+          {socialProfiles.map(({ icon, label, href }) => (
+            <a href={href} aria-label={label}>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d={socialIcons[icon]} /></svg>
+            </a>
+          ))}
+        </nav>
+      </div>
+      <div class="footer-directory">
+        {groups.map(({ title, links }) => (
+          <nav aria-label={title}>
+            <h2>{title}</h2>
+            <ul>{links.map(([url, label]) => <li><a href={path(url)}>{label}</a></li>)}</ul>
+          </nav>
+        ))}
+      </div>
+      <div class="footer-contact">
+        <h2>Contacto</h2>
+        <a href="mailto:hola@juancapower.com">hola@juancapower.com</a>
+        <a href={path('agenda')}>Conversemos <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <nav class="footer-legal" aria-label="Información legal">
+        {legal.map(([url, label]) => <a href={path(url)}>{label}</a>)}
+        {!leanRelease && <button type="button" data-cookie-settings>Configurar cookies</button>}
+      </nav>
+      <p class="footer-copyright">© {year} JuanCa Power.</p>
+      {!leanRelease && <p class="footer-note">Staging · Validación previa al lanzamiento.</p>}
+    </div>
+    <QuickWhatsApp />
+  </div>
 </footer>
 <style>
-  .platform-footer .social-profiles { gap: 8px; }
-  .social-profiles a { justify-content: center; min-width: 44px; border: 1px solid #626B80; border-radius: 4px; }
-  .social-profiles a:hover { border-color: #F1E5AC; color: #F1E5AC; }
+  .editorial-footer { background: #0b0d17; color: #f8f9fa; padding-block: clamp(44px, 7vw, 100px) 28px; }
+  .footer-top { display: grid; grid-template-columns: 1.2fr 1fr .65fr; gap: clamp(22px, 5vw, 75px); padding-bottom: clamp(32px, 6vw, 88px); }
+  .footer-identity p { max-width: 30ch; margin: 14px 0; color: #b7bdce; }
+  .footer-brand { align-items: center; gap: 10px; text-decoration: none; }
+  .footer-directory { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+  .footer-directory nav { display: block; margin: 0; }
+  .footer-top h2 { color: #f1e5ac; font-size: 1rem; margin: 0 0 10px; }
+  .footer-directory ul { list-style: none; margin: 0; padding: 0; }
+  .footer-top a:not(.footer-brand), .footer-legal a, .footer-legal button { color: #d0d5e1; text-underline-offset: .22em; }
+  .footer-top a:not(.footer-brand) { text-decoration: none; }
+  .footer-identity .social-profiles { margin: 0; gap: 2px; }
+  .social-profiles a { justify-content: center; min-width: 44px; }
+  .footer-contact a { display: flex; overflow-wrap: anywhere; }
+  .footer-bottom { display: block; border-top: 1px solid #343b50; padding-top: 12px; }
+  .editorial-footer .footer-legal { gap: 0 18px; margin: 0; font-size: .875rem; }
+  .footer-legal button { padding-inline: 0; cursor: pointer; }
+  .footer-copyright, .footer-note { font-size: .8125rem; color: #d0d5e1; margin-top: 6px; }
+  .editorial-footer a:hover, .editorial-footer button:hover { color: #f1e5ac; text-decoration: underline; }
+  .editorial-footer :is(a, button):focus-visible { outline: 3px solid #f1e5ac; outline-offset: 3px; }
+  @media (max-width: 860px) { .footer-top { grid-template-columns: 1fr; } }
 </style>
