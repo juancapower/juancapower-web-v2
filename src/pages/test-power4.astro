@@ -1,77 +1,243 @@
 ---
 import Power4Capture from '../components/Power4Capture.astro';import {captureConfig} from '../data/capture';
-import Platform from '../layouts/Platform.astro';import legacyQuestions from '../data/power4.json';import localQuestions from '../data/power4-local.json';import {booking} from '../data/site';
+import Platform from '../layouts/Platform.astro';import legacyQuestions from '../data/power4.json';import localQuestions from '../data/power4-local.json';import {booking,path} from '../data/site';
 const questions=(captureConfig.preview ? legacyQuestions : localQuestions) as [string,string[]][];
+const steps = questions.flatMap(([pillar, items], group) => {
+  const entries = items.map((question, index) => ({ question, id: group * items.length + index }));
+  return captureConfig.preview
+    ? [{ pillar, entries }]
+    : entries.map(entry => ({ pillar, entries: [entry] }));
+});
+const labels = ['Muy poco', 'Poco', 'Moderadamente', 'Bastante', 'Mucho'];
 ---
-<Platform title="Mapa POWER 4 · Evaluación de Alineación Personal" description="Doce afirmaciones de autopercepción con resultados locales y sin registro."><section class="platform-hero presence-wrap test-intro"><div><p class="presence-kicker">AUTOPERCEPCIÓN · SIN REGISTRO</p><h1>Tu momento.<br/><span>Tu mapa POWER 4.</span></h1><p>Considera las últimas dos semanas. Responde de 1 (muy poco) a 5 (mucho). Es una herramienta de reflexión, no un diagnóstico ni un instrumento científico validado.</p><a class="presence-button" href={booking}>Reservar orientación sin hacer el test ↗</a></div></section><section class="platform-section platform-light"><div class="presence-wrap test-questions"><Power4Capture/><noscript><p>El cálculo necesita JavaScript local. No se envían respuestas; puedes reservar orientación directamente desde el enlace de arriba.</p></noscript><form id="power-form" hidden={captureConfig.enabled} method="dialog" autocomplete="off" novalidate><div id="step-progress" hidden><p id="step-label" tabindex="-1"></p><progress id="step-meter" max="4" value="1" aria-label="Progreso de la evaluación"></progress><p id="step-error" role="alert"></p></div><ul class="power-scale" aria-label="Escala de respuestas"><li>1 · Muy poco</li><li>2 · Poco</li><li>3 · Moderadamente</li><li>4 · Bastante</li><li>5 · Mucho</li></ul>{questions.map(([dimension,items],group)=><section class="power-step" aria-label={dimension}><h2>{dimension}</h2>{items.map((question,index)=><fieldset><legend>{question}</legend>{[1,2,3,4,5].map(value=><label class="test-answer"><input type="radio" name={`q${group*items.length+index}`} value={value} required/><span>{value}</span></label>)}</fieldset>)}</section>)}<div class="step-actions"><button id="previous-step" class="presence-button" type="button" hidden>Anterior</button><button id="next-step" class="presence-button" type="button" hidden>Siguiente</button><button id="show-map" class="presence-button" type="submit" disabled>Ver mi mapa POWER 4</button></div></form><section id="power-result" hidden tabindex="-1" aria-labelledby="result-title"><h2 id="result-title">Tu mapa de hoy</h2>{captureConfig.preview ? <p>Rangos orientativos no clínicos ni psicométricamente validados: 4–9, área para explorar; 10–14, en desarrollo; 15–20, fortaleza percibida. No definen quién eres ni predicen resultados.</p> : <p>Estos índices de autopercepción no están validados. No son diagnósticos ni porcentajes científicos de bienestar.</p>}<p id="score-summary"></p><div id="scores"></div><p>Elige una dimensión y pregúntate: ¿qué acción pequeña y realista quiero explorar esta semana?</p><h3 id="power4-conversion">¿Quieres convertir este mapa en un plan personalizado?</h3><a class="presence-button" href={booking}>Agenda tu sesión POWER 4 ↗</a><p><button id="repeat" class="presence-button" type="button">Repetir el test</button></p></section><p>{captureConfig.enabled ? 'Las respuestas individuales se calculan aquí y no se envían. Los datos de contacto y los cuatro puntajes solo se comparten al confirmar tu solicitud y la autorización correspondiente. Puedes reservar sin enviar nada.' : 'Las respuestas se procesan solo en esta página y se eliminan al recargar. No se envían ni guardan. La reserva siempre es opcional y directa.'}</p></div></section></Platform>
+<Platform title="Mapa POWER 4 · Evaluación de Alineación Personal" description="Doce afirmaciones de autopercepción con resultados locales y sin registro.">  <section class="platform-hero secondary-stage power-hero">
+    <div class="presence-wrap secondary-stage-copy">
+      <p class="presence-kicker">AUTOPERCEPCIÓN · SIN REGISTRO</p>
+      <h1>Tu momento.<br /><span>Tu mapa POWER 4.</span></h1>
+      <p>Piensa en las últimas dos semanas. Responde 12 afirmaciones y descubre qué áreas de tu vida podrías explorar.</p>
+      <a class="presence-button" href={booking}>Reservar orientación sin hacer el test <span aria-hidden="true">↗</span></a>
+    </div>
+    <figure class="secondary-stage-photo">
+      <img src={path() + 'images/presence/power4-1440.webp'}
+        srcset={path() + 'images/presence/power4-640.webp 640w, ' + path() + 'images/presence/power4-1440.webp 1440w'}
+        sizes="100vw" width="1440" height="810" alt="JuanCa Power durante una conferencia" fetchpriority="high" />
+    </figure>
+  </section><section class="platform-section platform-light"><div class="presence-wrap test-questions"><Power4Capture/><noscript><p>El cálculo necesita JavaScript local. No se envían respuestas; puedes reservar orientación directamente desde el enlace de arriba.</p></noscript>      <form id="power-form" class:list={[{ 'power-editorial': !captureConfig.preview }]} data-synthetic={String(captureConfig.preview)} hidden={captureConfig.enabled} method="dialog" autocomplete="off" novalidate>
+        <div id="step-progress" hidden>
+          <p id="step-label" tabindex="-1"></p>
+          <progress id="step-meter" max={steps.length} value="1" aria-label="Progreso de la evaluación"></progress>
+        </div>
+        {steps.map(({ pillar, entries }) => (
+          <section class="power-step" aria-label={pillar}>
+            {entries.map(({ question, id }) => (
+              <fieldset>
+                <legend>{question}</legend>
+                {labels.map((label, index) => (
+                  <label class="test-answer">
+                    <input type="radio" name={'q' + id} value={index + 1} aria-label={(index + 1) + ' · ' + label} required />
+                    <span>{index + 1}</span>
+                    {!captureConfig.preview && <small>{label}</small>}
+                  </label>
+                ))}
+              </fieldset>
+            ))}
+          </section>
+        ))}
+        <p id="step-error" role="alert"></p>
+        <div class="step-actions">
+          <button id="previous-step" class="presence-button" type="button" hidden>Anterior</button>
+          <button id="next-step" class="presence-button" type="button" hidden>Siguiente</button>
+          <button id="show-map" class="presence-button" type="submit" disabled>Ver mi mapa POWER 4</button>
+        </div>
+      </form>      <section id="power-result" class:list={[{ 'power-editorial-result': !captureConfig.preview }]} hidden tabindex="-1" aria-labelledby="result-title">
+        <h2 id="result-title">Tu mapa de hoy.</h2>
+        {!captureConfig.preview && <p class="map-subtitle">Descubre cómo te percibes en cuatro áreas de tu vida y dónde podrías comenzar a crecer.</p>}
+        <p id="score-summary"></p>
+        <div id="scores"></div>
+        <h3 id="power4-conversion">Explora tu mapa con acompañamiento</h3>
+        <p>En una sesión POWER 4 podemos conversar sobre lo que observaste y elegir un primer paso que encaje con tu momento.</p>
+        <div class="step-actions">
+          <a class="presence-button" href={booking}>Agenda tu sesión POWER 4</a>
+          <button id="repeat" class="presence-button" type="button">{captureConfig.preview ? 'Repetir el test' : 'Repetir test'}</button>
+        </div>
+        <p>Estos índices de autopercepción y sus rangos son orientativos. Carecen de validación científica y de valor diagnóstico.</p>
+      </section><p>{captureConfig.enabled ? 'Las respuestas individuales se calculan aquí y no se envían. Los datos de contacto y los cuatro puntajes solo se comparten al confirmar tu solicitud y la autorización correspondiente. Puedes reservar sin enviar nada.' : 'Las respuestas se procesan solo en esta página y se eliminan al recargar. No se envían ni guardan. La reserva siempre es opcional y directa.'}</p></div></section></Platform>
 <script>
-const form=document.querySelector<HTMLFormElement>('#power-form')!;
-const result=document.querySelector<HTMLElement>('#power-result')!;
-const steps=[...form.querySelectorAll<HTMLElement>('.power-step')];
-const previous=document.querySelector<HTMLButtonElement>('#previous-step')!;
-const next=document.querySelector<HTMLButtonElement>('#next-step')!;
-const submit=document.querySelector<HTMLButtonElement>('#show-map')!;
-const label=document.querySelector<HTMLElement>('#step-label')!;
-const error=document.querySelector<HTMLElement>('#step-error')!;
-let current=0;
-form.reset();submit.disabled=false;
-function showStep(focus=true){steps.forEach((s,i)=>s.hidden=i!==current);previous.hidden=current===0;next.hidden=current===3;submit.hidden=current!==3;label.textContent=`Paso ${current+1} de 4 · ${steps[current].getAttribute('aria-label')}`;(document.querySelector('#step-meter') as HTMLProgressElement).value=current+1;error.textContent='';if(focus)label.focus()}
-function validate(){const fields=[...steps[current].querySelectorAll('fieldset')];const missing=fields.find(f=>!f.querySelector('input:checked'));if(missing){error.textContent='Responde todas las afirmaciones para continuar. Puedes volver al paso anterior sin perder tus respuestas.';missing.querySelector('input')!.focus();return false}return true}
-document.querySelector<HTMLElement>('#step-progress')!.hidden=false;showStep(false);
-next.addEventListener('click',()=>{if(validate()){current++;showStep()}});
-previous.addEventListener('click',()=>{current--;showStep()});
+const form = document.querySelector<HTMLFormElement>('#power-form')!;
+const result = document.querySelector<HTMLElement>('#power-result')!;
+const steps = [...form.querySelectorAll<HTMLElement>('.power-step')];
+const previous = form.querySelector<HTMLButtonElement>('#previous-step')!;
+const next = form.querySelector<HTMLButtonElement>('#next-step')!;
+const submit = form.querySelector<HTMLButtonElement>('#show-map')!;
+const label = form.querySelector<HTMLElement>('#step-label')!;
+const meter = form.querySelector<HTMLProgressElement>('#step-meter')!;
+const error = form.querySelector<HTMLElement>('#step-error')!;
+const scores = result.querySelector<HTMLElement>('#scores')!;
+const summary = result.querySelector<HTMLElement>('#score-summary')!;
+const synthetic = form.dataset.synthetic === 'true';
+let current = 0;
+
+function showStep(focus = true) {
+  steps.forEach((step, index) => { step.hidden = index !== current; });
+  const last = current === steps.length - 1;
+  previous.hidden = current === 0;
+  next.hidden = last;
+  submit.hidden = !last;
+  const pillar = steps[current].getAttribute('aria-label');
+  label.textContent = (synthetic ? 'Paso ' : 'Pregunta ') + (current + 1) + ' de ' + steps.length + ' · ' + pillar;
+  meter.value = current + 1;
+  error.textContent = '';
+  if (focus) label.focus();
+}
+
+function validate() {
+  const missing = [...steps[current].querySelectorAll('fieldset')].find(field => !field.querySelector('input:checked'));
+  if (!missing) return true;
+  error.textContent = synthetic ? 'Responde todas las afirmaciones para continuar.' : 'Selecciona una opción para continuar.';
+  missing.querySelector('input')!.focus();
+  return false;
+}
+
 const suggestions = [
-  ['Reserva un momento de silencio o reflexión.', 'Identifica un valor que pueda orientar tu próxima decisión.', 'Nombra una actividad que le dé sentido a tu semana.'],
-  ['Define qué quieres lograr, cuándo y cómo lo medirás.', 'Identifica una creencia y considera otra forma de interpretar la situación.', 'Elige algo concreto que quieras aprender esta semana.'],
-  ['Observa qué hábitos favorecen tu descanso.', 'Elige una forma de movimiento que puedas incorporar a tu día.', 'Revisa qué hábito alimentario cotidiano quieres cuidar.'],
-  ['Practica decir «Me siento…» y expresar una necesidad con respeto.', 'Identifica una forma saludable de recuperar la calma.', 'Elige una relación que quieras cuidar con una acción concreta.'],
+  ['Reserva unos minutos de silencio o reflexión.', 'Elige un valor para orientar una decisión de esta semana.', 'Dedica tiempo a una actividad que le dé sentido a tu semana.'],
+  ['Escribe una meta concreta y ponle un plazo.', 'Anota un pensamiento que te frena y busca otra forma de mirar la situación.', 'Elige una habilidad y reserva un momento para practicarla.'],
+  ['Observa qué hábito de la noche te ayuda a descansar.', 'Elige una actividad física que puedas incorporar a tu semana.', 'Identifica un hábito de alimentación que te gustaría cuidar.'],
+  ['Ponle nombre a una emoción y practica cómo expresarla con claridad.', 'Recuerda qué te ayudó a recuperar la calma y tenlo a mano.', 'Elige un gesto concreto para cuidar una relación importante.'],
 ];
+const maintain = [
+  'Identifica qué práctica te ayuda a conectar contigo y protégela en tu semana.',
+  'Reconoce qué hábito de aprendizaje o enfoque te está funcionando y dale continuidad.',
+  'Mantén la rutina de descanso, movimiento o alimentación que mejor te está funcionando.',
+  'Conserva una forma de expresar tus emociones o cuidar tus vínculos que te resulte útil.',
+];
+
+form.reset();
+submit.disabled = false;
+form.querySelector<HTMLElement>('#step-progress')!.hidden = false;
+showStep(false);
+previous.addEventListener('click', () => { if (current > 0) { current--; showStep(); } });
+next.addEventListener('click', () => { if (current < steps.length - 1 && validate()) { current++; showStep(); } });
+
 form.addEventListener('submit', event => {
   event.preventDefault();
-  if (!validate()) return;
+  const last = current === steps.length - 1;
+  if (!last || !validate()) return;
   const data = new FormData(form);
-  const size = steps[0].querySelectorAll('fieldset').length;
-  if ([...data.keys()].length !== steps.length * size) return;
-  const scores = document.querySelector('#scores')!;
-  scores.replaceChildren();
+  const size = synthetic ? 4 : 3;
+  if ([...data.keys()].length !== 4 * size) return;
+
+  const names = [...new Set(steps.map(step => step.getAttribute('aria-label')!))];
   const values: number[] = [];
-  const names = steps.map(step => step.getAttribute('aria-label')!);
-  const legacy = size === 4;
+  const advice: string[] = [];
+  scores.replaceChildren();
   names.forEach((name, group) => {
     const answers = Array.from({ length: size }, (_, index) => Number(data.get('q' + (group * size + index))));
     const sum = answers.reduce((total, answer) => total + answer, 0);
     const percent = Math.round((sum - 3) / 12 * 100);
     values.push(sum);
+
     const row = document.createElement('article');
     row.className = 'result-row';
     const heading = document.createElement('h3');
-    heading.textContent = name + ': ' + (legacy ? sum + '/20' : percent + '%');
-    const meter = document.createElement('meter');
-    meter.min = legacy ? 4 : 0;
-    meter.max = legacy ? 20 : 100;
-    meter.value = legacy ? sum : percent;
-    meter.setAttribute('aria-label', heading.textContent);
-    const text = document.createElement('p');
-    text.textContent = legacy
+    heading.textContent = name + ': ' + (synthetic ? sum + '/20' : percent + '%');
+    const bar = document.createElement('meter');
+    bar.min = synthetic ? 4 : 0;
+    bar.max = synthetic ? 20 : 100;
+    bar.value = synthetic ? sum : percent;
+    bar.setAttribute('aria-label', heading.textContent);
+    const interpretation = document.createElement('p');
+    interpretation.className = 'map-band';
+    interpretation.textContent = synthetic
       ? (sum < 10 ? 'Área para explorar y fortalecer' : sum < 15 ? 'Área en desarrollo' : 'Fortaleza percibida')
-      : suggestions[group][answers.indexOf(Math.min(...answers))];
-    row.append(heading, meter, text);
+      : (percent < 40 ? 'Área que merece refuerzo' : percent < 70 ? 'Área en desarrollo' : 'Fortaleza percibida');
+    row.append(heading, bar, interpretation);
+    if (!synthetic) {
+      const tip = document.createElement('p');
+      tip.textContent = percent >= 70 ? maintain[group] : suggestions[group][answers.indexOf(Math.min(...answers))];
+      advice.push(tip.textContent);
+      row.append(tip);
+    }
     scores.append(row);
   });
-  if (!legacy) {
-    const leaders = names.filter((_, index) => values[index] === Math.max(...values));
-    const growth = names.filter((_, index) => values[index] === Math.min(...values));
-    document.querySelector('#score-summary')!.textContent = leaders.length === names.length
-      ? 'Los cuatro pilares obtuvieron el mismo índice. Elige cuál te interesa explorar primero.'
-      : 'Fortaleza percibida: ' + leaders.join(', ') + '. Para fortalecer: ' + growth.join(', ') + '.';
+
+  if (!synthetic) {
+    const high = Math.max(...values);
+    const low = Math.min(...values);
+    const leaders = names.filter((_, index) => values[index] === high);
+    const growth = names.filter((_, index) => values[index] === low);
+    summary.textContent = high === low
+      ? 'Los cuatro pilares empataron. Elige el que más te interese y prueba una de las sugerencias.'
+      : 'Mayor índice percibido: ' + leaders.join(', ') + '. Oportunidad para explorar: ' + growth.join(', ') + '. '
+        + (growth.length === 1 ? 'Para comenzar, ' + advice[values.indexOf(low)].charAt(0).toLowerCase() + advice[values.indexOf(low)].slice(1) : 'Elige una sugerencia de cualquiera de los pilares con el índice más bajo.');
   }
   form.hidden = true;
   result.hidden = false;
   result.focus();
-  // Only the synthetic legacy build may use the 4–20 capture contract.
-  if (legacy) document.dispatchEvent(new CustomEvent('power4:result', {
+  if (synthetic) document.dispatchEvent(new CustomEvent('power4:result', {
     detail: { spirit: values[0], mind: values[1], body: values[2], emotion: values[3] },
   }));
 });
-document.querySelector('#repeat')!.addEventListener('click',()=>{form.reset();result.hidden=true;document.querySelector('#scores')!.replaceChildren();form.hidden=false;current=0;showStep();document.dispatchEvent(new Event('power4:reset'))});
+
+result.querySelector('#repeat')!.addEventListener('click', () => {
+  form.reset();
+  result.hidden = true;
+  scores.replaceChildren();
+  summary.textContent = '';
+  form.hidden = false;
+  current = 0;
+  showStep();
+  if (synthetic) document.dispatchEvent(new Event('power4:reset'));
+});
 </script>
+<style>
+  .power-hero { --stage-focus: 50% 49%; --stage-mobile-focus: 44% 52%; }
+  .power-hero .presence-button { max-width: 100%; }
+  .power-hero .secondary-stage-photo img { transform: scale(1.38); transform-origin: left center; }
+  .power-hero h1 { max-width: 13ch; text-wrap: balance; }
+  .power-hero .secondary-stage-copy { padding-inline: env(safe-area-inset-left) env(safe-area-inset-right); }
+  .power-hero::after {
+    background: linear-gradient(90deg, #0b0d17 2%, rgba(11,13,23,.91) 24%, rgba(11,13,23,.22) 59%, transparent 85%), linear-gradient(0deg,#0b0d17,transparent 26%);
+  }
+  .power-editorial, .power-editorial-result {
+    padding: clamp(20px, 4vw, 48px);
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #a4a8b3;
+  }
+  #step-label { font-weight: 800; scroll-margin-top: 24px; }
+  #step-error { color: #9f2437; font-weight: 700; }
+  #step-error:empty { display: none; }
+  .power-editorial .power-step fieldset { margin-block: 32px 24px; padding: 0; border: 0; gap: 8px; }
+  .power-editorial legend {
+    margin-bottom: 22px;
+    padding: 0;
+    font-size: clamp(1.35rem, 3vw, 2.2rem);
+    line-height: 1.25;
+    letter-spacing: -.035em;
+    text-wrap: pretty;
+  }
+  .power-editorial .test-answer { min-height: 68px; flex-direction: column; touch-action: manipulation; }
+  .power-editorial .test-answer small { font-size: .72rem; font-weight: 600; }
+  .power-editorial .step-actions, .power-editorial-result .step-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .power-editorial-result { background: #0b0d17; color: #f8f9fa; }
+  .power-editorial-result h2, .power-editorial-result :global(.result-row h3) { color: #f1e5ac; }
+  .power-editorial-result #score-summary { padding: 16px; border-inline-start: 3px solid #f1e5ac; background: #171c2a; }
+  .power-editorial-result :global(#scores) { gap: 0 28px; }
+  .power-editorial-result :global(#scores .result-row) { background: transparent; border: 0; border-top: 1px solid #596379; border-radius: 0; padding: 18px 0; }
+  .power-editorial-result :global(.result-row h3) { font-size: 1.35rem; font-variant-numeric: tabular-nums; }
+  .power-editorial-result :global(.map-band) { font-weight: 800; }
+  .power-editorial-result :global(.result-row meter::-webkit-meter-optimum-value) { background: #f1e5ac; }
+  .power-editorial-result :global(.result-row meter::-moz-meter-bar) { background: #f1e5ac; }
+  .power-editorial-result :global(.result-row meter) { height: 16px; }
+  .map-privacy { color: #454c60; }
+  @media (max-width: 767px) {
+    .power-hero::after { background: linear-gradient(0deg,#0b0d17 7%,rgba(11,13,23,.97) 30%,rgba(11,13,23,.38) 61%,transparent 78%); }
+    .platform-hero.power-hero { min-height: 580px; padding-bottom: 36px; }
+    .power-hero .secondary-stage-photo img { transform: scale(1.18); transform-origin: center bottom; }
+    .power-hero h1 { max-width: none; }
+    :global(body:has(.power-editorial) .quick-whatsapp) { position: static; margin: 12px 0 0 auto; }
+    .power-editorial .power-step fieldset { grid-template-columns: 1fr; }
+    .power-editorial .test-answer { min-height: 48px; flex-direction: row; justify-content: start; gap: 12px; padding-inline: 14px; }
+    .power-editorial .test-answer small { font-size: .9rem; }
+  }
+</style>
