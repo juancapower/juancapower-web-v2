@@ -3,13 +3,13 @@ import Platform from '../layouts/Platform.astro';
 import { booking, speakerContact, path } from '../data/site';
 ---
 <Platform title="Contacto · Agenda, Coaching y Speaker" description="Reserva una cita, consulta sobre Coaching POWER 4 o conversemos sobre tu próximo evento.">
-  <section class="platform-hero presence-wrap contact-hero">
-    <div>
+  <section class="platform-hero secondary-stage secondary-stage--contacto">
+    <div class="presence-wrap secondary-stage-copy">
       <p class="presence-kicker">CONTACTO</p>
       <h1>Hablemos de tu<br /><span>siguiente paso.</span></h1>
       <p>Reserva una cita, explora el coaching individual o cuéntame qué quieres organizar.</p>
     </div>
-    <figure class="booking-portrait"><img src={path() + 'images/presence/contacto-960.webp'} srcset={path() + 'images/presence/contacto-480.webp 480w, ' + path() + 'images/presence/contacto-960.webp 960w'} sizes="(max-width: 767px) 90vw, 42vw" alt="JuanCa Power sonriendo durante una presentación" fetchpriority="high" /></figure>
+    <figure class="secondary-stage-photo"><img src={path() + 'images/presence/contacto-960.webp'} srcset={path() + 'images/presence/contacto-480.webp 480w, ' + path() + 'images/presence/contacto-960.webp 960w'} sizes="(max-width: 767px) 90vw, 42vw" alt="JuanCa Power sonriendo durante una presentación" fetchpriority="high" /></figure>
   </section>
   <section class="platform-section platform-light" aria-label="Canales de contacto">
     <div class="presence-wrap">
