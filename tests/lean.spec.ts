@@ -16,7 +16,7 @@ for (const width of [390, 1440]) {
     const social = page.getByRole('navigation', { name: 'Redes sociales' });
     await expect(social.getByRole('link', { name: 'TikTok de JuanCa Power' })).toHaveAttribute('href', 'https://www.tiktok.com/@soyjuancapower');
     await expect(social.getByRole('link', { name: 'Instagram de JuanCa Power' })).toHaveAttribute('href', 'https://www.instagram.com/soyjuancapower/');
-    await expect(social.locator('svg[aria-hidden="true"]')).toHaveCount(2);
+    await expect(social.locator('svg[aria-hidden="true"]')).toHaveCount(4);
     await social.scrollIntoViewIfNeeded();
     await expect(contact).toBeInViewport();
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex,nofollow');

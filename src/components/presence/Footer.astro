@@ -31,13 +31,13 @@ const year = new Date().getUTCFullYear();
       <div class="footer-directory">
         {groups.map(({ title, links }) => (
           <nav aria-label={title}>
-            <h3>{title}</h3>
+            <h2>{title}</h2>
             <ul>{links.map(([url, label]) => <li><a href={path(url)}>{label}</a></li>)}</ul>
           </nav>
         ))}
       </div>
       <div class="footer-contact">
-        <h3>Contacto</h3>
+        <h2>Contacto</h2>
         <a href="mailto:hola@juancapower.com">hola@juancapower.com</a>
         <a href={path('agenda')}>Conversemos <span aria-hidden="true">↗</span></a>
       </div>
@@ -60,7 +60,7 @@ const year = new Date().getUTCFullYear();
   .footer-brand { align-items: center; gap: 10px; text-decoration: none; }
   .footer-directory { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
   .footer-directory nav { display: block; margin: 0; }
-  .footer-top h3 { color: #f1e5ac; font-size: 1rem; margin: 0 0 10px; }
+  .footer-top h2 { color: #f1e5ac; font-size: 1rem; margin: 0 0 10px; }
   .footer-directory ul { list-style: none; margin: 0; padding: 0; }
   .footer-top a:not(.footer-brand), .footer-legal a, .footer-legal button { color: #d0d5e1; text-underline-offset: .22em; }
   .footer-top a:not(.footer-brand) { text-decoration: none; }
