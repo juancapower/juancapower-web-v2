@@ -1,4 +1,4 @@
-name: Validate and deploy staging
+name: Validate site
 on:
   push:
     branches: [main]
@@ -8,7 +8,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: pages-${{ github.ref }}
+  group: site-ci-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   build:
@@ -51,12 +51,6 @@ jobs:
         with:
           name: power-presence-static-preview
           path: dist/
-      - uses: actions/configure-pages@v5
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.LEAN_RELEASE_APPROVED_SHA == ''
-      - uses: actions/upload-pages-artifact@v4
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.LEAN_RELEASE_APPROVED_SHA == ''
-        with:
-          path: dist
   capture-synthetic:
     runs-on: ubuntu-latest
     steps:
@@ -105,16 +99,3 @@ jobs:
         with:
           name: legal-synthetic-evidence
           path: legal-results/
-  deploy:
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.LEAN_RELEASE_APPROVED_SHA == ''
-    needs: [build, capture-synthetic, legal-synthetic]
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@v4
-        id: deployment

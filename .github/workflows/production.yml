@@ -1,15 +1,19 @@
-name: Publish approved lean production
-on: workflow_dispatch
+name: Publish lean production
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: pages-${{ github.ref }}
+  group: production-pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   build:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,13 +27,10 @@ jobs:
       LEAN_PRIVACY_DISCLOSURE: ${{ vars.LEAN_PRIVACY_DISCLOSURE }}
       LEAN_CONTACT_RETENTION: ${{ vars.LEAN_CONTACT_RETENTION }}
     steps:
-      - name: Verify approved revision and custom domain
+      - name: Verify production custom domain
         env:
-          APPROVED_SHA: ${{ vars.LEAN_RELEASE_APPROVED_SHA }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          test "$GITHUB_REF" = refs/heads/main
-          test "$APPROVED_SHA" = "$GITHUB_SHA"
           test "$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.cname')" = www.juancapower.com
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6

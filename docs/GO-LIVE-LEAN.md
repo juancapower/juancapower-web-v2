@@ -1,5 +1,14 @@
 # JuanCa Power 2.0 · Checklist GO/NO-GO
 
+## Publicación habitual tras aprobar el despliegue automático
+
+El primer merge que incorpore este workflow a main activa la publicación automática. Revisa el sitio localmente y autoriza la incorporación a main. GitHub Actions valida el dominio de Pages, compila desde la raíz con la configuración legal aprobada y comprueba que el Libro responda READY con versión 2. Si esos controles pasan, publica en www.juancapower.com. El workflow de CI mantiene sus pruebas y artefactos de revisión.
+
+Para revertir una entrega de código, crea un commit con git revert <SHA> (usa git revert -m 1 <SHA> si fue un merge), revísalo e incorpóralo a main mediante el mismo flujo. Comprueba el resultado en Actions y en el dominio. Si necesitas repetir una publicación, ejecuta manualmente production.yml sobre main.
+
+Los pasos de reasignación de dominio y reversión de infraestructura que siguen corresponden al traspaso inicial. Las referencias a LEAN_RELEASE_APPROVED_SHA y al despliegue de staging de pages.yml describen el flujo anterior.
+
+
 **NO-GO hasta cerrar 2, 3 y 5.** El Libro propio utiliza Cloudflare D1 y Turnstile. Brevo tramita los correos sin condicionar el registro. Captación POWER 4, rastreadores, PDF y galerías adicionales quedan fuera del lanzamiento.
 
 1. **PASS · Accesos y estado técnico.** Calendar y WhatsApp se verificaron en la preparación del PR #17. El test POWER 4 conserva su modalidad anónima. La cuenta Brevo de JuanCa Power y el remitente activo `hola@juancapower.com` se verificaron en lectura. Los dos Workers existentes respondieron `503 DISABLED` a un POST vacío con el Origin permitido. El despliegue del código nuevo, la validación de D1 remota y la entrega real de correos siguen pendientes.
