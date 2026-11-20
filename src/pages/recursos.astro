@@ -1,4 +1,51 @@
 ---
 import Platform from '../layouts/Platform.astro';import {path} from '../data/site';import Architecture from '../components/presence/Architecture.astro';import {resources} from '../data/resources';
 ---
-<Platform title="Recursos gratuitos · JuanCa Power" description="Explora el Mapa POWER 4 y el Kit de Marca Personal disponible en la biblioteca original."><section class="platform-hero secondary-stage secondary-stage--recursos"><div class="presence-wrap secondary-stage-copy"><p class="presence-kicker">EXPLORA · REFLEXIONA · APLICA</p><h1>Una idea útil.<br/><span>Un paso posible.</span></h1><p>Herramientas para explorar tu autopercepción y trabajar tu marca personal. Elige por dónde empezar.</p></div><figure class="secondary-stage-photo"><img src={path() + "images/juanca-taller.webp"} alt="JuanCa Power durante una actividad con Caja Arequipa en Piura" fetchpriority="high" /></figure></section><section class="platform-section platform-light"><div class="presence-wrap resource-list">{resources.map((r,index)=><article class="resource-feature"><div class="resource-image">{r.route ? <div class="resource-diagram"><Architecture/></div> : <img src={`${path()}${r.image}`} alt="Portada del Kit de Marca Personal de JuanCa Power" width={r.width} height={r.height} loading="lazy"/>}</div><div><p class="presence-kicker">0{index+1} · {r.kind}</p><h2>{r.title}</h2><p>{r.description}</p><a class="presence-button" href={r.url || path(r.route)}>Explorar {r.title} ↗</a>{r.url && <p class="resource-note">Abre la biblioteca original, que tiene sus propias condiciones.</p>}</div></article>)}</div></section></Platform>
+<Platform title="Recursos gratuitos · JuanCa Power" description="Explora el Mapa POWER 4, el Kit de Marca Personal y la guía gratuita de Power Digital."><section class="platform-hero secondary-stage secondary-stage--recursos"><div class="presence-wrap secondary-stage-copy"><p class="presence-kicker">EXPLORA · REFLEXIONA · APLICA</p><h1>Una idea útil.<br/><span>Un paso posible.</span></h1><p>Herramientas para explorar tu autopercepción y trabajar tu marca personal. Elige por dónde empezar.</p></div><figure class="secondary-stage-photo"><img src={path() + "images/juanca-taller.webp"} alt="JuanCa Power durante una actividad con Caja Arequipa en Piura" fetchpriority="high" /></figure></section>
+  <section class="platform-section platform-light">
+    <div class="presence-wrap resource-list">
+      {resources.map((resource, index) => (
+        <article class:list={['resource-feature', { 'resource-guide': resource.download }]}>
+          <div class="resource-image">
+            {resource.route ? <div class="resource-diagram"><Architecture /></div> :
+              <img src={path() + resource.image} alt={resource.imageAlt ?? 'Portada del Kit de Marca Personal de JuanCa Power'}
+                width={resource.width} height={resource.height} loading="lazy" decoding="async" />}
+          </div>
+          <div>
+            <p class="presence-kicker">{resource.download ? resource.kind : '0' + (index + 1) + ' · ' + resource.kind}</p>
+            <h2>{resource.title}</h2>
+            <p>{resource.description}</p>
+            {resource.download ? (
+              <>
+                <p class="resource-format">PDF gratuito</p>
+                <div class="resource-actions">
+                  <a class="presence-button" href={path() + resource.download.file} download>{resource.download.label}</a>
+                  <a href={path() + resource.download.file} target="_blank" rel="noopener"
+                    aria-label={resource.download.previewLabel + ' del PDF (nueva pestaña)'}>{resource.download.previewLabel}</a>
+                </div>
+                <p class="resource-note">Un recurso de <a href={resource.download.authorUrl}>{resource.download.author}</a>.</p>
+              </>
+            ) : (
+              <>
+                <a class="presence-button" href={resource.url || path(resource.route)}>Explorar {resource.title} ↗</a>
+                {resource.url && <p class="resource-note">Abre la biblioteca original, que tiene sus propias condiciones.</p>}
+              </>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Platform>
+<style>
+  .resource-guide .resource-image {
+    display: grid;
+    place-items: center;
+    background: #e4e2dc;
+    padding: clamp(16px, 3vw, 32px);
+  }
+  .resource-guide .resource-image img { width: min(100%, 300px); height: auto; }
+  .resource-format { font-weight: 700; color: #454b58; }
+  .resource-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 22px; }
+  .resource-actions a { display: inline-flex; align-items: center; min-height: 44px; }
+</style>
